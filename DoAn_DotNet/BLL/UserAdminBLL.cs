@@ -113,6 +113,57 @@ namespace DoAn_DotNet.BLL
                 return false;
         }
 
+        //public static List<DTO.UserAdmin> DangNhap2(string tenDangNhap, string matKhau)
+        //{
+        //    DatabaseDataContext data = new DatabaseDataContext();
+        //    List<DTO.UserAdmin> lst = null;
+        //    lst = (from user in data.UserAdmins
+        //           where user.UserName == tenDangNhap && user.Password == matKhau
+        //           select new DTO.UserAdmin
+        //           {
+        //               Id = user.ID,
+        //               UserName = user.UserName,
+        //               Password = user.Password,
+        //               HoTen = user.Name,
+        //               Cmnd = user.CMND,
+        //               NgaySinh = Convert.ToDateTime(user.NgaySinh),
+        //               DiaChi = user.Address,
+        //               Email = user.Email,
+        //               Phone = user.Phone,
+        //               CreateDate = Convert.ToDateTime(user.CreateDate),
+        //               MaQuyen = user.MaQuyen,
+        //               TienLuong = Convert.ToDecimal(user.TienLuong)
+
+        //           }).ToList();
+        //    if (lst.Count > 0)
+        //    {
+        //        DTO.UserAdmin tK = new DTO.UserAdmin();
+        //        frmMain.hoVaTen = tK.HoTen;
+        //        frmMain.quyenHan = tK.MaQuyen;
+        //        frmMain.maNV = tK.Id;
+        //        frmDonHang.maNV = tK.Id;
+        //        frmDoiMK.maNV = tK.Id;
+        //        frmDoiMK.taiKhoan = tK.UserName;
+        //        frmDetailUser.maNV = tK.Id;
+        //        frmDetailUser.hoTen = tK.HoTen;
+        //        frmDetailUser.maQuyen = tK.MaQuyen;
+        //        frmDetailUser.ngaySinh = tK.NgaySinh;
+        //        frmDetailUser.taiKhoan = tK.UserName;
+        //        frmDetailUser.tienLuong = Convert.ToInt32(tK.TienLuong);
+        //        frmDetailUser.cmnd = tK.Cmnd;
+        //        frmKhachHang.maQuyen = tK.MaQuyen;
+        //        return true;
+        //    }
+        //    else
+        //        return false;
+        //    return lst;
+
+        //    //var tK = data.ChiTiet(tenDangNhap, matKhau);
+            
+        //}
+
+
+
         public bool DoiMK(int manv, string matkhaumoi)
         {
             var tK = data.DoiMatKhau(manv, matkhaumoi);

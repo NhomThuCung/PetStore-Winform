@@ -21,6 +21,26 @@ namespace DoAn_DotNet.DTO
         private int maQuyen;
         private decimal tienLuong;
 
+        public UserAdmin()
+        {
+
+        }
+
+        public UserAdmin(int id, string userName, string password, string hoTen, string cmnd, DateTime ngaysinh, string diaChi, string email, string phone, DateTime createDate, int maQuyen, decimal tienLuong)
+        {
+            this.Id = id;
+            this.UserName = userName;
+            this.Password = password;
+            this.HoTen = hoTen;
+            this.Cmnd = cmnd;
+            this.NgaySinh = ngaySinh;
+            this.DiaChi = diaChi;
+            this.Email = email;
+            this.Phone = phone;
+            this.CreateDate = createDate;
+            this.MaQuyen = maQuyen;
+            this.TienLuong = tienLuong;
+        }
         public int Id { get => id; set => id = value; }
         public string UserName { get => userName; set => userName = value; }
         public string Password { get => password; set => password = value; }

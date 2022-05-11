@@ -38,3 +38,21 @@ E:\HocTap\HK5\Cong Nghe NET\DoAn_DotNet\DoAn_DotNet\bin\Debug\CrystalDecisions.R
 E:\HocTap\HK5\Cong Nghe NET\DoAn_DotNet\DoAn_DotNet\bin\Debug\stdole.dll
 E:\HocTap\HK5\Cong Nghe NET\DoAn_DotNet\DoAn_DotNet\bin\Debug\CrystalDecisions.ReportAppServer.CommonControls.dll
 E:\HocTap\HK5\Cong Nghe NET\DoAn_DotNet\DoAn_DotNet\obj\Debug\DoAn_DotNet.GUI.frmThanhToan.resources
+E:\HocTap\HK6\QuanLyThuCung\DoAn_DotNet\obj\Debug\DoAn_DotNet.csproj.AssemblyReference.cache
+E:\HocTap\HK6\QuanLyThuCung\DoAn_DotNet\obj\Debug\DoAn_DotNet.GUI.frmDangNhap.resources
+E:\HocTap\HK6\QuanLyThuCung\DoAn_DotNet\obj\Debug\DoAn_DotNet.GUI.frmDetailUser.resources
+E:\HocTap\HK6\QuanLyThuCung\DoAn_DotNet\obj\Debug\DoAn_DotNet.GUI.frmDoiMK.resources
+E:\HocTap\HK6\QuanLyThuCung\DoAn_DotNet\obj\Debug\DoAn_DotNet.GUI.frmDonHang.resources
+E:\HocTap\HK6\QuanLyThuCung\DoAn_DotNet\obj\Debug\DoAn_DotNet.GUI.frmKhachHang.resources
+E:\HocTap\HK6\QuanLyThuCung\DoAn_DotNet\obj\Debug\DoAn_DotNet.GUI.frmMain.resources
+E:\HocTap\HK6\QuanLyThuCung\DoAn_DotNet\obj\Debug\DoAn_DotNet.GUI.frmQLDonHang.resources
+E:\HocTap\HK6\QuanLyThuCung\DoAn_DotNet\obj\Debug\DoAn_DotNet.GUI.frmQLGiongLoai.resources
+E:\HocTap\HK6\QuanLyThuCung\DoAn_DotNet\obj\Debug\DoAn_DotNet.GUI.frmQLThongKe.resources
+E:\HocTap\HK6\QuanLyThuCung\DoAn_DotNet\obj\Debug\DoAn_DotNet.GUI.frmQLThuCung.resources
+E:\HocTap\HK6\QuanLyThuCung\DoAn_DotNet\obj\Debug\DoAn_DotNet.GUI.frmQLUserAdmin.resources
+E:\HocTap\HK6\QuanLyThuCung\DoAn_DotNet\obj\Debug\DoAn_DotNet.GUI.frmThanhToan.resources
+E:\HocTap\HK6\QuanLyThuCung\DoAn_DotNet\obj\Debug\DoAn_DotNet.Properties.Resources.resources
+E:\HocTap\HK6\QuanLyThuCung\DoAn_DotNet\obj\Debug\DoAn_DotNet.csproj.GenerateResource.cache
+E:\HocTap\HK6\QuanLyThuCung\DoAn_DotNet\obj\Debug\DoAn_DotNet.csproj.CoreCompileInputs.cache
+E:\HocTap\HK6\QuanLyThuCung\DoAn_DotNet\obj\Debug\DoAn_DotNet.exe
+E:\HocTap\HK6\QuanLyThuCung\DoAn_DotNet\obj\Debug\DoAn_DotNet.pdb

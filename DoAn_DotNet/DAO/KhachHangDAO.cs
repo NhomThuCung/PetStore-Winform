@@ -50,6 +50,14 @@ namespace DoAn_DotNet.DAO
             data.ExecuteSQL(sql);
         }
 
+        public void Them2(KhachHang info)
+        {
+            string sql = "INSERT INTO KhachHang(HoTen, TaiKhoan, MatKhau, Email, DiaChi, DienThoai, GioiTinh, NgaySinh, CreatedDate) " +
+                "VALUES(N'" + info.HoTen + "', '" + info.TaiKhoan + "', '" + info.MatKhau + "', N'" + info.Email + "'" +
+                ", N'" + info.DiaChi + "', N'" + info.Phone + "', N'" + info.GioiTinh + "', N'" + info.NgaySinh.ToString("yyyy-MM-dd") + "', N'" + info.CreateDate.ToString("yyyy-MM-dd") + "')";
+            data.ExecuteSQL(sql);
+        }
+
         public void Sua(KhachHang info, int maKhach)
         {
             string sql = "UPDATE KhachHang SET HoTen = N'" + info.HoTen + "', TaiKhoan = '" + info.TaiKhoan + "'" +
