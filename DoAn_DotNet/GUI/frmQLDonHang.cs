@@ -263,7 +263,7 @@ namespace DoAn_DotNet.GUI
         {
             if (MessageBox.Show("Bạn có muốn xoá chi tiết đơn hàng " + cboDH.SelectedValue + " không?", "Xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
-                ChiTietDonHang info = new ChiTietDonHang();
+                ChiTietDonHangDTO info = new ChiTietDonHangDTO();
                 info.MaDH = Convert.ToInt32(cboDH.SelectedValue);
                 info.MaTC = Convert.ToInt32(cboThuCung.SelectedValue);
                 ctBLL.XoaChiTiet(info);
@@ -291,7 +291,7 @@ namespace DoAn_DotNet.GUI
                 MessageBox.Show("Thành tiền không được bỏ trống!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
-                ChiTietDonHang info = new ChiTietDonHang();
+                ChiTietDonHangDTO info = new ChiTietDonHangDTO();
                 info.SoLuong = Convert.ToInt32(txtSoLuong.Text);
 
                 ctBLL.SuaChiTiet(info, Convert.ToInt32(cboThuCung.SelectedValue), Convert.ToInt32(maDHCT));

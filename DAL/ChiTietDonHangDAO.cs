@@ -35,32 +35,32 @@ namespace DAL
             return data.QuerySQL(sql);
         }
 
-        public void Them(ChiTietDonHang info)
+        public void Them(ChiTietDonHangDTO info)
         {
             string sql = "INSERT INTO ChiTietDonHang(MaDH, MaTC, SoLuong, ThanhTien)" +
                 " VALUES (" + info.MaDH + ", " + info.MaTC + ", " + info.SoLuong + ", " + info.ThanhTien + ") ";
             data.ExecuteSQL(sql);
         }
 
-        public void Sua(ChiTietDonHang info, int maDH)
+        public void Sua(ChiTietDonHangDTO info, int maDH)
         {
             string sql = "UPDATE ChiTietDonHang SET MaTC = " + info.MaTC + ", SoLuong = " + info.SoLuong + ", ThanhTien = " + info.ThanhTien + " WHERE MaDH = " + maDH;
             data.ExecuteSQL(sql);
         }
 
-        public void SuaChiTiet(ChiTietDonHang info, int maTC, int maHD)
+        public void SuaChiTiet(ChiTietDonHangDTO info, int maTC, int maHD)
         {
             string sql = "UPDATE ChiTietDonHang SET SoLuong = " + info.SoLuong + " WHERE MaTC = " + maTC + " AND MaDH = "+ maHD +"";
             data.ExecuteSQL(sql);
         }
 
-        public void Xoa(ChiTietDonHang info)
+        public void Xoa(ChiTietDonHangDTO info)
         {
             string sql = "DELETE FROM ChiTietDonHang WHERE MaDH = " + info.MaDH;
             data.ExecuteSQL(sql);
         }
 
-        public void XoaChiTiet(ChiTietDonHang info)
+        public void XoaChiTiet(ChiTietDonHangDTO info)
         {
             string sql = "DELETE FROM ChiTietDonHang WHERE MaDH = " + info.MaDH + " AND MaTC = " + info.MaTC;
             data.ExecuteSQL(sql);

@@ -142,7 +142,7 @@ namespace DoAn_DotNet.GUI
             {
                 if (dataGridView4 != null)
                 {
-                    ChiTietDonHang ctdh = new ChiTietDonHang();
+                    ChiTietDonHangDTO ctdh = new ChiTietDonHangDTO();
                     ctdh.MaDH = Convert.ToInt32(txtDH.Text);
                     ctdh.MaTC = Convert.ToInt32(txtMaTC.Text);
                     ctdh.SoLuong = Convert.ToInt32(numSoLuong.Value);
@@ -321,7 +321,7 @@ namespace DoAn_DotNet.GUI
             else
             if (MessageBox.Show("Bạn có muốn xoá hoá đơn không?", "Chi tiết hoá đơn", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
-                ChiTietDonHang ctdh = new ChiTietDonHang();
+                ChiTietDonHangDTO ctdh = new ChiTietDonHangDTO();
                 ctdh.MaDH = Convert.ToInt32(txtDH.Text);
                 ctdh.MaTC = Convert.ToInt32(txtMaTC.Text);
                 ctdhBLL.XoaChiTiet(ctdh);

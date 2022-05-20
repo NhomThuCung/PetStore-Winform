@@ -74,26 +74,26 @@ namespace BLL
             cboThuCung.DisplayMember = "TenTC";
         }
 
-        public void Them(ChiTietDonHang info)
+        public void Them(ChiTietDonHangDTO info)
         {
             data.Them(info);
         }
 
-        public void Sua(ChiTietDonHang info, int maDH)
+        public void Sua(ChiTietDonHangDTO info, int maDH)
         {
             data.Sua(info, maDH);
         }
-        public void SuaChiTiet(ChiTietDonHang info, int maTC, int maHD)
+        public void SuaChiTiet(ChiTietDonHangDTO info, int maTC, int maHD)
         {
             data.SuaChiTiet(info, maTC, maHD);
         }
 
-        public void Xoa(ChiTietDonHang info)
+        public void Xoa(ChiTietDonHangDTO info)
         {
             data.Xoa(info);
         }
 
-        public void XoaChiTiet(ChiTietDonHang info)
+        public void XoaChiTiet(ChiTietDonHangDTO info)
         {
             data.XoaChiTiet(info);
         }
