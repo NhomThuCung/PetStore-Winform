@@ -101,7 +101,7 @@ namespace DoAn_DotNet.GUI
         {
             if (MessageBox.Show("Bạn có muốn xoá giống " + txtTenGiong.Text + " không?", "Xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
-                Giong info = new Giong();
+                GiongDTO info = new GiongDTO();
                 info.MaGiong = Convert.ToInt32(txtMaGiong.Text);
                 gBLL.Xoa(info);
                 MessageBox.Show("Xoá giống thành công", "Xoá giống", MessageBoxButtons.OK);
@@ -128,7 +128,7 @@ namespace DoAn_DotNet.GUI
                 MessageBox.Show("Mô Tả không được bỏ trống!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
-                Giong info = new Giong();
+                GiongDTO info = new GiongDTO();
                 info.MaLoai = Convert.ToInt32(cboMaLoai.SelectedValue);
                 info.TenGiong = txtTenGiong.Text.Trim();
                 info.MoTa = txtMoTa.Text.Trim();
@@ -193,7 +193,7 @@ namespace DoAn_DotNet.GUI
                 do
                 {
                     GiongBLL giongBLL = new GiongBLL();
-                    Giong giong = new Giong();
+                    GiongDTO giong = new GiongDTO();
                     giong.MaLoai = Convert.ToInt32(sheet.Cells[cellRowIndex, 1].Value);
                     giong.MaGiong = Convert.ToInt32(sheet.Cells[cellRowIndex, 2].Value);
                     giong.TenGiong = sheet.Cells[cellRowIndex, 3].Value;
@@ -279,7 +279,7 @@ namespace DoAn_DotNet.GUI
         {
             if (MessageBox.Show("Bạn có muốn xoá loài " + txtTenLoai.Text + " không?", "Xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
-                Loai info = new Loai();
+                LoaiDTO info = new LoaiDTO();
                 info.MaLoai = Convert.ToInt32(txtMaLoai.Text);
                 lBLL.Xoa(info);
                 MessageBox.Show("Xoá loài thành công", "Xoá Loài", MessageBoxButtons.OK);
@@ -300,7 +300,7 @@ namespace DoAn_DotNet.GUI
                 MessageBox.Show("Bạn chưa nhập tên loài", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
              else
             {
-                Loai info = new Loai();
+                LoaiDTO info = new LoaiDTO();
 
                 info.TenLoai = txtTenLoai.Text.Trim();
 
@@ -356,7 +356,7 @@ namespace DoAn_DotNet.GUI
                 do
                 {
                     LoaiBLL loaiBLL = new LoaiBLL();
-                    Loai loai = new Loai();
+                    LoaiDTO loai = new LoaiDTO();
                     loai.MaLoai = Convert.ToInt32(sheet.Cells[cellRowIndex, 1].Value);
                     loai.TenLoai = sheet.Cells[cellRowIndex, 2].Value;
 

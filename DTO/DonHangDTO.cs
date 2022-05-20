@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    public class DonHang
+    public class DonHangDTO
     {
         private int maDH;
         private int id;

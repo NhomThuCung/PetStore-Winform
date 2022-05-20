@@ -109,17 +109,17 @@ namespace BLL
         }
 
 
-        public void Them(ThuCung info)
+        public void Them(ThuCungDTO info)
         {
             data.Them(info);
         }
 
-        public void Sua(ThuCung info, int maTC)
+        public void Sua(ThuCungDTO info, int maTC)
         {
             data.Sua(info, maTC);
         }
 
-        public void Xoa(ThuCung info)
+        public void Xoa(ThuCungDTO info)
         {
             data.Xoa(info);
         }

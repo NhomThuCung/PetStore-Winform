@@ -202,17 +202,17 @@ namespace BLL
                 return true;
         }
 
-        public void Them(UserAdmin info)
+        public void Them(UserAdminDTO info)
         {
             data.Them(info);
         }
 
-        public void Sua(UserAdmin info, int maNV)
+        public void Sua(UserAdminDTO info, int maNV)
         {
             data.Sua(info, maNV);
         }
 
-        public void Xoa(UserAdmin info)
+        public void Xoa(UserAdminDTO info)
         {
             data.Xoa(info);
         }

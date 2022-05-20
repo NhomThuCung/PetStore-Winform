@@ -36,17 +36,17 @@ namespace BLL
             bN.BindingSource = bS1;
             dGV.DataSource = bS1;
         }
-        public void Them(PhanQuyen info)
+        public void Them(PhanQuyenDTO info)
         {
             data.Them(info);
         }
 
-        public void Sua(PhanQuyen info, int maQuyen)
+        public void Sua(PhanQuyenDTO info, int maQuyen)
         {
             data.Sua(info, maQuyen);
         }
 
-        public void Xoa(PhanQuyen info)
+        public void Xoa(PhanQuyenDTO info)
         {
             data.Xoa(info);
         }

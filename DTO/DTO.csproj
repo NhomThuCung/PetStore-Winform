@@ -41,16 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChiTietDonHang.cs" />
-    <Compile Include="DonHang.cs" />
-    <Compile Include="Giong.cs" />
+    <Compile Include="ChiTietDonHangDTO.cs" />
+    <Compile Include="DonHangDTO.cs" />
+    <Compile Include="GiongDTO.cs" />
     <Compile Include="IUserAdmin.cs" />
-    <Compile Include="KhachHang.cs" />
-    <Compile Include="Loai.cs" />
-    <Compile Include="PhanQuyen.cs" />
+    <Compile Include="KhachHangDTO.cs" />
+    <Compile Include="LoaiDTO.cs" />
+    <Compile Include="PhanQuyenDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ThuCung.cs" />
-    <Compile Include="UserAdmin.cs" />
+    <Compile Include="ThuCungDTO.cs" />
+    <Compile Include="UserAdminDTO.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

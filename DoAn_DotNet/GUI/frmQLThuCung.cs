@@ -126,7 +126,7 @@ namespace DoAn_DotNet.GUI
         {
             if (MessageBox.Show("Bạn có muốn xoá thú cưng " + txtTenTC.Text + " không?", "Xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
-                ThuCung info = new ThuCung();
+                ThuCungDTO info = new ThuCungDTO();
                 info.MaTC = Convert.ToInt32(txtMaTC.Text);
                 tcBLL.Xoa(info);
             }
@@ -161,7 +161,7 @@ namespace DoAn_DotNet.GUI
                 MessageBox.Show("Số lượng phải khác 0", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
-                ThuCung info = new ThuCung();
+                ThuCungDTO info = new ThuCungDTO();
                 string url = txtAnh.Text;
 
                 info.MaLoai = Convert.ToInt32(cboMaLoai.SelectedValue);
@@ -224,7 +224,7 @@ namespace DoAn_DotNet.GUI
                 do
                 {
                     ThuCungBLL thuBLL = new ThuCungBLL();
-                    ThuCung tc = new ThuCung();
+                    ThuCungDTO tc = new ThuCungDTO();
                     tc.MaTC = Convert.ToInt32(sheet.Cells[cellRowIndex, 1].Value);
                     tc.TenTC = sheet.Cells[cellRowIndex, 2].Value;
                     tc.GiaBan = Convert.ToDecimal(sheet.Cells[cellRowIndex, 3].Value);

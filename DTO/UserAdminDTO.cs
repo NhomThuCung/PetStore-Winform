@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    public class UserAdmin
+    public class UserAdminDTO
     {
         private int id;
         private string userName;
@@ -21,12 +21,12 @@ namespace DTO
         private int maQuyen;
         private decimal tienLuong;
 
-        public UserAdmin()
+        public UserAdminDTO()
         {
 
         }
 
-        public UserAdmin(int id, string userName, string password, string hoTen, string cmnd, DateTime ngaysinh, string diaChi, string email, string phone, DateTime createDate, int maQuyen, decimal tienLuong)
+        public UserAdminDTO(int id, string userName, string password, string hoTen, string cmnd, DateTime ngaysinh, string diaChi, string email, string phone, DateTime createDate, int maQuyen, decimal tienLuong)
         {
             this.Id = id;
             this.UserName = userName;

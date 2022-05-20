@@ -42,7 +42,7 @@ namespace DAL
             return data.QuerySQL(sql);
         }
 
-        public void Them(KhachHang info)
+        public void Them(KhachHangDTO info)
         {
             string sql = "INSERT INTO KhachHang(HoTen, TaiKhoan, MatKhau, Email, DiaChi, DienThoai, GioiTinh, NgaySinh, CreatedDate) " +
                 "VALUES(N'" + info.HoTen + "', '" + info.TaiKhoan + "', '" + info.MatKhau + "', N'" + info.Email + "'" +
@@ -50,7 +50,7 @@ namespace DAL
             data.ExecuteSQL(sql);
         }
 
-        public void Them2(KhachHang info)
+        public void Them2(KhachHangDTO info)
         {
             string sql = "INSERT INTO KhachHang(HoTen, TaiKhoan, MatKhau, Email, DiaChi, DienThoai, GioiTinh, NgaySinh, CreatedDate) " +
                 "VALUES(N'" + info.HoTen + "', '" + info.TaiKhoan + "', '" + info.MatKhau + "', N'" + info.Email + "'" +
@@ -58,7 +58,7 @@ namespace DAL
             data.ExecuteSQL(sql);
         }
 
-        public void Sua(KhachHang info, int maKhach)
+        public void Sua(KhachHangDTO info, int maKhach)
         {
             string sql = "UPDATE KhachHang SET HoTen = N'" + info.HoTen + "', TaiKhoan = '" + info.TaiKhoan + "'" +
                 ", MatKhau = '" + info.MatKhau + "', Email = N'" + info.Email + "', DiaChi = N'" + info.DiaChi + "', DienThoai = N'" + info.Phone + "'" +
@@ -66,7 +66,7 @@ namespace DAL
             data.ExecuteSQL(sql);
         }
 
-        public void Xoa(KhachHang info)
+        public void Xoa(KhachHangDTO info)
         {
             string sql = "DELETE FROM KhachHang WHERE MaKH = " + info.MaKH;
             data.ExecuteSQL(sql);

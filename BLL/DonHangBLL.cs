@@ -103,22 +103,22 @@ namespace BLL
         }
 
 
-        public void Them(DonHang info)
+        public void Them(DonHangDTO info)
         {
             data.Them(info);
         }
 
-        public void Sua(DonHang info, int maDH)
+        public void Sua(DonHangDTO info, int maDH)
         {
             data.Sua(info, maDH);
         }
 
-        public void SuaDonHang(DonHang info, int maDH)
+        public void SuaDonHang(DonHangDTO info, int maDH)
         {
             data.SuaDonHang(info, maDH);
         }
 
-        public void Xoa(DonHang info)
+        public void Xoa(DonHangDTO info)
         {
             data.Xoa(info);
         }

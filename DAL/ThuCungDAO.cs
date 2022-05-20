@@ -42,7 +42,7 @@ namespace DAL
             return data.QuerySQL(sql);
         }
 
-        public void Them(ThuCung info)
+        public void Them(ThuCungDTO info)
         {
             string sql = "INSERT INTO ThuCung(TenTC, GiaBan, MoTa, Anh, NgayCapNhat, SoLuongTon, MaGiong, MaLoai, Moi) " +
                 "VALUES(N'" + info.TenTC + "', " + info.GiaBan + ", N'" + info.MoTa + "', N'" + info.Anh + "'" +
@@ -50,7 +50,7 @@ namespace DAL
             data.ExecuteSQL(sql);
         }
 
-        public void Sua(ThuCung info, int maTC)
+        public void Sua(ThuCungDTO info, int maTC)
         {
             string sql = "UPDATE ThuCung SET TenTC = N'" + info.TenTC + "', GiaBan = " + info.GiaBan + "" +
                 ", MoTa = N'" + info.MoTa + "', Anh = N'" + info.Anh + "', NgayCapNhat = N'" + info.NgayCapNhat.ToString("yyyy-MM-dd") + "', SoLuongTon = " + info.SoLuongTon + "" +
@@ -58,7 +58,7 @@ namespace DAL
             data.ExecuteSQL(sql);
         }
 
-        public void Xoa(ThuCung info)
+        public void Xoa(ThuCungDTO info)
         {
             string sql = "DELETE FROM ThuCung WHERE MaTC = " + info.MaTC;
             data.ExecuteSQL(sql);

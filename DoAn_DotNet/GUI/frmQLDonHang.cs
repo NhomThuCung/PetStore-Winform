@@ -95,7 +95,7 @@ namespace DoAn_DotNet.GUI
         {
             if (MessageBox.Show("Bạn có muốn xoá đơn hàng " + txtMaDH.Text + " không?", "Xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
-                DonHang info = new DonHang();
+                DonHangDTO info = new DonHangDTO();
                 info.MaDH = Convert.ToInt32(txtMaDH.Text);
                 dhBLL.Xoa(info);
                 MessageBox.Show("Xoá đơn hàng thành công", "Xoá Đơn Hàng", MessageBoxButtons.OK);
@@ -151,7 +151,7 @@ namespace DoAn_DotNet.GUI
             else
 
             {
-                DonHang info = new DonHang();
+                DonHangDTO info = new DonHangDTO();
 
                 info.Id = Convert.ToInt32(txtID.Text);
                 info.CreatedDate = dtpNgayTao.Value;

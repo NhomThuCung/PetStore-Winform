@@ -241,7 +241,7 @@ namespace DoAn_DotNet.GUI
             else
             if (MessageBox.Show("Bạn có muốn thêm đơn mới không?", "Thêm Đơn Mới", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
-                DonHang dh = new DonHang();
+                DonHangDTO dh = new DonHangDTO();
                 dh.Id = Convert.ToInt32(txtMaNV.Text);
                 dh.CreatedDate = dateTimePicker1.Value;
                 dh.MaKH = Convert.ToInt32(txtMaKH.Text);
@@ -281,7 +281,7 @@ namespace DoAn_DotNet.GUI
                 {
                     if (MessageBox.Show("Bạn có muốn thanh toán hoá đơn không?", "Thanh Toán", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
                     {
-                        DonHang dh = new DonHang();
+                        DonHangDTO dh = new DonHangDTO();
                         dh.MaDH = Convert.ToInt32(txtDH.Text);
                         dh.Status = Convert.ToBoolean(1);
 
@@ -390,7 +390,7 @@ namespace DoAn_DotNet.GUI
             else
             if (MessageBox.Show("Bạn có muốn xoá đơn hàng không?", "Đơn Hàng", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
-                DonHang dh = new DonHang();
+                DonHangDTO dh = new DonHangDTO();
                 dh.MaDH = Convert.ToInt32(txtDH.Text);
                 dhBLL.Xoa(dh);
                 MessageBox.Show("Xoá Thành Công", "Đơn Hàng");

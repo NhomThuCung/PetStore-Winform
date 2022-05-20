@@ -35,17 +35,17 @@ namespace BLL
             bN.BindingSource = bS1;
             dGV.DataSource = bS1;
         }
-        public void Them(Loai info)
+        public void Them(LoaiDTO info)
         {
             data.Them(info);
         }
 
-        public void Sua(Loai info, int maLoai)
+        public void Sua(LoaiDTO info, int maLoai)
         {
             data.Sua(info, maLoai);
         }
 
-        public void Xoa(Loai info)
+        public void Xoa(LoaiDTO info)
         {
             data.Xoa(info);
         }

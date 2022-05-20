@@ -49,7 +49,7 @@ namespace DAL
             return data.QuerySQL(sql);
         }
 
-        public void Them(UserAdmin info)
+        public void Them(UserAdminDTO info)
         {
             string sql = "INSERT INTO UserAdmin(UserName, Password, Name, CMND, NgaySinh, Address, Email, Phone, CreateDate, MaQuyen, TienLuong) " +
                 "VALUES(N'" + info.UserName + "', N'" + info.Password + "', N'" + info.HoTen + "', '" + info.Cmnd + "'" +
@@ -57,7 +57,7 @@ namespace DAL
             data.ExecuteSQL(sql);
         }
 
-        public void Sua(UserAdmin info, int maNV)
+        public void Sua(UserAdminDTO info, int maNV)
         {
             string sql = "UPDATE UserAdmin SET UserName = N'" + info.UserName + "', Password = N'" + info.Password + "'" +
                 ", Name = N'" + info.HoTen + "', CMND = '" + info.Cmnd + "', NgaySinh = N'" + info.NgaySinh.ToString("yyyy-MM-dd") + "', Address = N'" + info.DiaChi + "'" +
@@ -65,7 +65,7 @@ namespace DAL
             data.ExecuteSQL(sql);
         }
 
-        public void Xoa(UserAdmin info)
+        public void Xoa(UserAdminDTO info)
         {
             string sql = "DELETE FROM UserAdmin WHERE ID = " + info.Id;
             data.ExecuteSQL(sql);

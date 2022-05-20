@@ -25,19 +25,19 @@ namespace DAL
             return data.QuerySQL(sql);
         }
 
-        public void Them(PhanQuyen info)
+        public void Them(PhanQuyenDTO info)
         {
             string sql = "INSERT INTO PhanQuyen(TenQuyen) VALUES (N'" + info.TenQuyen + "')";
             data.ExecuteSQL(sql);
         }
 
-        public void Sua(PhanQuyen info, int maQuyen)
+        public void Sua(PhanQuyenDTO info, int maQuyen)
         {
             string sql = "UPDATE PhanQuyen SET TenQuyen = N'" + info.TenQuyen + "' WHERE MaQuyen = " + maQuyen;
             data.ExecuteSQL(sql);
         }
 
-        public void Xoa(PhanQuyen info)
+        public void Xoa(PhanQuyenDTO info)
         {
             string sql = "DELETE FROM PhanQuyen WHERE MaQuyen = " + info.MaQuyen;
             data.ExecuteSQL(sql);

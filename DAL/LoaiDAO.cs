@@ -22,20 +22,20 @@ namespace DAL
             return data.QuerySQL(sql);
         }
 
-        public void Them(Loai info)
+        public void Them(LoaiDTO info)
         {
             string sql = "INSERT INTO Loai(TenLoai)" +
                 " VALUES (N'" + info.TenLoai + "')";
             data.ExecuteSQL(sql);
         }
 
-        public void Sua(Loai info, int maLoai)
+        public void Sua(LoaiDTO info, int maLoai)
         {
             string sql = "UPDATE Loai SET TenLoai = N'" + info.TenLoai + "' WHERE MaLoai = " + maLoai;
             data.ExecuteSQL(sql);
         }
 
-        public void Xoa(Loai info)
+        public void Xoa(LoaiDTO info)
         {
             string sql = "DELETE FROM Loai WHERE MaLoai = " + info.MaLoai;
             data.ExecuteSQL(sql);

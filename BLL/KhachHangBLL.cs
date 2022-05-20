@@ -87,17 +87,17 @@ namespace BLL
             dGV.DataSource = bS1;
         }
 
-        public void Them(KhachHang info)
+        public void Them(KhachHangDTO info)
         {
             data.Them(info);
         }
 
-        public void Sua(KhachHang info, int maKhach)
+        public void Sua(KhachHangDTO info, int maKhach)
         {
             data.Sua(info, maKhach);
         }
 
-        public void Xoa(KhachHang info)
+        public void Xoa(KhachHangDTO info)
         {
             data.Xoa(info);
         }

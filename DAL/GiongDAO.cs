@@ -23,20 +23,20 @@ namespace DAL
             return data.QuerySQL(sql);
         }
 
-        public void Them(Giong info)
+        public void Them(GiongDTO info)
         {
             string sql = "INSERT INTO Giong(MaLoai, TenGiong, MoTa)" +
                 " VALUES (" + info.MaLoai + ", N'"+ info.TenGiong + "', N'" + info.MoTa + "')";
             data.ExecuteSQL(sql);
         }
 
-        public void Sua(Giong info, int maGiong)
+        public void Sua(GiongDTO info, int maGiong)
         {
             string sql = "UPDATE Giong SET MaLoai = '" + info.MaLoai + "', TenGiong = N'" + info.TenGiong +"', MoTa = N'" + info.MoTa + "' WHERE MaGiong = " + maGiong;
             data.ExecuteSQL(sql);
         }
 
-        public void Xoa(Giong info)
+        public void Xoa(GiongDTO info)
         {
             string sql = "DELETE FROM Giong WHERE MaGiong = " + info.MaGiong;
             data.ExecuteSQL(sql);

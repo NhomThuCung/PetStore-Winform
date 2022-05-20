@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    public class ThuCung
+    public class ThuCungDTO
     {
         private int maTC;
         private string tenTC;

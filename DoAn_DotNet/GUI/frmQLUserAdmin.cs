@@ -123,7 +123,7 @@ namespace DoAn_DotNet.GUI
         {
             if (MessageBox.Show("Bạn có muốn xóa user " + txtHoTen.Text + " không?", "Xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
-                UserAdmin info = new UserAdmin();
+                UserAdminDTO info = new UserAdminDTO();
                 info.Id = Convert.ToInt32(txtID.Text);
                 userBLL.Xoa(info);
                 MessageBox.Show("Xoá khách user công", "Xoá", MessageBoxButtons.OK);
@@ -183,7 +183,7 @@ namespace DoAn_DotNet.GUI
                 MessageBox.Show("Bạn chưa chọn quyền!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
-                UserAdmin info = new UserAdmin();
+                UserAdminDTO info = new UserAdminDTO();
                 UserAdminBLL tk = new UserAdminBLL();
                 string encrypt_pass = Encrypt.Instance.MD5Encrypt(txtMatKhau.Text);
 
@@ -252,7 +252,7 @@ namespace DoAn_DotNet.GUI
                 do
                 {
                     UserAdminBLL uaBLL = new UserAdminBLL();
-                    UserAdmin ua = new UserAdmin();
+                    UserAdminDTO ua = new UserAdminDTO();
                     ua.Id = Convert.ToInt32(sheet.Cells[cellRowIndex, 1].Value);
                     ua.UserName = sheet.Cells[cellRowIndex, 2].Value;
                     ua.Password = sheet.Cells[cellRowIndex, 3].Value;
@@ -354,7 +354,7 @@ namespace DoAn_DotNet.GUI
         {
             if (MessageBox.Show("Bạn có muốn xoá quyền " + txtTenQuyen.Text + " không?", "Xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
-                PhanQuyen info = new PhanQuyen();
+                PhanQuyenDTO info = new PhanQuyenDTO();
                 info.MaQuyen = Convert.ToInt32(txtMaQuyen.Text);
                 pBLL.Xoa(info);
                 MessageBox.Show("Xoá quyền thành công", "Xoá Quyền", MessageBoxButtons.OK);
@@ -375,7 +375,7 @@ namespace DoAn_DotNet.GUI
                 MessageBox.Show("Bạn chưa nhập tên quyền", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
-                PhanQuyen info = new PhanQuyen();
+                PhanQuyenDTO info = new PhanQuyenDTO();
                 info.TenQuyen = txtTenQuyen.Text.Trim();
 
                 if (isThemQuyen)
@@ -430,7 +430,7 @@ namespace DoAn_DotNet.GUI
                 do
                 {
                     PhanQuyenBLL quyenBLL = new PhanQuyenBLL();
-                    PhanQuyen quyen = new PhanQuyen();
+                    PhanQuyenDTO quyen = new PhanQuyenDTO();
                     quyen.MaQuyen = Convert.ToInt32(sheet.Cells[cellRowIndex, 1].Value);
                     quyen.TenQuyen = sheet.Cells[cellRowIndex, 2].Value;
 

@@ -73,26 +73,26 @@ namespace DAL
         }
 
 
-        public void Them(DonHang info)
+        public void Them(DonHangDTO info)
         {
             string sql = "INSERT INTO DonHang(ID, CreatedDate, MaKH, NguoiNhan, Email, SoDT, DiaChi, TongTien, Status)" +
                 " VALUES(" + info.Id + ", '" + info.CreatedDate.ToString("yyyy-MM-dd") + "'," + info.MaKH + ", N'" + info.NguoiNhan + "', N'" + info.Email + "', N'" + info.SoDT + "', N'" + info.DiaChi + "', CAST(N'" + info.TongTien + "'AS Decimal(18, 0)), '" + info.Status + "')";
             data.ExecuteSQL(sql);
         }
 
-        public void SuaDonHang(DonHang info, int maDH)
+        public void SuaDonHang(DonHangDTO info, int maDH)
         {
             string sql = "UPDATE DonHang SET ID =" + info.Id + ", CreatedDate = '"+ info.CreatedDate.ToString("yyyy-MM-dd") + "', MaKH = " + info.MaKH + ", NguoiNhan = N'" + info.NguoiNhan + "', Email =  N'" + info.Email + "',SoDT = N'" + info.SoDT + "', DiaChi= N'" + info.DiaChi + "', TongTien = CAST(N'" + info.TongTien + "'AS Decimal(18, 0)), Status = '" + info.Status + "' WHERE MaDH = " + maDH;
             data.ExecuteSQL(sql);
         }
 
-        public void Sua(DonHang info, int maDH)
+        public void Sua(DonHangDTO info, int maDH)
         {
             string sql = "UPDATE DonHang SET Status = '" + info.Status + "' WHERE MaDH = " + maDH;
             data.ExecuteSQL(sql);
         }
 
-        public void Xoa(DonHang info)
+        public void Xoa(DonHangDTO info)
         {
             string sql = "DELETE FROM DonHang WHERE MaDH = " + info.MaDH;
             data.ExecuteSQL(sql);

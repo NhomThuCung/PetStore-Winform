@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    public class Giong
+    public class GiongDTO
     {
-        public Giong()
+        public GiongDTO()
         {
-            Loai = new Loai();
+            Loai = new LoaiDTO();
         }
 
-        private Loai loai;
-        internal Loai Loai
+        private LoaiDTO loai;
+        internal LoaiDTO Loai
         {
             get { return loai; }
             set { loai = value; }

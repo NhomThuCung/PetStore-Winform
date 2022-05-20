@@ -89,7 +89,7 @@ namespace DoAn_DotNet.GUI
         {
             if (MessageBox.Show("Bạn có muốn xóa khách hàng " + txtTenKhach.Text + " không?", "Xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
-                KhachHang info = new KhachHang();
+                KhachHangDTO info = new KhachHangDTO();
                 info.MaKH = Convert.ToInt32(txtMaKhach.Text);
                 khBLL.Xoa(info);
                 MessageBox.Show("Xoá khách hàng thành công", "Xoá", MessageBoxButtons.OK);
@@ -141,7 +141,7 @@ namespace DoAn_DotNet.GUI
                 MessageBox.Show("Số điện thoại không vượt quá 15 ký tự!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
-                KhachHang info = new KhachHang();
+                KhachHangDTO info = new KhachHangDTO();
                 UserAdminBLL tk = new UserAdminBLL();
                 string encrypt_pass = Encrypt.Instance.MD5Encrypt(txtMatKhau.Text);
                 info.HoTen = txtTenKhach.Text.Trim();
@@ -209,7 +209,7 @@ namespace DoAn_DotNet.GUI
                 do
                 {
                     KhachHangBLL khachBLL = new KhachHangBLL();
-                    KhachHang khach = new KhachHang();
+                    KhachHangDTO khach = new KhachHangDTO();
                     khach.MaKH = Convert.ToInt32(sheet.Cells[cellRowIndex, 1].Value);
                     khach.HoTen = sheet.Cells[cellRowIndex, 2].Value;
                     khach.TaiKhoan = sheet.Cells[cellRowIndex, 3].Value;

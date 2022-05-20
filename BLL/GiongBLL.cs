@@ -54,17 +54,17 @@ namespace BLL
 
         }
 
-        public void Them(Giong info)
+        public void Them(GiongDTO info)
         {
             data.Them(info);
         }
 
-        public void Sua(Giong info,int maGiong)
+        public void Sua(GiongDTO info,int maGiong)
         {
             data.Sua(info, maGiong);
         }
 
-        public void Xoa(Giong info)
+        public void Xoa(GiongDTO info)
         {
             data.Xoa(info);
         }
