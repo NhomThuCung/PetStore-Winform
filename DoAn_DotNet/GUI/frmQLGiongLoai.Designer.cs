@@ -34,10 +34,6 @@ namespace DoAn_DotNet.GUI
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.bN = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem1 = new System.Windows.Forms.ToolStripLabel();
@@ -68,6 +64,8 @@ namespace DoAn_DotNet.GUI
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnDong = new System.Windows.Forms.ToolStripButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.numSoLuongTon = new System.Windows.Forms.NumericUpDown();
             this.cboMaLoai = new System.Windows.Forms.ComboBox();
             this.txtMoTa = new System.Windows.Forms.RichTextBox();
             this.txtMaGiong = new System.Windows.Forms.TextBox();
@@ -113,6 +111,11 @@ namespace DoAn_DotNet.GUI
             this.label3 = new System.Windows.Forms.Label();
             this.txtTenLoai = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SoLuongTon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -120,6 +123,7 @@ namespace DoAn_DotNet.GUI
             ((System.ComponentModel.ISupportInitialize)(this.bN)).BeginInit();
             this.bN.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSoLuongTon)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bN1)).BeginInit();
@@ -161,6 +165,7 @@ namespace DoAn_DotNet.GUI
             this.Column1,
             this.Column2,
             this.Column3,
+            this.SoLuongTon,
             this.Column4});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 212);
@@ -173,42 +178,6 @@ namespace DoAn_DotNet.GUI
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1018, 318);
             this.dataGridView1.TabIndex = 15;
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "MaLoai";
-            this.Column1.FillWeight = 39.24923F;
-            this.Column1.HeaderText = "Mã Loài";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "MaGiong";
-            this.Column2.FillWeight = 40.49068F;
-            this.Column2.HeaderText = "Mã Giống";
-            this.Column2.MinimumWidth = 6;
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "TenGiong";
-            this.Column3.FillWeight = 42.18523F;
-            this.Column3.HeaderText = "Tên Giống";
-            this.Column3.MinimumWidth = 6;
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "MoTa";
-            this.Column4.FillWeight = 278.0749F;
-            this.Column4.HeaderText = "Mô Tả";
-            this.Column4.MinimumWidth = 6;
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
             // 
             // panel1
             // 
@@ -472,6 +441,8 @@ namespace DoAn_DotNet.GUI
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.numSoLuongTon);
             this.groupBox1.Controls.Add(this.cboMaLoai);
             this.groupBox1.Controls.Add(this.txtMoTa);
             this.groupBox1.Controls.Add(this.txtMaGiong);
@@ -491,6 +462,23 @@ namespace DoAn_DotNet.GUI
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông Tin Giống";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(779, 72);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(85, 20);
+            this.label4.TabIndex = 43;
+            this.label4.Text = "Số Lượng:";
+            // 
+            // numSoLuongTon
+            // 
+            this.numSoLuongTon.Location = new System.Drawing.Point(877, 70);
+            this.numSoLuongTon.Name = "numSoLuongTon";
+            this.numSoLuongTon.Size = new System.Drawing.Size(122, 27);
+            this.numSoLuongTon.TabIndex = 42;
+            // 
             // cboMaLoai
             // 
             this.cboMaLoai.FormattingEnabled = true;
@@ -503,7 +491,7 @@ namespace DoAn_DotNet.GUI
             // 
             this.txtMoTa.Location = new System.Drawing.Point(130, 67);
             this.txtMoTa.Name = "txtMoTa";
-            this.txtMoTa.Size = new System.Drawing.Size(869, 96);
+            this.txtMoTa.Size = new System.Drawing.Size(484, 96);
             this.txtMoTa.TabIndex = 14;
             this.txtMoTa.Text = "";
             // 
@@ -919,6 +907,50 @@ namespace DoAn_DotNet.GUI
             this.label6.TabIndex = 0;
             this.label6.Text = "Tên Loài:";
             // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "MaLoai";
+            this.Column1.FillWeight = 39.24923F;
+            this.Column1.HeaderText = "Mã Loài";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "MaGiong";
+            this.Column2.FillWeight = 40.49068F;
+            this.Column2.HeaderText = "Mã Giống";
+            this.Column2.MinimumWidth = 6;
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "TenGiong";
+            this.Column3.FillWeight = 42.18523F;
+            this.Column3.HeaderText = "Tên Giống";
+            this.Column3.MinimumWidth = 6;
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // SoLuongTon
+            // 
+            this.SoLuongTon.DataPropertyName = "SoLuongTon";
+            this.SoLuongTon.HeaderText = "Số Lượng";
+            this.SoLuongTon.MinimumWidth = 6;
+            this.SoLuongTon.Name = "SoLuongTon";
+            this.SoLuongTon.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "MoTa";
+            this.Column4.FillWeight = 278.0749F;
+            this.Column4.HeaderText = "Mô Tả";
+            this.Column4.MinimumWidth = 6;
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            // 
             // frmQLGiongLoai
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -942,6 +974,7 @@ namespace DoAn_DotNet.GUI
             this.bN.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSoLuongTon)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
@@ -997,10 +1030,6 @@ namespace DoAn_DotNet.GUI
         private System.Windows.Forms.RichTextBox txtMoTa;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ComboBox cboMaLoai;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.BindingNavigator bN1;
@@ -1038,5 +1067,12 @@ namespace DoAn_DotNet.GUI
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown numSoLuongTon;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SoLuongTon;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
     }
 }

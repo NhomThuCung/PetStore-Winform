@@ -1,70 +1,70 @@
-CREATE DATABASE QL_PetStore
+CREATE DATABASE QuanLyPetStore
 GO
-USE QL_PetStore
+USE QuanLyPetStore
 GO
-ALTER DATABASE QL_PetStore SET ANSI_NULL_DEFAULT OFF 
+ALTER DATABASE QuanLyPetStore SET ANSI_NULL_DEFAULT OFF 
 GO
-ALTER DATABASE QL_PetStore SET ANSI_NULLS OFF 
+ALTER DATABASE QuanLyPetStore SET ANSI_NULLS OFF 
 GO
-ALTER DATABASE QL_PetStore SET ANSI_PADDING OFF 
+ALTER DATABASE QuanLyPetStore SET ANSI_PADDING OFF 
 GO
-ALTER DATABASE QL_PetStore SET ANSI_WARNINGS OFF 
+ALTER DATABASE QuanLyPetStore SET ANSI_WARNINGS OFF 
 GO
-ALTER DATABASE QL_PetStore SET ARITHABORT OFF 
+ALTER DATABASE QuanLyPetStore SET ARITHABORT OFF 
 GO
-ALTER DATABASE QL_PetStore SET AUTO_CLOSE OFF 
+ALTER DATABASE QuanLyPetStore SET AUTO_CLOSE OFF 
 GO
-ALTER DATABASE QL_PetStore SET AUTO_SHRINK OFF 
+ALTER DATABASE QuanLyPetStore SET AUTO_SHRINK OFF 
 GO
-ALTER DATABASE QL_PetStore SET AUTO_UPDATE_STATISTICS ON 
+ALTER DATABASE QuanLyPetStore SET AUTO_UPDATE_STATISTICS ON 
 GO
-ALTER DATABASE QL_PetStore SET CURSOR_CLOSE_ON_COMMIT OFF 
+ALTER DATABASE QuanLyPetStore SET CURSOR_CLOSE_ON_COMMIT OFF 
 GO
-ALTER DATABASE QL_PetStore SET CURSOR_DEFAULT  GLOBAL 
+ALTER DATABASE QuanLyPetStore SET CURSOR_DEFAULT  GLOBAL 
 GO
-ALTER DATABASE QL_PetStore SET CONCAT_NULL_YIELDS_NULL OFF 
+ALTER DATABASE QuanLyPetStore SET CONCAT_NULL_YIELDS_NULL OFF 
 GO
-ALTER DATABASE QL_PetStore SET NUMERIC_ROUNDABORT OFF 
+ALTER DATABASE QuanLyPetStore SET NUMERIC_ROUNDABORT OFF 
 GO
-ALTER DATABASE QL_PetStore SET QUOTED_IDENTIFIER OFF 
+ALTER DATABASE QuanLyPetStore SET QUOTED_IDENTIFIER OFF 
 GO
-ALTER DATABASE QL_PetStore SET RECURSIVE_TRIGGERS OFF 
+ALTER DATABASE QuanLyPetStore SET RECURSIVE_TRIGGERS OFF 
 GO
-ALTER DATABASE QL_PetStore SET  ENABLE_BROKER 
+ALTER DATABASE QuanLyPetStore SET  ENABLE_BROKER 
 GO
-ALTER DATABASE QL_PetStore SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+ALTER DATABASE QuanLyPetStore SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
 GO
-ALTER DATABASE QL_PetStore SET DATE_CORRELATION_OPTIMIZATION OFF 
+ALTER DATABASE QuanLyPetStore SET DATE_CORRELATION_OPTIMIZATION OFF 
 GO
-ALTER DATABASE QL_PetStore SET TRUSTWORTHY OFF 
+ALTER DATABASE QuanLyPetStore SET TRUSTWORTHY OFF 
 GO
-ALTER DATABASE QL_PetStore SET ALLOW_SNAPSHOT_ISOLATION OFF 
+ALTER DATABASE QuanLyPetStore SET ALLOW_SNAPSHOT_ISOLATION OFF 
 GO
-ALTER DATABASE QL_PetStore SET PARAMETERIZATION SIMPLE 
+ALTER DATABASE QuanLyPetStore SET PARAMETERIZATION SIMPLE 
 GO
-ALTER DATABASE QL_PetStore SET READ_COMMITTED_SNAPSHOT OFF 
+ALTER DATABASE QuanLyPetStore SET READ_COMMITTED_SNAPSHOT OFF 
 GO
-ALTER DATABASE QL_PetStore SET HONOR_BROKER_PRIORITY OFF 
+ALTER DATABASE QuanLyPetStore SET HONOR_BROKER_PRIORITY OFF 
 GO
-ALTER DATABASE QL_PetStore SET RECOVERY FULL 
+ALTER DATABASE QuanLyPetStore SET RECOVERY FULL 
 GO
-ALTER DATABASE QL_PetStore SET  MULTI_USER 
+ALTER DATABASE QuanLyPetStore SET  MULTI_USER 
 GO
-ALTER DATABASE QL_PetStore SET PAGE_VERIFY CHECKSUM  
+ALTER DATABASE QuanLyPetStore SET PAGE_VERIFY CHECKSUM  
 GO
-ALTER DATABASE QL_PetStore SET DB_CHAINING OFF 
+ALTER DATABASE QuanLyPetStore SET DB_CHAINING OFF 
 GO
-ALTER DATABASE QL_PetStore SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+ALTER DATABASE QuanLyPetStore SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
 GO
-ALTER DATABASE QL_PetStore SET TARGET_RECOVERY_TIME = 60 SECONDS 
+ALTER DATABASE QuanLyPetStore SET TARGET_RECOVERY_TIME = 60 SECONDS 
 GO
-ALTER DATABASE QL_PetStore SET DELAYED_DURABILITY = DISABLED 
+ALTER DATABASE QuanLyPetStore SET DELAYED_DURABILITY = DISABLED 
 GO
-EXEC sys.sp_db_vardecimal_storage_format N'QL_PetStore', N'ON'
+EXEC sys.sp_db_vardecimal_storage_format N'QuanLyPetStore', N'ON'
 GO
-ALTER DATABASE QL_PetStore SET QUERY_STORE = OFF
+ALTER DATABASE QuanLyPetStore SET QUERY_STORE = OFF
 GO
-USE QL_PetStore
+USE QuanLyPetStore
 GO
 
 SET ANSI_NULLS ON
@@ -130,6 +130,7 @@ CREATE TABLE [dbo].[Giong](
 	[MaLoai] [int] NOT NULL,
 	[MaGiong] [int] IDENTITY(1,1) NOT NULL,
 	[TenGiong] [nvarchar](50) NULL,
+	[SoLuongTon] [int] NULL,
 	[MoTa] [nvarchar](max) NULL,
  CONSTRAINT [PK_Giong] PRIMARY KEY CLUSTERED 
 (
@@ -150,10 +151,9 @@ CREATE TABLE [dbo].[ThuCung](
 	[MoTa] [nvarchar](max) NULL,
 	[Anh] [nvarchar](max) NULL,
 	[NgayCapNhat] [date] NULL,
-	[SoLuongTon] [int] NULL,
 	[MaGiong] [int] NULL,
 	[MaLoai] [int] NULL,
-	[Moi] [bit] NULL,
+	[TrangThai] [bit] NULL,
  CONSTRAINT [PK_ThuCung] PRIMARY KEY CLUSTERED 
 (
 	[MaTC] ASC
@@ -192,7 +192,6 @@ GO
 CREATE TABLE [dbo].[ChiTietDonHang](
 	[MaDH] [int] NOT NULL,
 	[MaTC] [int] NOT NULL,
-	[SoLuong] [int] NOT NULL,
 	[ThanhTien] [decimal](18, 0) NULL,
  CONSTRAINT [PK_ChiTietDonHang] PRIMARY KEY CLUSTERED 
 (
@@ -227,14 +226,72 @@ GO
 
 /*====================================================================================*/
 --Cập nhập tổng tiền trong bảng chi tiết đơn hàng
+--CREATE TRIGGER CapNhapThanhTien
+--on ChiTietDonHang
+--for insert, update
+--as
+--	update ChiTietDonHang
+--	set THANHTIEN =(select ThuCung.GiaBan * ChiTietDonHang.SoLuong from ThuCung where ChiTietDonHang.MaTC = ThuCung.MaTC )
+--	where MaDH = (select MaDH from inserted)
+--go
+
+
+--Cập nhập tổng tiền trong bảng chi tiết đơn hàng
 CREATE TRIGGER CapNhapThanhTien
 on ChiTietDonHang
 for insert, update
 as
 	update ChiTietDonHang
-	set THANHTIEN =(select ThuCung.GiaBan * ChiTietDonHang.SoLuong from ThuCung where ChiTietDonHang.MaTC = ThuCung.MaTC )
+	set THANHTIEN =(select ThuCung.GiaBan from ThuCung where ChiTietDonHang.MaTC = ThuCung.MaTC )
 	where MaDH = (select MaDH from inserted)
 go
+
+/*====================================================================================*/
+--Cập nhập SoLuongTon trong bảng Giong
+CREATE TRIGGER CapNhapSoLuongTon
+on ThuCung
+for insert
+as
+	update Giong
+	set SoLuongTon = (select COUNT(*) from ThuCung where ThuCung.MaGiong = Giong.MaGiong AND TrangThai = 'False')
+	From ThuCung
+	where ThuCung.MaGiong = (select MaGiong from inserted)
+go
+
+CREATE TRIGGER CapNhapSoLuongTon2
+on ThuCung
+for DELETE
+as
+	update Giong
+	set SoLuongTon = (select COUNT(*) from ThuCung where ThuCung.MaGiong = Giong.MaGiong AND TrangThai = 'False')
+	From ThuCung
+	where ThuCung.MaGiong = (select MaGiong from deleted)
+go
+
+
+/*====================================================================================*/
+--Cập nhập TrangThai trong bảng ThuCung
+CREATE TRIGGER CapNhapTrangThai
+on ChiTietDonHang
+for insert
+as
+	update ThuCung
+	set TrangThai = 1
+	From ThuCung
+	where ThuCung.MaTC = (select MaTC from inserted)
+go
+
+CREATE TRIGGER CapNhapTrangThai2
+on ChiTietDonHang
+for DELETE
+as
+	update ThuCung
+	set TrangThai = 0
+	From ThuCung
+	where ThuCung.MaTC = (select MaTC from deleted)
+go
+
+
 
 /*====================================================================================*/
 --Cập nhập tổng tiền trong bảng đơn hàng
@@ -248,7 +305,7 @@ as
 go
 
 /*====================================================================================*/
---Cập nhập tổng tiền trong bảng chi tiết đơn hàng
+--Cập nhập tổng tiền trong bảng đơn hàng
 create trigger CapNhapTongTien
 on ChiTietDonHang
 for insert
@@ -257,7 +314,7 @@ as
 	set TongTien = (select sum(ThanhTien) from ChiTietDonHang where MaDH = (select MaDH from inserted))
 	where MaDH = (select MaDH from inserted)
 go
---Cập nhập tổng tiền trong bảng chi tiết đơn hàng
+--Cập nhập tổng tiền trong bảng đơn hàng
 CREATE TRIGGER CapNhapTongTien3
 ON ChiTietDonHang 
 FOR DELETE
@@ -266,7 +323,7 @@ AS
 	set TongTien = (select sum(ThanhTien) from ChiTietDonHang where MaDH = (select MaDH from deleted))
 	where MaDH = (select MaDH from deleted)
 GO
---Cập nhập tổng tiền trong bảng chi tiết đơn hàng
+--Cập nhập tổng tiền trong bảng đơn hàng
 create trigger CapNhapTongTien2
 on ChiTietDonHang
 after update
@@ -279,33 +336,35 @@ go
 
 /*====================================================================================*/
 --Cập nhập số lượng thú cưng trong bảng thú cưng
-CREATE TRIGGER CapNhapSoLuongThuCung
-ON ChiTietDonHang 
-FOR INSERT
-AS
-	UPDATE ThuCung
-	set SoLuongTon = (ThuCung.SoLuongTon - (SELECT SoLuong FROM inserted))
-	where MaTC = (select MaTC from inserted)
-GO
+--CREATE TRIGGER CapNhapSoLuongThuCung
+--ON ChiTietDonHang 
+--FOR INSERT
+--AS
+--	UPDATE ThuCung
+--	set SoLuongTon = (ThuCung.SoLuongTon - (SELECT SoLuong FROM inserted))
+--	where MaTC = (select MaTC from inserted)
+--GO
+
 --Cập nhập số lượng thú cưng trong bảng thú cưng
-CREATE TRIGGER CapNhapSoLuongThuCung3
-ON ChiTietDonHang 
-FOR update
-AS
-	UPDATE ThuCung
-	set SoLuongTon = ThuCung.SoLuongTon - (SELECT SoLuong FROM inserted where MaTC = ThuCung.MaTC) 
-					+ (SELECT SoLuong FROM deleted where MaTC = ThuCung.MaTC)
-	from ThuCung join deleted on ThuCung.MaTC = deleted.MaTC
-GO
+--CREATE TRIGGER CapNhapSoLuongThuCung3
+--ON ChiTietDonHang 
+--FOR update
+--AS
+--	UPDATE ThuCung
+--	set SoLuongTon = ThuCung.SoLuongTon - (SELECT SoLuong FROM inserted where MaTC = ThuCung.MaTC) 
+--					+ (SELECT SoLuong FROM deleted where MaTC = ThuCung.MaTC)
+--	from ThuCung join deleted on ThuCung.MaTC = deleted.MaTC
+--GO
+
 --Cập nhập số lượng thú cưng trong bảng thú cưng
-CREATE TRIGGER CapNhapSoLuongThuCung2
-ON ChiTietDonHang 
-FOR DELETE
-AS
-	UPDATE ThuCung
-	set SoLuongTon = (ThuCung.SoLuongTon + (SELECT SoLuong FROM deleted))
-	where MaTC = (select MaTC from deleted)
-GO
+--CREATE TRIGGER CapNhapSoLuongThuCung2
+--ON ChiTietDonHang 
+--FOR DELETE
+--AS
+--	UPDATE ThuCung
+--	set SoLuongTon = (ThuCung.SoLuongTon + (SELECT SoLuong FROM deleted))
+--	where MaTC = (select MaTC from deleted)
+--GO
 
 /*====================================================================================*/
 --Cập nhập tiền lương trong bảng nhân viên
@@ -370,7 +429,7 @@ INSERT [dbo].[Loai] ([MaLoai], [TenLoai]) VALUES (1, N'Chó')
 INSERT [dbo].[Loai] ([MaLoai], [TenLoai]) VALUES (2, N'Mèo')
 INSERT [dbo].[Loai] ([MaLoai], [TenLoai]) VALUES (3, N'Chim')
 INSERT [dbo].[Loai] ([MaLoai], [TenLoai]) VALUES (4, N'Hamster')
-INSERT [dbo].[Loai] ([MaLoai], [TenLoai]) VALUES (5, N'Cá')
+--INSERT [dbo].[Loai] ([MaLoai], [TenLoai]) VALUES (N'Cá')
 SET IDENTITY_INSERT [dbo].[Loai] OFF
 
 /*====================================================================================*/
@@ -459,306 +518,314 @@ INSERT [dbo].[Giong] ([MaLoai], [MaGiong], [TenGiong], [MoTa]) VALUES (4,
 N'Chuột Hamster',
 N'Chuột Hamster không phải thuộc loài họ chuột thông thường (họ Chuột) như chuột cống, 
 chuột nhắt, chuột đồng... mang nhiều mầm bệnh. Mà chúng thuộc họ Cricetidae, sinh sống ngoài tự nhiên, thường đào hang và có hai túi má để dự trữ thức ăn. ')
-INSERT [dbo].[Giong] ([MaLoai], [MaGiong], [TenGiong], [MoTa]) VALUES (5,
-15,
-N'Cá ba đuôi',
-N'Là loài cá cảnh đẹp thuộc họ cá Chép. Loại cá này dễ thích nghi với điều kiện sống trong bể nuôi
-từ kích cỡ nhỏ đến to, hòn non bộ, bể cạn, bể kính…Điểm đặc biệt của cá 3 đuôi là loại cá cảnh nước ngọt dễ nuôi.')
-INSERT [dbo].[Giong] ([MaLoai], [MaGiong], [TenGiong], [MoTa]) VALUES (5,
-16,
-N'Cá chép Nhật(Koi)',
-N'Cá Koi là loài cá chép lai tạo, có quan hệ họ hàng gần với cá vàng và được nuôi để làm cảnh.
-Cá Koi được cho là loại cá kiểng đẹp dễ nuôi mang lại may mắn, thể hiện triển vọng tương lai và
-cơ hội về tài chính. Hồ cá Koi sinh trưởng càng nhiều thì may mắn tiền tài càng sinh sôi.')
-INSERT [dbo].[Giong] ([MaLoai], [MaGiong], [TenGiong], [MoTa]) VALUES (5,
-17,
-N'Cá bảy màu',
-N'Cá bảy màu là một trong những loại cá cảnh nước ngọt phổ biến nhất thế giới. Nó là một thành viên nhỏ của họ
-Cá khổng tước và giống như các thành viên khác của họ cá này, chúng là dạng cá đẻ trứng thai.')
-INSERT [dbo].[Giong] ([MaLoai], [MaGiong], [TenGiong], [MoTa]) VALUES (5,
-18,
-N'Cá Đuôi kiếm',
-N'Cá đuôi kiếm là loại cá cảnh với thân hình nhỏ và bầu bĩnh con trống là những con có kỳ trên lưng (vây lưng) dài rất đẹp, 
-Cá đuôi kiếm mái thì hầu như quanh năm suốt tháng bụng to tròn vì chúng mang thai và đẻ một cách liên tục')
+--INSERT [dbo].[Giong] ([MaLoai], [MaGiong], [TenGiong], [MoTa]) VALUES (5,
+--15,
+--N'Cá ba đuôi',
+--N'Là loài cá cảnh đẹp thuộc họ cá Chép. Loại cá này dễ thích nghi với điều kiện sống trong bể nuôi
+--từ kích cỡ nhỏ đến to, hòn non bộ, bể cạn, bể kính…Điểm đặc biệt của cá 3 đuôi là loại cá cảnh nước ngọt dễ nuôi.')
+--INSERT [dbo].[Giong] ([MaLoai], [MaGiong], [TenGiong], [MoTa]) VALUES (5,
+--16,
+--N'Cá chép Nhật(Koi)',
+--N'Cá Koi là loài cá chép lai tạo, có quan hệ họ hàng gần với cá vàng và được nuôi để làm cảnh.
+--Cá Koi được cho là loại cá kiểng đẹp dễ nuôi mang lại may mắn, thể hiện triển vọng tương lai và
+--cơ hội về tài chính. Hồ cá Koi sinh trưởng càng nhiều thì may mắn tiền tài càng sinh sôi.')
+--INSERT [dbo].[Giong] ([MaLoai], [MaGiong], [TenGiong], [MoTa]) VALUES (5,
+--17,
+--N'Cá bảy màu',
+--N'Cá bảy màu là một trong những loại cá cảnh nước ngọt phổ biến nhất thế giới. Nó là một thành viên nhỏ của họ
+--Cá khổng tước và giống như các thành viên khác của họ cá này, chúng là dạng cá đẻ trứng thai.')
+--INSERT [dbo].[Giong] ([MaLoai], [MaGiong], [TenGiong], [MoTa]) VALUES (5,
+--18,
+--N'Cá Đuôi kiếm',
+--N'Cá đuôi kiếm là loại cá cảnh với thân hình nhỏ và bầu bĩnh con trống là những con có kỳ trên lưng (vây lưng) dài rất đẹp, 
+--Cá đuôi kiếm mái thì hầu như quanh năm suốt tháng bụng to tròn vì chúng mang thai và đẻ một cách liên tục')
 SET IDENTITY_INSERT [dbo].[Giong] OFF
 /*====================================================================================*/
 
 /*====================================================================================*/
 
 SET IDENTITY_INSERT [dbo].[ThuCung] ON 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (1,
-N'Cá ba đuôi ngũ sắc Loại 1 ', CAST(120000 AS Decimal(18, 0)), N'Nếu bạn đang muốn tìm mua một chú cá Ba Đuôi Ngũ Sắc đẹp,
-lộng lẫy mà vẫn chưa tìm được cửa hàng bán cá cảnh đẹp tại TPHCM, thì cửa hàng cá cảnh Trung Tín là địa chỉ
-đáng tin cậy để bạn chọn mua. Ngoài cá loại cá cảnh thì cửa hàng hiện đang bán rất nhiều mặc hàng khác nhau
-phục vụ cho việc thiết kế một hồ cá cảnh sinh động nhất.',
-N'CaBaDuoi_1.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 15, 5,1)
+--INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (1,
+--N'Cá ba đuôi ngũ sắc Loại 1 ', CAST(120000 AS Decimal(18, 0)), N'Nếu bạn đang muốn tìm mua một chú cá Ba Đuôi Ngũ Sắc đẹp,
+--lộng lẫy mà vẫn chưa tìm được cửa hàng bán cá cảnh đẹp tại TPHCM, thì cửa hàng cá cảnh Trung Tín là địa chỉ
+--đáng tin cậy để bạn chọn mua. Ngoài cá loại cá cảnh thì cửa hàng hiện đang bán rất nhiều mặc hàng khác nhau
+--phục vụ cho việc thiết kế một hồ cá cảnh sinh động nhất.',
+--N'CaBaDuoi_1.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 15,1)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (2,
-N'Cá ba đuôi ngũ sắc Loại 2', CAST(100000 AS Decimal(18, 0)), N'Nếu bạn đang muốn tìm mua một chú cá Ba Đuôi Ngũ Sắc đẹp,
-lộng lẫy mà vẫn chưa tìm được cửa hàng bán cá cảnh đẹp tại TPHCM, thì cửa hàng cá cảnh Trung Tín là địa chỉ
-đáng tin cậy để bạn chọn mua. Ngoài cá loại cá cảnh thì cửa hàng hiện đang bán rất nhiều mặc hàng khác nhau
-phục vụ cho việc thiết kế một hồ cá cảnh sinh động nhất.',
-N'CaBaDuoi_2.png', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 15, 5,1)
+--INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (2,
+--N'Cá ba đuôi ngũ sắc Loại 2', CAST(100000 AS Decimal(18, 0)), N'Nếu bạn đang muốn tìm mua một chú cá Ba Đuôi Ngũ Sắc đẹp,
+--lộng lẫy mà vẫn chưa tìm được cửa hàng bán cá cảnh đẹp tại TPHCM, thì cửa hàng cá cảnh Trung Tín là địa chỉ
+--đáng tin cậy để bạn chọn mua. Ngoài cá loại cá cảnh thì cửa hàng hiện đang bán rất nhiều mặc hàng khác nhau
+--phục vụ cho việc thiết kế một hồ cá cảnh sinh động nhất.',
+--N'CaBaDuoi_2.png', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 15,1)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (3,
-N'Cá bảy màu', CAST(100000 AS Decimal(18, 0)), N' Là một trong những loài cá cảnh đẹp và phổ biến nhất thế giới, cá bảy màu thu hút người nhìn bởi màu sắc
-sặc sỡ cùng nhiều thông tin thú vị xoay quanh nó. Vậy bạn có biết loại cá bảy màu nào hiện nay được người chơi ưa chuộng nhất chưa, hôm nay Trung Tín sẽ giới thiệu
-đến bạn một loại cá bảy màu đẹp nhất đang được bày bán tại cửa hàng của chúng tôi đó chính là cá Bảy Màu Tai To.',
-N'CaBayMau_2.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 17, 5,1)
+--INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (3,
+--N'Cá bảy màu', CAST(100000 AS Decimal(18, 0)), N' Là một trong những loài cá cảnh đẹp và phổ biến nhất thế giới, cá bảy màu thu hút người nhìn bởi màu sắc
+--sặc sỡ cùng nhiều thông tin thú vị xoay quanh nó. Vậy bạn có biết loại cá bảy màu nào hiện nay được người chơi ưa chuộng nhất chưa, hôm nay Trung Tín sẽ giới thiệu
+--đến bạn một loại cá bảy màu đẹp nhất đang được bày bán tại cửa hàng của chúng tôi đó chính là cá Bảy Màu Tai To.',
+--N'CaBayMau_2.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 17, 5,1)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (4,
-N'Cá đuôi kiếm', CAST(500000 AS Decimal(18, 0)), N'Cá đuôi kiếm – Loại cá cảnh phổ biến dễ nuôi dễ chăm sóc
-Là loại cá cảnh rất phổ biến nó là loại cá cảnh phổ biến đến mức gần như ai chơi cá cảnh đều đã từng nuôi qua loại này
-Cá đuôi kiếm rất dễ nuôi và dễ chăm sóc chúng đẻ rất nhiều nếu ở trong môi trường nước ổn đinh'
-,N'CaDuoiKiem_2.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 18, 5,1)
+--INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (4,
+--N'Cá đuôi kiếm', CAST(500000 AS Decimal(18, 0)), N'Cá đuôi kiếm – Loại cá cảnh phổ biến dễ nuôi dễ chăm sóc
+--Là loại cá cảnh rất phổ biến nó là loại cá cảnh phổ biến đến mức gần như ai chơi cá cảnh đều đã từng nuôi qua loại này
+--Cá đuôi kiếm rất dễ nuôi và dễ chăm sóc chúng đẻ rất nhiều nếu ở trong môi trường nước ổn đinh'
+--,N'CaDuoiKiem_2.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 18, 5,1)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (5,
-N'Cá Koi Loại 1', CAST(1550000 AS Decimal(18, 0)), N'Cá Koi có nguồn gốc từ Trung Á sau  đó phát triển mạnh, phổ biến tại Trung Quốc và Nhật Bản. 
-Vào năm 1950, các chuyên gia sinh học người Nhật được cử đến Trung tâm khoa học Kỹ thuật của trường Đại học Chicago để học hỏi kinh nghiệm và
-lai tạo thành công dòng cá Koi. Cá Koi được người Nhật tạo ra có màu sắc vô cùng cuốn hút và có giá thành khá cao. Ban đầu dòng cá Koi khi được
-tạo ra được đặt tên là Nishikigoi, mãi đến thế kỷ 19 mới chính thức được đổi tên thành cá Koi.'
-,N'CaKoi_1.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 16, 5,1)
+--INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat],  [MaGiong], [MaLoai], [TrangThai]) VALUES (5,
+--N'Cá Koi Loại 1', CAST(1550000 AS Decimal(18, 0)), N'Cá Koi có nguồn gốc từ Trung Á sau  đó phát triển mạnh, phổ biến tại Trung Quốc và Nhật Bản. 
+--Vào năm 1950, các chuyên gia sinh học người Nhật được cử đến Trung tâm khoa học Kỹ thuật của trường Đại học Chicago để học hỏi kinh nghiệm và
+--lai tạo thành công dòng cá Koi. Cá Koi được người Nhật tạo ra có màu sắc vô cùng cuốn hút và có giá thành khá cao. Ban đầu dòng cá Koi khi được
+--tạo ra được đặt tên là Nishikigoi, mãi đến thế kỷ 19 mới chính thức được đổi tên thành cá Koi.'
+--,N'CaKoi_1.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime),  16, 5,1)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (6,
-N'Cá Koi Loại 2', CAST(1200000 AS Decimal(18, 0)), N'Cá Koi có nguồn gốc từ Trung Á sau  đó phát triển mạnh, phổ biến tại Trung Quốc và Nhật Bản. 
-Vào năm 1950, các chuyên gia sinh học người Nhật được cử đến Trung tâm khoa học Kỹ thuật của trường Đại học Chicago để học hỏi kinh nghiệm và
-lai tạo thành công dòng cá Koi. Cá Koi được người Nhật tạo ra có màu sắc vô cùng cuốn hút và có giá thành khá cao. Ban đầu dòng cá Koi khi được
-tạo ra được đặt tên là Nishikigoi, mãi đến thế kỷ 19 mới chính thức được đổi tên thành cá Koi.'
-,N'CaKoi_2.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 16, 5,1)
+--INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat],   [MaGiong], [MaLoai], [TrangThai]) VALUES (6,
+--N'Cá Koi Loại 2', CAST(1200000 AS Decimal(18, 0)), N'Cá Koi có nguồn gốc từ Trung Á sau  đó phát triển mạnh, phổ biến tại Trung Quốc và Nhật Bản. 
+--Vào năm 1950, các chuyên gia sinh học người Nhật được cử đến Trung tâm khoa học Kỹ thuật của trường Đại học Chicago để học hỏi kinh nghiệm và
+--lai tạo thành công dòng cá Koi. Cá Koi được người Nhật tạo ra có màu sắc vô cùng cuốn hút và có giá thành khá cao. Ban đầu dòng cá Koi khi được
+--tạo ra được đặt tên là Nishikigoi, mãi đến thế kỷ 19 mới chính thức được đổi tên thành cá Koi.'
+--,N'CaKoi_2.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime),  16, 5,1)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (7,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (1,
 N'Chim Chào Mào Loại 1', CAST(750000 AS Decimal(18, 0)), N'CChim Chào Mào là loài chim đang ngày càng được lựa chọn nhiều để làm chim cảnh bởi tập tính sinh sống
 của chúng phù hợp với điều kiện sống ở nước ta. Cùng với đó là ngoại hình khá bắt mắt và giọng hót rất hay của loài chim cảnh này cũng khiến người chơi thích
 thú. Chim Chào Mào cũng rất thân thiện với người nuôi nếu như người nuôi hiểu rõ về tập tính, kỹ thuật và cách chăm sóc chúng.'
-,N'ChimChaoMao_1.png', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 13, 3,1)
+,N'ChimChaoMao_1.png', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 13, 3, 0)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (8,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (2,
 N'Chim Chào Mào Loại 2', CAST(500000 AS Decimal(18, 0)), N'CChim Chào Mào là loài chim đang ngày càng được lựa chọn nhiều để làm chim cảnh bởi tập tính sinh sống
 của chúng phù hợp với điều kiện sống ở nước ta. Cùng với đó là ngoại hình khá bắt mắt và giọng hót rất hay của loài chim cảnh này cũng khiến người chơi thích
 thú. Chim Chào Mào cũng rất thân thiện với người nuôi nếu như người nuôi hiểu rõ về tập tính, kỹ thuật và cách chăm sóc chúng.'
-,N'ChimChaoMao_2.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 13, 3,1)
+,N'ChimChaoMao_2.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 13, 3, 0)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (9,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (3,
 N'Chim Hoạ Mi Loại 1', CAST(650000 AS Decimal(18, 0)), N'Chim Họa Mi được nhiều người mệnh danh là loài chim có giọng hót tuyệt vời nhất trong tất cả các loài chim rừng.
 Cũng chính vì thế mà người nghệ sĩ nào có tông giọng tốt, hát hay đều được so sánh với chim họa mi.'
-,N'ChimHoaMi_1.png', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 10, 3,1)
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (10,
+,N'ChimHoaMi_1.png', CAST(N'2021-11-22T00:00:00.000' AS DateTime),  10, 3, 0)
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (4,
 N'Chim Hoạ Mi Loại 2', CAST(500000 AS Decimal(18, 0)), N'Chim Họa Mi được nhiều người mệnh danh là loài chim có giọng hót tuyệt vời nhất
 trong tất cả các loài chim rừng. Cũng chính vì thế mà người nghệ sĩ nào có tông giọng tốt, hát hay đều được so sánh với chim họa mi.'
-,N'ChimHoaMi_2.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 10, 3,1)
+,N'ChimHoaMi_2.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 10, 3, 0)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (11,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (5,
 N'Chim Sơn Ca', CAST(500000 AS Decimal(18, 0)), N'Chim sơn ca là một trong những loài chim cảnh, được yêu thích nhất tại Việt Nam hiện nay.
 Trước khi có ý định nuôi 1 chú chim sơn ca, các bạn nên tìm hiểu rõ về đặc điểm và đặc tính của chúng.'
-,N'ChimSonCa_1.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 12, 3,1)
+,N'ChimSonCa_1.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 12, 3, 0)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (12,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (6,
 N'Chim Vàng Anh Loại 1', CAST(1660000 AS Decimal(18, 0)), N'Trước khi tìm hiểu chim vàng anh ăn gì thì bạn cần biết được nguồn gốc xuất xứ và đặc điểm của loài
 chim này. Vàng anh tên hay còn được gọi là chim hoàng anh, đây là loài duy nhất thuộc họ Vàng anh, bộ sẻ, sinh sống chủ yếu ở khu vực ôn đới của Bắc bán cầu.
 Loài chim này có tập tính di cư, mùa hè nó sẽ di cư đến những khu vực Châu Âu và Châu Á, mùa đông nó sẽ di cư đến khu vực nhiệt đới.'
-,N'ChimVangAnh_1.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 11, 3,1)
+,N'ChimVangAnh_1.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 11, 3, 0)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (13,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (7,
 N'Chim Vàng Anh Loại 2', CAST(1500000 AS Decimal(18, 0)), N'Trước khi tìm hiểu chim vàng anh ăn gì thì bạn cần biết được nguồn gốc xuất xứ và đặc điểm của loài
 chim này. Vàng anh tên hay còn được gọi là chim hoàng anh, đây là loài duy nhất thuộc họ Vàng anh, bộ sẻ, sinh sống chủ yếu ở khu vực ôn đới của Bắc bán cầu.
 Loài chim này có tập tính di cư, mùa hè nó sẽ di cư đến những khu vực Châu Âu và Châu Á, mùa đông nó sẽ di cư đến khu vực nhiệt đới.'
-,N'ChimVangAnh_2.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 11, 3,1)
+,N'ChimVangAnh_2.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 11, 3, 0)
 
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (14,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (8,
 N'Chó Corgi Loại 1', CAST(8550000 AS Decimal(18, 0)), N'Xuất hiện từ hơn 3000 năm trước, chó Corgi luôn nằm trong bảng xếp hạng những giống chó được nuôi phổ biến nhất
 trên thế giới. Chú chó có nguồn gốc từ xứ Wales này rất được Hoàng gia Anh ưa chuộng. Ban đầu chúng được nuôi để chăn gia súc, từ sau thế kỉ 16 thì được nuôi rộng
 rãi và Việt Nam cũng không ngoại lệ.'
-,N'ChoCogri.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 2, 1,1)
+,N'ChoCogri.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 2, 1, 0)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (15,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (9,
 N'Chó Corgi Loại 2', CAST(7000000 AS Decimal(18, 0)), N'Xuất hiện từ hơn 3000 năm trước, chó Corgi luôn nằm trong bảng xếp hạng những giống chó được nuôi phổ biến nhất
 trên thế giới. Chú chó có nguồn gốc từ xứ Wales này rất được Hoàng gia Anh ưa chuộng. Ban đầu chúng được nuôi để chăn gia súc, từ sau thế kỉ 16 thì được nuôi rộng
 rãi và Việt Nam cũng không ngoại lệ.'
-,N'ChoCorgi_4.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 2, 1,1)
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (16,
+,N'ChoCorgi_4.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 2, 1, 0)
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (10,
 N'Chó Corgi Loại 3', CAST(6350000 AS Decimal(18, 0)), N'Xuất hiện từ hơn 3000 năm trước, chó Corgi luôn nằm trong bảng xếp hạng những giống chó được nuôi phổ biến nhất
 trên thế giới. Chú chó có nguồn gốc từ xứ Wales này rất được Hoàng gia Anh ưa chuộng. Ban đầu chúng được nuôi để chăn gia súc, từ sau thế kỉ 16 thì được nuôi rộng
 rãi và Việt Nam cũng không ngoại lệ.'
-,N'ChoCorgi_5.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 2, 1,1)
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (17,
+,N'ChoCorgi_5.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 2, 1, 0)
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (11,
 N'Chó Corgi Thuần Chủng', CAST(12000000 AS Decimal(18, 0)), N'Xuất hiện từ hơn 3000 năm trước, chó Corgi luôn nằm trong bảng xếp hạng những giống chó được nuôi phổ biến nhất
 trên thế giới. Chú chó có nguồn gốc từ xứ Wales này rất được Hoàng gia Anh ưa chuộng. Ban đầu chúng được nuôi để chăn gia súc, từ sau thế kỉ 16 thì được nuôi rộng
 rãi và Việt Nam cũng không ngoại lệ.'
-,N'ChoCorgi_6.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 2, 1,1)
+,N'ChoCorgi_6.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 2, 1, 0)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (18,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (12,
 N'Chó Golden Loại 1', CAST(12500000 AS Decimal(18, 0)), N'Hiện nay trên thị trường, có rất nhiều trại chó chuyên về giống Golden Retriever thuần chủng.
 Những chú chó Golden sinh tại Việt Nam có mức giá rất hợp lý, dao động từ 6-8 triệu/ con. Rất nhiều người nuôi tỏ ra hài lòng với mức giá này. 
 Bởi chỉ với vài triệu họ có thể sở hữu được một chú chó cực kỳ thông minh, trung thành, thân thiện.'
-,N'ChoGoldenRetriever_4.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 3, 1,1)
+,N'ChoGoldenRetriever_4.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 3, 1, 0)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (19,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (13,
 N'Chó Golden Thuần Chủng', CAST(14500000 AS Decimal(18, 0)), N'Hiện nay trên thị trường, có rất nhiều trại chó chuyên về giống Golden Retriever thuần chủng.
 Những chú chó Golden sinh tại Việt Nam có mức giá rất hợp lý, dao động từ 6-8 triệu/ con. Rất nhiều người nuôi tỏ ra hài lòng với mức giá này. 
 Bởi chỉ với vài triệu họ có thể sở hữu được một chú chó cực kỳ thông minh, trung thành, thân thiện.'
-,N'ChoGoldenRetriever_5.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 3, 1,1)
+,N'ChoGoldenRetriever_5.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 3, 1, 0)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (20,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (14,
 N'Chó Husky Loại 1', CAST(7500000 AS Decimal(18, 0)), N'Chó Husky tên quốc tế là Siberian Husky hay chó Husky Sibir là giống chó nhà được phát triển bởi bộ tộc 
 Chukchi hơn 3000 năm trước và hoàn toàn không phải lai giữa chó và Sói.
 Người Chukchi đã sử dụng chó Husky để kéo xe trượt tuyết và họ xem chúng như một thành viên trong gia đình. Do đó chúng còn được 
 gọi là chó tuyết trắng, chó bạch tuyết hay chó kéo xe tuyết.'
-,N'ChoHusky_6.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 1, 1,1)
+,N'ChoHusky_6.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 1, 1, 0)
 
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (21,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (15,
 N'Chó Husky Xám', CAST(8900000 AS Decimal(18, 0)), N'Chó Husky tên quốc tế là Siberian Husky hay chó Husky Sibir là giống chó nhà được phát triển bởi bộ tộc 
 Chukchi hơn 3000 năm trước và hoàn toàn không phải lai giữa chó và Sói.
 Người Chukchi đã sử dụng chó Husky để kéo xe trượt tuyết và họ xem chúng như một thành viên trong gia đình. Do đó chúng còn được 
 gọi là chó tuyết trắng, chó bạch tuyết hay chó kéo xe tuyết.'
-,N'ChoHusky1.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 1, 1,1)
+,N'ChoHusky1.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 1, 1, 0)
 
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (22,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (16,
 N'Chó Husky Thuần Chủng', CAST(12500000 AS Decimal(18, 0)), N'Chó Husky tên quốc tế là Siberian Husky hay chó Husky Sibir là giống chó nhà được phát triển bởi bộ tộc 
 Chukchi hơn 3000 năm trước và hoàn toàn không phải lai giữa chó và Sói.
 Người Chukchi đã sử dụng chó Husky để kéo xe trượt tuyết và họ xem chúng như một thành viên trong gia đình. Do đó chúng còn được 
 gọi là chó tuyết trắng, chó bạch tuyết hay chó kéo xe tuyết.'
-,N'ChoHusky2.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 1, 1,1)
+,N'ChoHusky2.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 1, 1, 0)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (23,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (17,
 N'Chó Pit Bull America', CAST(85000000 AS Decimal(18, 0)), N'Thực tế đã xảy ra rất nhiều vụ tai nạn do chó Pitbull gây ra khiến đa phần người Việt “tẩy chay” chúng.
 Tuy nhiên vẫn có rất nhiều người chọn nuôi Pitbull bởi đam mê và bởi họ biết một sự thật rằng, mọi người đang đánh đồng, hiểu sai về người bạn này.'
-,N'ChoPitBull_1.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 4, 1,1)
+,N'ChoPitBull_1.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 4, 1, 0)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (24,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (18,
 N'Chó Pit Bull Loại 1', CAST(65000000 AS Decimal(18, 0)), N'Thực tế đã xảy ra rất nhiều vụ tai nạn do chó Pitbull gây ra khiến đa phần người Việt “tẩy chay” chúng.
 Tuy nhiên vẫn có rất nhiều người chọn nuôi Pitbull bởi đam mê và bởi họ biết một sự thật rằng, mọi người đang đánh đồng, hiểu sai về người bạn này.'
-,N'ChoPitBull_4.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 4, 1,1)
+,N'ChoPitBull_4.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 4, 1, 0)
 
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (25,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (19,
 N'Chó Pug Thuần Chủng', CAST(6000000 AS Decimal(18, 0)), N'Chó Pug mặt xệ là giống cảnh khuyển có lịch sử lâu đời. Xuất xứ của chúng đến nay vẫn chưa có câu trả lời
 chính xác. Khả năng cao nhất, Pug đã có mặt từ thời nhà Hán – Trung Quốc vào khoảng năm 200 TCN. Khi ấy, Pug được coi là giống thú cảnh quý tộc, có cuộc sống xa hoa bởi chủ yếu được hoàng thân, quốc thích Trung Quốc nuôi dưỡng.'
-,N'ChoPug_1.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 5, 1,1)
+,N'ChoPug_1.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 5, 1, 0)
 
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (26,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (20,
 N'Chó Pug Con', CAST(4000000 AS Decimal(18, 0)), N'Chó Pug mặt xệ là giống cảnh khuyển có lịch sử lâu đời. Xuất xứ của chúng đến nay vẫn chưa có câu trả lời
 chính xác. Khả năng cao nhất, Pug đã có mặt từ thời nhà Hán – Trung Quốc vào khoảng năm 200 TCN. Khi ấy, Pug được coi là giống thú cảnh quý tộc, có cuộc sống xa hoa bởi chủ yếu được hoàng thân, quốc thích Trung Quốc nuôi dưỡng.'
-,N'ChoPug_2.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 5, 1,1)
+,N'ChoPug_2.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 5, 1, 0)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (27,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (21,
 N'Chó Pug Loại 1', CAST(3500000 AS Decimal(18, 0)), N'Chó Pug mặt xệ là giống cảnh khuyển có lịch sử lâu đời. Xuất xứ của chúng đến nay vẫn chưa có câu trả lời
 chính xác. Khả năng cao nhất, Pug đã có mặt từ thời nhà Hán – Trung Quốc vào khoảng năm 200 TCN. Khi ấy, Pug được coi là giống thú cảnh quý tộc, có cuộc sống xa hoa bởi chủ yếu được hoàng thân, quốc thích Trung Quốc nuôi dưỡng.'
-,N'ChoPug_5.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 5, 1,1)
+,N'ChoPug_5.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 5, 1, 0)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (28,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (22,
 N'Chuột Hamster', CAST(350000 AS Decimal(18, 0)), N'Chuột Hamster hiện nay có khoảng 26 loài, tuy nhiên giống chuột được biết đến nhiều nhất là chuột Hamster
 Syria. Chúng được phát hiện lần đầu vào năm 1839 bởi một nhà động vật học người Anh tên là George Robert Waterhouse, ông đã đặt tên loài chuột kỳ lạ này là
 Mesocricetus auratus, có nghĩa là lông vàng.'
-,N'ChuotHamster_2.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 14, 4,1)
+,N'ChuotHamster_2.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 14, 4, 0)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (29,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (23,
 N'Mèo Ai Cập Loại 1', CAST(45000000 AS Decimal(18, 0)), N'Vào năm 1966, có 1 sự giao phối rất ngẫu nhiên đến từ 2 chú mèo ở Toronto và Canada. 
 Kết quả thực sự rất bất ngờ khi Prune ra đời và trên người hoàn toàn trụi lông và trông rất hoang dã.
 Sau khi trưởng thành, Prune lại tiếp tục giao phối với mẹ của nó và kết quả là đã có nhiều chú mèo không lông khác ra đời.
 Chúng chính là cụ nội loài mèo không lông Ai Cập ngày nay'
-,N'MeoAiCap_1.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 9, 2,1)
+,N'MeoAiCap_1.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 9, 2, 0)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (30,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (24,
 N'Mèo Ai Cập Mắt Vàng', CAST(170000000 AS Decimal(18, 0)), N'Vào năm 1966, có 1 sự giao phối rất ngẫu nhiên đến từ 2 chú mèo ở Toronto và Canada. 
 Kết quả thực sự rất bất ngờ khi Prune ra đời và trên người hoàn toàn trụi lông và trông rất hoang dã.
 Sau khi trưởng thành, Prune lại tiếp tục giao phối với mẹ của nó và kết quả là đã có nhiều chú mèo không lông khác ra đời.
 Chúng chính là cụ nội loài mèo không lông Ai Cập ngày nay'
-,N'MeoAiCap_2.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 9, 2,1)
+,N'MeoAiCap_2.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 9, 2, 0)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (31,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (25,
 N'Mèo Ai Cập Mắt Vàng 2', CAST(112000000 AS Decimal(18, 0)), N'Vào năm 1966, có 1 sự giao phối rất ngẫu nhiên đến từ 2 chú mèo ở Toronto và Canada. 
 Kết quả thực sự rất bất ngờ khi Prune ra đời và trên người hoàn toàn trụi lông và trông rất hoang dã.
 Sau khi trưởng thành, Prune lại tiếp tục giao phối với mẹ của nó và kết quả là đã có nhiều chú mèo không lông khác ra đời.
 Chúng chính là cụ nội loài mèo không lông Ai Cập ngày nay'
-,N'MeoAiCap_3.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 9, 2,1)
+,N'MeoAiCap_3.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 9, 2, 0)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (32,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (26,
 N'Mèo Ai Cập', CAST(40000000 AS Decimal(18, 0)), N'Vào năm 1966, có 1 sự giao phối rất ngẫu nhiên đến từ 2 chú mèo ở Toronto và Canada. 
 Kết quả thực sự rất bất ngờ khi Prune ra đời và trên người hoàn toàn trụi lông và trông rất hoang dã.
 Sau khi trưởng thành, Prune lại tiếp tục giao phối với mẹ của nó và kết quả là đã có nhiều chú mèo không lông khác ra đời.
 Chúng chính là cụ nội loài mèo không lông Ai Cập ngày nay'
-,N'MeoAiCap_4.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 9, 2,1)
+,N'MeoAiCap_4.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 9, 2, 0)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (33,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (27,
 N'Mèo Ai Cập Chuẩn', CAST(135000000 AS Decimal(18, 0)), N'Vào năm 1966, có 1 sự giao phối rất ngẫu nhiên đến từ 2 chú mèo ở Toronto và Canada. 
 Kết quả thực sự rất bất ngờ khi Prune ra đời và trên người hoàn toàn trụi lông và trông rất hoang dã.
 Sau khi trưởng thành, Prune lại tiếp tục giao phối với mẹ của nó và kết quả là đã có nhiều chú mèo không lông khác ra đời.
 Chúng chính là cụ nội loài mèo không lông Ai Cập ngày nay'
-,N'MeoAiCap_5.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 9, 2,1)
+,N'MeoAiCap_5.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 9, 2, 0)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (34,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (28,
 N'Mèo Anh Long Ngắn Thuần Chủng', CAST(7500000 AS Decimal(18, 0)), N'Mèo Anh là giống mèo phổ biến có nguồn gốc từ nước Anh. Xuất hiên từ nhưng
 năm cuối thế kỉ 19 và trải qua một khoảng thời gian dài lai tạo để có những đặc tính tốt nhất. Hiện nay chúng đã được nuôi rất phổ biến trong các gia đình trên khắp thế giới, Việt Nam cũng không ngoại lệ.
 Có hai dòng mèo Anh phố biến nhất là Anh lông ngắn (ALN) và Anh lông dài (ALD).'
-,N'MeoAnhLongNgan_3.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 6, 2,1)
+,N'MeoAnhLongNgan_3.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 6, 2, 0)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (35,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (29,
 N'Mèo Anh Long Ngắn Loại 1', CAST(6000000 AS Decimal(18, 0)), N'Mèo Anh là giống mèo phổ biến có nguồn gốc từ nước Anh. Xuất hiên từ nhưng
 năm cuối thế kỉ 19 và trải qua một khoảng thời gian dài lai tạo để có những đặc tính tốt nhất. Hiện nay chúng đã được nuôi rất phổ biến trong các gia đình trên khắp thế giới, Việt Nam cũng không ngoại lệ.
 Có hai dòng mèo Anh phố biến nhất là Anh lông ngắn (ALN) và Anh lông dài (ALD).'
-,N'MeoAnhLongNgan_4.png', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 6, 2,1)
+,N'MeoAnhLongNgan_4.png', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 6, 2, 0)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (36,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (30,
 N'Mèo Anh Long Ngắn', CAST(5500000 AS Decimal(18, 0)), N'Mèo Anh là giống mèo phổ biến có nguồn gốc từ nước Anh. Xuất hiên từ nhưng
 năm cuối thế kỉ 19 và trải qua một khoảng thời gian dài lai tạo để có những đặc tính tốt nhất. Hiện nay chúng đã được nuôi rất phổ biến trong các gia đình trên khắp thế giới, Việt Nam cũng không ngoại lệ.
 Có hai dòng mèo Anh phố biến nhất là Anh lông ngắn (ALN) và Anh lông dài (ALD).'
-,N'MeoAnhLongNgan_5.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 6, 2,1)
+,N'MeoAnhLongNgan_5.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 6, 2, 0)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (37,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (31,
 N'Mèo Exotic', CAST(9000000 AS Decimal(18, 0)), N'Bạn yêu thích một chú Mèo Ba Tư sang trọng nhưng lại không có đủ thời gian săn sóc kĩ lưỡng cho bộ lông 
 của chúng? Hãy thử làm bạn với mèo Exotic là giống mèo còn khá mới, có nguồn gốc từ Ba Tư thuần chủng lai với mèo Mỹ lông ngắn vào những năm 1950. 
 Do có khuôn mặt, thân hình, tính cách và cả các bệnh di truyền giống hệt mèo Ba Tư nên giới yêu mèo thường gọi mèo Exotic là mèo Ba Tư lông ngắn.'
-,N'MeoExotic_1.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 8, 2,1)
+,N'MeoExotic_1.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 8, 2, 0)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (38,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (32,
 N'Mèo Nga Long Dài Thuần Chủng', CAST(5200000 AS Decimal(18, 0)), N'Đúng với tên gọi của mình, mèo Nga thuần chủng có xuất xứ từ đất nước Russian 
 nhưng điều đặc biệt làm nên vẻ hấp dẫn của giống loài này không chỉ dừng lại ở đấy.
 Vào cuối thế kỉ 19, người ta tìm thấy loài mèo này tại nước Nga với thân hình nhỏ bé, bộ lông ngắn ôm sát và màu sắc rất riêng biệt.
 mèo nga mắt 2 màuTại 1 cuộc triển lãm thường niên dành cho loài mèo được tổ chức vào năm 1875.'
-,N'MeoNgaLongDai_1.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 7, 2,1)
+,N'MeoNgaLongDai_1.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 7, 2, 0)
 
-INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [SoLuongTon], [MaGiong], [MaLoai], [Moi]) VALUES (39,
+INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (33,
 N'Mèo Nga Long Dài', CAST(2400000 AS Decimal(18, 0)), N'Đúng với tên gọi của mình, mèo Nga thuần chủng có xuất xứ từ đất nước Russian 
 nhưng điều đặc biệt làm nên vẻ hấp dẫn của giống loài này không chỉ dừng lại ở đấy.
 Vào cuối thế kỉ 19, người ta tìm thấy loài mèo này tại nước Nga với thân hình nhỏ bé, bộ lông ngắn ôm sát và màu sắc rất riêng biệt.
 mèo nga mắt 2 màuTại 1 cuộc triển lãm thường niên dành cho loài mèo được tổ chức vào năm 1875.'
-,N'MeoNgaLongDai_2.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 100, 7, 2,1)
+,N'MeoNgaLongDai_2.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 7, 2, 0)
+
+--SET IDENTITY_INSERT [dbo].[ThuCung] ON
+--INSERT [dbo].[ThuCung] ([MaTC], [TenTC], [GiaBan], [MoTa], [Anh], [NgayCapNhat], [MaGiong], [MaLoai], [TrangThai]) VALUES (34,
+--N'Mèo Nga Long Dài 2', CAST(2400000 AS Decimal(18, 0)), N'Đúng với tên gọi của mình, mèo Nga thuần chủng có xuất xứ từ đất nước Russian 
+--nhưng điều đặc biệt làm nên vẻ hấp dẫn của giống loài này không chỉ dừng lại ở đấy.
+--Vào cuối thế kỉ 19, người ta tìm thấy loài mèo này tại nước Nga với thân hình nhỏ bé, bộ lông ngắn ôm sát và màu sắc rất riêng biệt.
+--mèo nga mắt 2 màuTại 1 cuộc triển lãm thường niên dành cho loài mèo được tổ chức vào năm 1875.'
+--,N'MeoNgaLongDai_2.jpg', CAST(N'2021-11-22T00:00:00.000' AS DateTime), 7, 2, 0)
 SET IDENTITY_INSERT [dbo].[ThuCung] OFF
 
 /*====================================================================================*/
 SET IDENTITY_INSERT [dbo].[DonHang] ON 
 INSERT [dbo].[DonHang] ([MaDH], [ID], [CreatedDate], [MaKH], [NguoiNhan], [Email], [SoDT], [DiaChi], [TongTien], [Status]) VALUES (1, 2,
-CAST(N'2021-12-01T23:51:19.487' AS DateTime), 2, N'Nguyễn Văn Dao', N'nguyenvandao@gmail.com', N'0425343423', N'Ấp 3 Long Cang, Cần Đước, Long An', CAST(25000000 AS Decimal(18, 0)), 1)
+CAST(N'2022-05-26T23:51:19.487' AS DateTime), 2, N'Nguyễn Văn Dao', N'nguyenvandao@gmail.com', N'0425343423', N'Ấp 3 Long Cang, Cần Đước, Long An', CAST(25000000 AS Decimal(18, 0)), 1)
 INSERT [dbo].[DonHang] ([MaDH], [ID], [CreatedDate], [MaKH], [NguoiNhan], [Email], [SoDT], [DiaChi], [TongTien], [Status]) VALUES (2, 2,
-CAST(N'2021-12-02T23:51:19.487' AS DateTime), 1, N'Nguyễn Văn Cảnh', N'nguyenvanccanh@gmail.com', N'0417237280', N'Ấp 11 Long Định, Cần Đước, Long An', CAST(25000000 AS Decimal(18, 0)), 1)
+CAST(N'2022-05-26T23:51:19.487' AS DateTime), 1, N'Nguyễn Văn Cảnh', N'nguyenvanccanh@gmail.com', N'0417237280', N'Ấp 11 Long Định, Cần Đước, Long An', CAST(25000000 AS Decimal(18, 0)), 1)
 INSERT [dbo].[DonHang] ([MaDH], [ID], [CreatedDate], [MaKH], [NguoiNhan], [Email], [SoDT], [DiaChi], [TongTien], [Status]) VALUES (3, 3,
-CAST(N'2021-12-03T23:51:19.487' AS DateTime), 3, N'Nguyễn Thị Anh', N'nguyenthianh@gmail.com', N'0132003781', N'Ấp 11 Long Định, Cần Đước, Long An', CAST(25000000 AS Decimal(18, 0)), 1)
+CAST(N'2022-05-26T23:51:19.487' AS DateTime), 3, N'Nguyễn Thị Anh', N'nguyenthianh@gmail.com', N'0132003781', N'Ấp 11 Long Định, Cần Đước, Long An', CAST(25000000 AS Decimal(18, 0)), 1)
 INSERT [dbo].[DonHang] ([MaDH], [ID], [CreatedDate], [MaKH], [NguoiNhan], [Email], [SoDT], [DiaChi], [TongTien], [Status]) VALUES (4, 4,
-CAST(N'2021-12-04T23:51:19.487' AS DateTime), 4, N'Trần Hoàng Anh', N'tranvananh@gmail.com', N'0870063999', N'Ấp 11 Long Định, Cần Đước, Long An', CAST(25000000 AS Decimal(18, 0)), 1)
+CAST(N'2022-05-26T23:51:19.487' AS DateTime), 4, N'Trần Hoàng Anh', N'tranvananh@gmail.com', N'0870063999', N'Ấp 11 Long Định, Cần Đước, Long An', CAST(25000000 AS Decimal(18, 0)), 1)
 
 SET IDENTITY_INSERT [dbo].[DonHang] OFF
 
 /*====================================================================================*/
-INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [SoLuong], [ThanhTien]) VALUES (1, 1, 5, CAST(25000000 AS Decimal(18, 0)))
-INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [SoLuong], [ThanhTien]) VALUES (1, 12, 5, CAST(25000000 AS Decimal(18, 0)))
-INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [SoLuong], [ThanhTien]) VALUES (1, 17, 5, CAST(25000000 AS Decimal(18, 0)))
-INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [SoLuong], [ThanhTien]) VALUES (2, 2, 5, CAST(25000000 AS Decimal(18, 0)))
-INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [SoLuong], [ThanhTien]) VALUES (2, 4, 5, CAST(25000000 AS Decimal(18, 0)))
-INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [SoLuong], [ThanhTien]) VALUES (2, 13, 5, CAST(25000000 AS Decimal(18, 0)))
-INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [SoLuong], [ThanhTien]) VALUES (2, 7, 5, CAST(25000000 AS Decimal(18, 0)))
-INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [SoLuong], [ThanhTien]) VALUES (3, 16, 5, CAST(25000000 AS Decimal(18, 0)))
-INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [SoLuong], [ThanhTien]) VALUES (3, 15, 5, CAST(25000000 AS Decimal(18, 0)))
-INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [SoLuong], [ThanhTien]) VALUES (3, 10, 5, CAST(25000000 AS Decimal(18, 0)))
-INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [SoLuong], [ThanhTien]) VALUES (3, 11, 5, CAST(25000000 AS Decimal(18, 0)))
-INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [SoLuong], [ThanhTien]) VALUES (4, 12, 5, CAST(25000000 AS Decimal(18, 0)))
-INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [SoLuong], [ThanhTien]) VALUES (4, 13, 5, CAST(25000000 AS Decimal(18, 0)))
-INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [SoLuong], [ThanhTien]) VALUES (4, 1, 5, CAST(25000000 AS Decimal(18, 0)))
-INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [SoLuong], [ThanhTien]) VALUES (4, 2, 5, CAST(25000000 AS Decimal(18, 0)))
-INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [SoLuong], [ThanhTien]) VALUES (4, 16, 5, CAST(25000000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [ThanhTien]) VALUES (1, 1, CAST(25000000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [ThanhTien]) VALUES (1, 12, CAST(25000000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [ThanhTien]) VALUES (1, 17, CAST(25000000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [ThanhTien]) VALUES (2, 2, CAST(25000000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [ThanhTien]) VALUES (2, 4, CAST(25000000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [ThanhTien]) VALUES (2, 13, CAST(25000000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [ThanhTien]) VALUES (2, 7, CAST(25000000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [ThanhTien]) VALUES (3, 16, CAST(25000000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [ThanhTien]) VALUES (3, 3, CAST(25000000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [ThanhTien]) VALUES (3, 10, CAST(25000000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [ThanhTien]) VALUES (3, 11, CAST(25000000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [ThanhTien]) VALUES (4, 19, CAST(25000000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [ThanhTien]) VALUES (4, 20, CAST(25000000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [ThanhTien]) VALUES (4, 6, CAST(25000000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [ThanhTien]) VALUES (4, 5, CAST(25000000 AS Decimal(18, 0)))
+INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [ThanhTien]) VALUES (4, 15, CAST(25000000 AS Decimal(18, 0)))
 
 /*================================Mã Hash = 123456 ====================================================*/
 
@@ -802,12 +869,12 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE PROC [dbo].[sp_DoiMatKhau]
 @ID int,
-@matkhaumoi varchar(1000)
+@matkhauTrangThai varchar(1000)
 AS
 BEGIN
 	UPDATE dbo.UserAdmin
 	SET
-	    dbo.UserAdmin.Password = @matkhaumoi
+	    dbo.UserAdmin.Password = @matkhauTrangThai
 	WHERE dbo.UserAdmin.ID = @ID
 END
 GO
@@ -914,7 +981,7 @@ CREATE PROC [dbo].[sp_ThongKeDonHang]
 AS 
 BEGIN
 	BEGIN
-		SELECT top 10 dbo.DonHang.MaDH , dbo.DonHang.CreatedDate, sum(dbo.ChiTietDonHang.SoLuong) AS [SoLuongBan], sum((dbo.ChiTietDonHang.ThanhTien)) AS [DoanhThu] 
+		SELECT top 10 dbo.DonHang.MaDH , dbo.DonHang.CreatedDate, sum((dbo.ChiTietDonHang.ThanhTien)) AS [DoanhThu] 
 		FROM dbo.DonHang, dbo.ChiTietDonHang
 		WHERE dbo.DonHang.MaDH = dbo.ChiTietDonHang.MaDH AND dbo.DonHang.CreatedDate >= @frmdate 
 			AND dbo.DonHang.CreatedDate <= @todate AND dbo.DonHang.Status = 'True'
@@ -936,11 +1003,12 @@ CREATE PROC [dbo].[sp_ThongKeThuCungBanChay]
 AS
 BEGIN
 	BEGIN
-		SELECT TOP 10 dbo.ThuCung.MaTC, dbo.ThuCung.TenTC, dbo.ThuCung.GiaBan, sum(dbo.ChiTietDonHang.SoLuong) AS [SoLuongBan], dbo.ThuCung.SoLuongTon 
-		FROM dbo.ThuCung, dbo.ChiTietDonHang, dbo.DonHang
-		WHERE dbo.ThuCung.MaTC=dbo.ChiTietDonHang.MaTC AND dbo.DonHang.MaDH=dbo.ChiTietDonHang.MaDH 
+		SELECT TOP 5 dbo.Giong.MaGiong, dbo.Giong.TenGiong, COUNT(dbo.ChiTietDonHang.MaTC) AS [SoLuongBan], sum((dbo.ChiTietDonHang.ThanhTien)) AS [DoanhThu] 
+		FROM dbo.Giong, dbo.ThuCung, dbo.ChiTietDonHang, dbo.DonHang
+		WHERE dbo.Giong.MaGiong = dbo.ThuCung.MaGiong AND 
+			dbo.ThuCung.MaTC=dbo.ChiTietDonHang.MaTC AND dbo.DonHang.MaDH=dbo.ChiTietDonHang.MaDH 
 			AND dbo.DonHang.CreatedDate >= @frmdate AND dbo.DonHang.CreatedDate <= @todate AND dbo.DonHang.Status = 'True'
-		GROUP BY dbo.ThuCung.MaTC, dbo.ThuCung.TenTC, dbo.ThuCung.GiaBan, dbo.ThuCung.SoLuongTon
+		GROUP BY dbo.Giong.MaGiong, dbo.Giong.TenGiong
 		ORDER BY [SoLuongBan] DESC;
 	END
 END
@@ -1008,58 +1076,58 @@ GO
 -----------------------------------------------------BACKUP--------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------
 
---BACKUP DATABASE QL_PetStore
+--BACKUP DATABASE QuanLyPetStore
 --TO DISK = 'C:\backupsql\Test_FULL.bak'
 --WITH INIT
 
 ---- Thêm một bản ghi mới 
---INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [SoLuong], [ThanhTien]) VALUES (1, 3, 5, CAST(25000000 AS Decimal(18, 0)))
+--INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [ThanhTien]) VALUES (1, 3, CAST(25000000 AS Decimal(18, 0)))
 
---BACKUP LOG QL_PetStore 
+--BACKUP LOG QuanLyPetStore 
 --TO DISK = 'C:\backupsql\Test_TRAN.trn'
 --WITH INIT
 
 ---- Thêm một bản ghi mới 
---INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [SoLuong], [ThanhTien]) VALUES (1, 4, 5, CAST(25000000 AS Decimal(18, 0)))
+--INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [ThanhTien]) VALUES (1, 4, CAST(25000000 AS Decimal(18, 0)))
 
 ---- Thời điểm t3: Log Backup
---BACKUP LOG QL_PetStore 
+--BACKUP LOG QuanLyPetStore 
 --TO DISK = 'C:\backupsql\Test_TRAN.trn'
 
 ---- Thêm một bản ghi mới 
---INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [SoLuong], [ThanhTien]) VALUES (1, 6, 5, CAST(25000000 AS Decimal(18, 0)))
+--INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [ThanhTien]) VALUES (1, 6, CAST(25000000 AS Decimal(18, 0)))
 
 ---- Thời điểm t4: Differential backup
---BACKUP DATABASE QL_PetStore 
+--BACKUP DATABASE QuanLyPetStore 
 --TO DISK = 'C:\backupsql\Test_DIFF.bak' 
 --WITH INIT, DIFFERENTIAL
 
 ---- Thời điểm t5: Log Backup
---BACKUP LOG QL_PetStore 
+--BACKUP LOG QuanLyPetStore 
 --TO DISK = 'C:\backupsql\Test_TRAN.trn' 
 --WITH INIT
 
 ---- Thêm một bản ghi mới 
---INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [SoLuong], [ThanhTien]) VALUES (1, 8, 5, CAST(25000000 AS Decimal(18, 0)))
+--INSERT [dbo].[ChiTietDonHang] ([MaDH], [MaTC], [ThanhTien]) VALUES (1, 8, CAST(25000000 AS Decimal(18, 0)))
 
 ---- Giả sử sau đó xảy ra sự cố, ta mô phỏng sự việc này bằng cách xóa CSDL:
 
 ----Khôi phục
 ---- Bước 1: Khôi phục từ bản Full Backup 
---RESTORE DATABASE QL_PetStore 
+--RESTORE DATABASE QuanLyPetStore 
 --FROM DISK = 'C:\backupsql\Test_FULL.bak' 
 --WITH NORECOVERY   
 ---- Bước 2: Khôi phục từ bản Differential Backup 
---RESTORE DATABASE QL_PetStore 
+--RESTORE DATABASE QuanLyPetStore 
 --FROM DISK = 'C:\backupsql\Test_DIFF.bak' 
 --WITH NORECOVERY  
 ---- Bước 3: Khôi phục từ các bản Log Backup kể từ sau lần Diferential Backup gần nhất 
 
---RESTORE DATABASE QL_PetStore 
+--RESTORE DATABASE QuanLyPetStore 
 --FROM DISK = 'C:\backupsql\Test_TRAN.trn' 
 --WITH FILE = 1, NORECOVERY
 
---RESTORE DATABASE QL_PetStore 
+--RESTORE DATABASE QuanLyPetStore 
 --FROM DISK = 'C:\backupsql\Test_TRAN.trn'
 --WITH FILE=2, RECOVERY
 

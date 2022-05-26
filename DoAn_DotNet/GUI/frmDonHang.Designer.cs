@@ -52,8 +52,7 @@ namespace DoAn_DotNet.GUI
             this.MaTC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TenTC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GiaBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SoLuongTon = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Moi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TrangThai = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4 = new System.Windows.Forms.Panel();
             this.txtTenTC = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -65,7 +64,6 @@ namespace DoAn_DotNet.GUI
             this.col = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel6 = new System.Windows.Forms.Panel();
             this.txtTongTien = new System.Windows.Forms.TextBox();
@@ -113,7 +111,6 @@ namespace DoAn_DotNet.GUI
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -356,8 +353,7 @@ namespace DoAn_DotNet.GUI
             this.MaTC,
             this.TenTC,
             this.GiaBan,
-            this.SoLuongTon,
-            this.Moi});
+            this.TrangThai});
             this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView2.Location = new System.Drawing.Point(3, 60);
             this.dataGridView2.MultiSelect = false;
@@ -399,23 +395,14 @@ namespace DoAn_DotNet.GUI
             this.GiaBan.Name = "GiaBan";
             this.GiaBan.ReadOnly = true;
             // 
-            // SoLuongTon
+            // TrangThai
             // 
-            this.SoLuongTon.DataPropertyName = "SoLuongTon";
-            this.SoLuongTon.FillWeight = 91.57754F;
-            this.SoLuongTon.HeaderText = "Số Lượng Tồn";
-            this.SoLuongTon.MinimumWidth = 6;
-            this.SoLuongTon.Name = "SoLuongTon";
-            this.SoLuongTon.ReadOnly = true;
-            // 
-            // Moi
-            // 
-            this.Moi.DataPropertyName = "Moi";
-            this.Moi.FillWeight = 91.57754F;
-            this.Moi.HeaderText = "Trạng Thái";
-            this.Moi.MinimumWidth = 6;
-            this.Moi.Name = "Moi";
-            this.Moi.ReadOnly = true;
+            this.TrangThai.DataPropertyName = "TrangThai";
+            this.TrangThai.FillWeight = 91.57754F;
+            this.TrangThai.HeaderText = "Trạng Thái";
+            this.TrangThai.MinimumWidth = 6;
+            this.TrangThai.Name = "TrangThai";
+            this.TrangThai.ReadOnly = true;
             // 
             // panel4
             // 
@@ -505,7 +492,6 @@ namespace DoAn_DotNet.GUI
             this.col,
             this.Column1,
             this.Column4,
-            this.Column2,
             this.Column3});
             this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataGridView3.Location = new System.Drawing.Point(0, 405);
@@ -546,15 +532,6 @@ namespace DoAn_DotNet.GUI
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
             this.Column4.Width = 250;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "SoLuong";
-            this.Column2.HeaderText = "Số Lượng";
-            this.Column2.MinimumWidth = 6;
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Width = 125;
             // 
             // Column3
             // 
@@ -959,7 +936,6 @@ namespace DoAn_DotNet.GUI
             this.Column10,
             this.Column11,
             this.Column12,
-            this.Column14,
             this.Column13,
             this.Column15,
             this.Column16});
@@ -1056,14 +1032,6 @@ namespace DoAn_DotNet.GUI
             this.Column12.MinimumWidth = 6;
             this.Column12.Name = "Column12";
             this.Column12.ReadOnly = true;
-            // 
-            // Column14
-            // 
-            this.Column14.DataPropertyName = "SoLuong";
-            this.Column14.HeaderText = "Số Lượng Mua";
-            this.Column14.MinimumWidth = 6;
-            this.Column14.Name = "Column14";
-            this.Column14.ReadOnly = true;
             // 
             // Column13
             // 
@@ -1227,29 +1195,11 @@ namespace DoAn_DotNet.GUI
         private System.Windows.Forms.DataGridViewTextBoxColumn MaDH;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.Button btnThemDon;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridView dataGridView5;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.DateTimePicker dateTimePicker3;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Button btnTimKiemDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column17;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column18;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
         private System.Windows.Forms.Button btnQLTKKhachHang;
         private System.Windows.Forms.Button btnXoaDon;
         private System.Windows.Forms.Panel panel8;
@@ -1259,7 +1209,22 @@ namespace DoAn_DotNet.GUI
         private System.Windows.Forms.DataGridViewTextBoxColumn MaTC;
         private System.Windows.Forms.DataGridViewTextBoxColumn TenTC;
         private System.Windows.Forms.DataGridViewTextBoxColumn GiaBan;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SoLuongTon;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Moi;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TrangThai;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column17;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column18;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
     }
 }

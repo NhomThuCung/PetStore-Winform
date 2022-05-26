@@ -3,3 +3,4 @@ E:\HocTap\HK6\QuanLyThuCung\DTO\bin\Debug\DTO.pdb
 E:\HocTap\HK6\QuanLyThuCung\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
 E:\HocTap\HK6\QuanLyThuCung\DTO\obj\Debug\DTO.dll
 E:\HocTap\HK6\QuanLyThuCung\DTO\obj\Debug\DTO.pdb
+E:\HocTap\HK6\QuanLyThuCung\DTO\bin\Debug\DTO.dll.config

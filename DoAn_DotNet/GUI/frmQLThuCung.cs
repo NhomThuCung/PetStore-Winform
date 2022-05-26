@@ -40,7 +40,7 @@ namespace DoAn_DotNet.GUI
             //Load bảng thú cưng
             tcBLL.HienThiVaoDGV2(bN, dataGridView1, cboMaLoai, cboMaGiong,
                                 txtMaTC, txtTenTC, txtGiaBan,
-                                txtAnh, dtpNgayThem, numSoLuongTon,
+                                txtAnh, dtpNgayThem, 
                                 chkMoi, txtMoTa, "");
             dataGridView1.Columns["Column3"].DefaultCellStyle.Format = "c0";
         }
@@ -170,14 +170,22 @@ namespace DoAn_DotNet.GUI
                 info.GiaBan = Convert.ToDecimal(txtGiaBan.Text.Trim());
                 info.Anh = txtAnh.Text.Trim();
                 info.NgayCapNhat = dtpNgayThem.Value;
-                info.SoLuongTon = Convert.ToInt32(numSoLuongTon.Value);
+                //info.SoLuongTon = Convert.ToInt32(numSoLuongTon.Value);
                 info.Moi = chkMoi.Checked ? true : false;
                 info.MoTa = txtMoTa.Text.Trim();
 
                 if (isThem)
                 {
-                    tcBLL.Them(info);
-                    MessageBox.Show("Thêm thú cưng thành công", "Thêm thú cưng", MessageBoxButtons.OK);
+
+                    //InsertThuCungLinq
+                    if (tcBLL.ThemLinq(info.TenTC, info.GiaBan, info.MoTa, info.Anh, info.NgayCapNhat, info.MaGiong, info.MaLoai, info.Moi) == true)
+                    {
+                        MessageBox.Show("Thêm thú cưng thành công", "Thêm thú cưng", MessageBoxButtons.OK);
+                    }
+                    
+
+                    //tcBLL.Them(info);
+                    //MessageBox.Show("Thêm thú cưng thành công", "Thêm thú cưng", MessageBoxButtons.OK);
                     txtGiaBan.DataBindings[0].FormattingEnabled = true;
                     luuHinhAnh(url);
                 }
@@ -204,7 +212,7 @@ namespace DoAn_DotNet.GUI
         {
             tcBLL.HienThiVaoDGV2(bN, dataGridView1, cboMaLoai, cboMaGiong,
                     txtMaTC, txtTenTC, txtGiaBan,
-                    txtAnh, dtpNgayThem, numSoLuongTon,
+                    txtAnh, dtpNgayThem,
                     chkMoi, txtMoTa, txtTuKhoa.Text);
         }
 
@@ -229,12 +237,12 @@ namespace DoAn_DotNet.GUI
                     tc.TenTC = sheet.Cells[cellRowIndex, 2].Value;
                     tc.GiaBan = Convert.ToDecimal(sheet.Cells[cellRowIndex, 3].Value);
                     tc.NgayCapNhat = Convert.ToDateTime(String.Format("{0:MM/dd/yyyy}", sheet.Cells[cellRowIndex, 4].Value));
-                    tc.SoLuongTon = Convert.ToInt32(sheet.Cells[cellRowIndex, 5].Value);
-                    tc.MaLoai = Convert.ToInt32(sheet.Cells[cellRowIndex, 6].Value);
-                    tc.MaGiong = Convert.ToInt32(sheet.Cells[cellRowIndex, 7].Value);
-                    tc.Moi = sheet.Cells[cellRowIndex, 8].Value;
-                    tc.Anh = sheet.Cells[cellRowIndex, 9].Value;
-                    tc.MoTa = sheet.Cells[cellRowIndex, 10].Value;
+                    //tc.SoLuongTon = Convert.ToInt32(sheet.Cells[cellRowIndex, 5].Value);
+                    tc.MaLoai = Convert.ToInt32(sheet.Cells[cellRowIndex, 5].Value);
+                    tc.MaGiong = Convert.ToInt32(sheet.Cells[cellRowIndex, 6].Value);
+                    tc.Moi = sheet.Cells[cellRowIndex, 7].Value;
+                    tc.Anh = sheet.Cells[cellRowIndex, 8].Value;
+                    tc.MoTa = sheet.Cells[cellRowIndex, 9].Value;
 
                     thuBLL.Them(tc);
 
@@ -311,9 +319,9 @@ namespace DoAn_DotNet.GUI
             if (dataGridView1.Columns[e.ColumnIndex].Name == "Column8")
             {
                 if (e.Value.ToString() == "True")
-                    e.Value = "Mới thêm";
+                    e.Value = "Đã bán";
                 else
-                    e.Value = "Thú cưng cũ";
+                    e.Value = "Chưa bán";
             }
         }
 

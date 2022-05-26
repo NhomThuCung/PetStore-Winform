@@ -30,7 +30,7 @@ namespace BLL
                                   ComboBox cboMaDH,
                                   ComboBox cboThuCung,
                                   TextBox txtGiaBan,
-                                  TextBox txtSoLuong,
+                                  //TextBox txtSoLuong,
                                   TextBox txtThanhTien,
                                   string maDH)
         {
@@ -52,8 +52,8 @@ namespace BLL
             txtGiaBan.DataBindings[0].FormattingEnabled = true;
             txtGiaBan.DataBindings[0].FormatString = "c0";
 
-            txtSoLuong.DataBindings.Clear();
-            txtSoLuong.DataBindings.Add("Text", bS, "SoLuong", false, DataSourceUpdateMode.Never);
+            //txtSoLuong.DataBindings.Clear();
+            //txtSoLuong.DataBindings.Add("Text", bS, "SoLuong", false, DataSourceUpdateMode.Never);
 
             txtThanhTien.DataBindings.Clear();
             txtThanhTien.DataBindings.Add("Text", bS, "ThanhTien", false, DataSourceUpdateMode.Never);
@@ -83,10 +83,10 @@ namespace BLL
         {
             data.Sua(info, maDH);
         }
-        public void SuaChiTiet(ChiTietDonHangDTO info, int maTC, int maHD)
-        {
-            data.SuaChiTiet(info, maTC, maHD);
-        }
+        //public void SuaChiTiet(ChiTietDonHangDTO info, int maTC, int maHD)
+        //{
+        //    data.SuaChiTiet(info, maTC, maHD);
+        //}
 
         public void Xoa(ChiTietDonHangDTO info)
         {

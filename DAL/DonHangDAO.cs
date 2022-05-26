@@ -20,13 +20,13 @@ namespace DAL
 
         public DataTable DonHang_CTDH()
         {
-            string sql = "SELECT DH.*, CTDH.SoLuong, CTDH.MaTC, TC.TenTC FROM DonHang DH, ChiTietDonHang CTDH, ThuCung TC where DH.MaDH = CTDH.MaDH AND TC.MaTC = CTDH.MaTC";
+            string sql = "SELECT DH.*, CTDH.MaTC, TC.TenTC FROM DonHang DH, ChiTietDonHang CTDH, ThuCung TC where DH.MaDH = CTDH.MaDH AND TC.MaTC = CTDH.MaTC";
             return data.QuerySQL(sql);
         }
 
         public DataTable DonHang_CTDH(DateTime ngaydau, DateTime ngaycuoi)
         {
-            string sql = "SELECT DH.*, CTDH.SoLuong, CTDH.MaTC, TC.TenTC FROM DonHang DH, ChiTietDonHang CTDH, ThuCung TC where DH.MaDH = CTDH.MaDH AND TC.MaTC = CTDH.MaTC AND DH.CreatedDate >= N'" + ngaydau.ToString("yyyy-MM-dd") + "' AND DH.CreatedDate <= N'" + ngaycuoi.ToString("yyyy-MM-dd") + "' ";
+            string sql = "SELECT DH.*, CTDH.MaTC, TC.TenTC FROM DonHang DH, ChiTietDonHang CTDH, ThuCung TC where DH.MaDH = CTDH.MaDH AND TC.MaTC = CTDH.MaTC AND DH.CreatedDate >= N'" + ngaydau.ToString("yyyy-MM-dd") + "' AND DH.CreatedDate <= N'" + ngaycuoi.ToString("yyyy-MM-dd") + "' ";
             return data.QuerySQL(sql);
         }
 
@@ -38,7 +38,7 @@ namespace DAL
 
         public DataTable DonHang_Report(int maDH)
         {
-            string sql = "SELECT ChiTietDonHang.MaDH, ThuCung.TenTC, ThuCung.GiaBan, ChiTietDonHang.SoLuong, ChiTietDonHang.ThanhTien FROM ChiTietDonHang INNER JOIN ThuCung ON ChiTietDonHang.MaTC = ThuCung.MaTC AND ChiTietDonHang.MaDH = " + maDH + "";
+            string sql = "SELECT ChiTietDonHang.MaDH, ThuCung.TenTC, ThuCung.GiaBan, ChiTietDonHang.ThanhTien FROM ChiTietDonHang INNER JOIN ThuCung ON ChiTietDonHang.MaTC = ThuCung.MaTC AND ChiTietDonHang.MaDH = " + maDH + "";
             return data.QuerySQL(sql);
         }
 

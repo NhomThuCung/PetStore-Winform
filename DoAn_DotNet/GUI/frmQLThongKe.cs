@@ -76,12 +76,11 @@ namespace DoAn_DotNet.GUI
                         item.Text = i.ToString();
                         string maDH = row["MaDH"].ToString();
                         DateTime ntao = (DateTime)row["CreatedDate"];
-                        string sl = row["SoLuongBan"].ToString();
                         decimal tongtien = (decimal)row["DoanhThu"];
                         CultureInfo info = new CultureInfo("vi-VN");
                         item.SubItems.AddRange(new string[]
                         {
-                            maDH,ntao.ToString("dd-MM-yyyy"),sl,tongtien.ToString("c0",info)
+                            maDH,ntao.ToString("dd-MM-yyyy"), tongtien.ToString("c0",info)
                         });
                         lsvThongKeDonHang.Items.Add(item);
                         i++;
@@ -110,15 +109,14 @@ namespace DoAn_DotNet.GUI
                     {
                         ListViewItem item = new ListViewItem();
                         item.Text = i.ToString();
-                        string maTC = row["MaTC"].ToString();
-                        string tenTC = row["TenTC"].ToString();
-                        decimal giaBan = (decimal)row["GiaBan"];
+                        string maGiong = row["MaGiong"].ToString();
+                        string tenGiong = row["TenGiong"].ToString();
                         string slBan = row["SoLuongBan"].ToString();
-                        string slTon = row["SoLuongTon"].ToString();
+                        decimal doanhThu = (decimal)row["DoanhThu"];
                         CultureInfo info = new CultureInfo("vi-VN");
                         item.SubItems.AddRange(new string[]
                         {
-                            maTC, tenTC, giaBan.ToString("c0",info), slBan, slTon
+                            maGiong, tenGiong, slBan, doanhThu.ToString("c0",info)
                         });
                         lsvThongKeThuCungBC.Items.Add(item);
                         i++;

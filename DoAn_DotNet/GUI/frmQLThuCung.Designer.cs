@@ -85,17 +85,16 @@ namespace DoAn_DotNet.GUI
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.bN)).BeginInit();
             this.bN.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -624,7 +623,6 @@ namespace DoAn_DotNet.GUI
             this.Column2,
             this.Column3,
             this.Column4,
-            this.Column5,
             this.Column6,
             this.Column7,
             this.Column8,
@@ -643,6 +641,10 @@ namespace DoAn_DotNet.GUI
             this.dataGridView1.TabIndex = 16;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Column1
             // 
@@ -680,15 +682,6 @@ namespace DoAn_DotNet.GUI
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
             // 
-            // Column5
-            // 
-            this.Column5.DataPropertyName = "SoLuongTon";
-            this.Column5.FillWeight = 86.00858F;
-            this.Column5.HeaderText = "Số Lượng";
-            this.Column5.MinimumWidth = 6;
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            // 
             // Column6
             // 
             this.Column6.DataPropertyName = "MaLoai";
@@ -709,7 +702,7 @@ namespace DoAn_DotNet.GUI
             // 
             // Column8
             // 
-            this.Column8.DataPropertyName = "Moi";
+            this.Column8.DataPropertyName = "TrangThai";
             this.Column8.FillWeight = 86.00858F;
             this.Column8.HeaderText = "Tình Trạng";
             this.Column8.MinimumWidth = 6;
@@ -734,10 +727,6 @@ namespace DoAn_DotNet.GUI
             this.Column10.MinimumWidth = 6;
             this.Column10.Name = "Column10";
             this.Column10.ReadOnly = true;
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // frmQLThuCung
             // 
@@ -829,7 +818,6 @@ namespace DoAn_DotNet.GUI
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;

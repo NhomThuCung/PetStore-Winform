@@ -23,11 +23,13 @@ namespace DTO
         private int maLoai;
         private int maGiong;
         private string tenGiong;
+        private int soLuongTon;
         private string moTa;
 
         public int MaLoai { get => maLoai; set => maLoai = value; }
         public int MaGiong { get => maGiong; set => maGiong = value; }
         public string TenGiong { get => tenGiong; set => tenGiong = value; }
         public string MoTa { get => moTa; set => moTa = value; }
+        public int SoLuongTon { get => soLuongTon; set => soLuongTon = value; }
     }
 }

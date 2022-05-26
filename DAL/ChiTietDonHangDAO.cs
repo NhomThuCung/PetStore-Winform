@@ -37,22 +37,22 @@ namespace DAL
 
         public void Them(ChiTietDonHangDTO info)
         {
-            string sql = "INSERT INTO ChiTietDonHang(MaDH, MaTC, SoLuong, ThanhTien)" +
-                " VALUES (" + info.MaDH + ", " + info.MaTC + ", " + info.SoLuong + ", " + info.ThanhTien + ") ";
+            string sql = "INSERT INTO ChiTietDonHang(MaDH, MaTC, ThanhTien)" +
+                " VALUES (" + info.MaDH + ", " + info.MaTC + ", " + info.ThanhTien + ") ";
             data.ExecuteSQL(sql);
         }
 
         public void Sua(ChiTietDonHangDTO info, int maDH)
         {
-            string sql = "UPDATE ChiTietDonHang SET MaTC = " + info.MaTC + ", SoLuong = " + info.SoLuong + ", ThanhTien = " + info.ThanhTien + " WHERE MaDH = " + maDH;
+            string sql = "UPDATE ChiTietDonHang SET MaTC = " + info.MaTC + ", ThanhTien = " + info.ThanhTien + " WHERE MaDH = " + maDH;
             data.ExecuteSQL(sql);
         }
 
-        public void SuaChiTiet(ChiTietDonHangDTO info, int maTC, int maHD)
-        {
-            string sql = "UPDATE ChiTietDonHang SET SoLuong = " + info.SoLuong + " WHERE MaTC = " + maTC + " AND MaDH = "+ maHD +"";
-            data.ExecuteSQL(sql);
-        }
+        //public void SuaChiTiet(ChiTietDonHangDTO info, int maTC, int maHD)
+        //{
+        //    string sql = "UPDATE ChiTietDonHang SET SoLuong = " + info.SoLuong + " WHERE MaTC = " + maTC + " AND MaDH = "+ maHD +"";
+        //    data.ExecuteSQL(sql);
+        //}
 
         public void Xoa(ChiTietDonHangDTO info)
         {

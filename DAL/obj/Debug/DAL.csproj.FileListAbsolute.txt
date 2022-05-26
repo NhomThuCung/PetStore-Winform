@@ -5,6 +5,6 @@ E:\HocTap\HK6\QuanLyThuCung\DAL\bin\Debug\DAL.dll
 E:\HocTap\HK6\QuanLyThuCung\DAL\bin\Debug\DAL.pdb
 E:\HocTap\HK6\QuanLyThuCung\DAL\bin\Debug\DTO.dll
 E:\HocTap\HK6\QuanLyThuCung\DAL\bin\Debug\DTO.pdb
-E:\HocTap\HK6\QuanLyThuCung\DAL\obj\Debug\DAL.csproj.CopyComplete
 E:\HocTap\HK6\QuanLyThuCung\DAL\obj\Debug\DAL.dll
 E:\HocTap\HK6\QuanLyThuCung\DAL\obj\Debug\DAL.pdb
+E:\HocTap\HK6\QuanLyThuCung\DAL\bin\Debug\DTO.dll.config

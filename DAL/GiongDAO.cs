@@ -25,14 +25,14 @@ namespace DAL
 
         public void Them(GiongDTO info)
         {
-            string sql = "INSERT INTO Giong(MaLoai, TenGiong, MoTa)" +
-                " VALUES (" + info.MaLoai + ", N'"+ info.TenGiong + "', N'" + info.MoTa + "')";
+            string sql = "INSERT INTO Giong(MaLoai, TenGiong, SoLuongTon, MoTa)" +
+                " VALUES (" + info.MaLoai + ", N'"+ info.TenGiong + "', " + info.SoLuongTon + ", N'" + info.MoTa + "')";
             data.ExecuteSQL(sql);
         }
 
         public void Sua(GiongDTO info, int maGiong)
         {
-            string sql = "UPDATE Giong SET MaLoai = '" + info.MaLoai + "', TenGiong = N'" + info.TenGiong +"', MoTa = N'" + info.MoTa + "' WHERE MaGiong = " + maGiong;
+            string sql = "UPDATE Giong SET MaLoai = '" + info.MaLoai + "', TenGiong = N'" + info.TenGiong +"', SoLuongTon = '" + info.SoLuongTon + "', MoTa = N'" + info.MoTa + "' WHERE MaGiong = " + maGiong;
             data.ExecuteSQL(sql);
         }
 

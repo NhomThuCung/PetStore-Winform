@@ -9,4 +9,5 @@ E:\HocTap\HK6\QuanLyThuCung\BLL\bin\Debug\DAL.dll.config
 E:\HocTap\HK6\QuanLyThuCung\BLL\bin\Debug\DTO.pdb
 E:\HocTap\HK6\QuanLyThuCung\BLL\obj\Debug\BLL.dll
 E:\HocTap\HK6\QuanLyThuCung\BLL\obj\Debug\BLL.pdb
+E:\HocTap\HK6\QuanLyThuCung\BLL\bin\Debug\DTO.dll.config
 E:\HocTap\HK6\QuanLyThuCung\BLL\obj\Debug\BLL.csproj.CopyComplete

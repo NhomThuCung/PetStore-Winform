@@ -10,7 +10,7 @@ namespace DAL
 {
     public class Connect
     {
-        private static string connString = @"Data Source=PHATTAI ;Initial Catalog=QL_PetStore;User ID=sa;Password=123";
+        private static string connString = @"Data Source=PHATTAI ;Initial Catalog=QuanLyPetStore;User ID=sa;Password=123";
         private static SqlConnection conn = null;
 
         public Connect()

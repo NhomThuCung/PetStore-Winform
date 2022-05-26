@@ -39,7 +39,7 @@ namespace DoAn_DotNet.GUI
             gBLL.HienThiVaoComboBox(cboMaLoai);
 
             //Load bảng Giống
-            gBLL.HienThiVaoDGV(bN, dataGridView1, cboMaLoai, txtMaGiong, txtTenGiong, txtMoTa, "");
+            gBLL.HienThiVaoDGV(bN, dataGridView1, cboMaLoai, txtMaGiong, txtTenGiong, numSoLuongTon, txtMoTa, "");
 
             //Load bảng loài
             lBLL.HienThiVaoDGV(bN1, dataGridView2, txtMaLoai, txtTenLoai,"");
@@ -51,6 +51,7 @@ namespace DoAn_DotNet.GUI
             cboMaLoai.Enabled = tt;
             txtMaGiong.Enabled = tt;
             txtTenGiong.Enabled = tt;
+            numSoLuongTon.Enabled = tt;
             txtMoTa.Enabled = tt;
 
             btnLuu.Enabled = tt;
@@ -95,6 +96,7 @@ namespace DoAn_DotNet.GUI
             maGiong = txtMaGiong.Text;
             txtMaGiong.Enabled = false;
             txtTenGiong.Focus();
+
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
@@ -126,12 +128,15 @@ namespace DoAn_DotNet.GUI
                 MessageBox.Show("Tên giống không vượt quá 200 ký tự!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else if (txtMoTa.Text.Trim() == "")
                 MessageBox.Show("Mô Tả không được bỏ trống!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else if (numSoLuongTon.Value == 0)
+                MessageBox.Show("Số lượng thú cưng phải lớn hơn 0.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             else
             {
                 GiongDTO info = new GiongDTO();
                 info.MaLoai = Convert.ToInt32(cboMaLoai.SelectedValue);
                 info.TenGiong = txtTenGiong.Text.Trim();
                 info.MoTa = txtMoTa.Text.Trim();
+                info.SoLuongTon = Convert.ToInt32(numSoLuongTon.Value);
 
                 if (isThem)
                 {
@@ -158,7 +163,7 @@ namespace DoAn_DotNet.GUI
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
-            gBLL.HienThiVaoDGV(bN, dataGridView1, cboMaLoai, txtMaGiong, txtTenGiong, txtMoTa, txtTuKhoa.Text);
+            gBLL.HienThiVaoDGV(bN, dataGridView1, cboMaLoai, txtMaGiong, txtTenGiong, numSoLuongTon, txtMoTa,  txtTuKhoa.Text);
         }
 
         private void btnDong_Click(object sender, EventArgs e)
@@ -197,7 +202,8 @@ namespace DoAn_DotNet.GUI
                     giong.MaLoai = Convert.ToInt32(sheet.Cells[cellRowIndex, 1].Value);
                     giong.MaGiong = Convert.ToInt32(sheet.Cells[cellRowIndex, 2].Value);
                     giong.TenGiong = sheet.Cells[cellRowIndex, 3].Value;
-                    giong.MoTa = sheet.Cells[cellRowIndex, 4].Value;
+                    giong.SoLuongTon = Convert.ToInt32(sheet.Cells[cellRowIndex, 4].Value);
+                    giong.MoTa = sheet.Cells[cellRowIndex, 5].Value;
 
                     giongBLL.Them(giong);
 

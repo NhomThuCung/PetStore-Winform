@@ -19,6 +19,7 @@ namespace BLL
         GiongDAO dataGiong = new GiongDAO();
         LoaiDAO dataLoai = new LoaiDAO();
 
+        
         public void HienThiVaoDGV(
                                   DataGridView dGV,
                                   string tenTC)
@@ -42,7 +43,7 @@ namespace BLL
                                   TextBox txtGiaBan,
                                   TextBox txtAnh,
                                   DateTimePicker dtpNgayThem,
-                                  NumericUpDown numSoLuongTon,
+                                  //NumericUpDown numSoLuongTon,
                                   CheckBox chkMoi,
                                   RichTextBox txtMoTa,
                                   string tuKhoa)
@@ -77,7 +78,7 @@ namespace BLL
             txtAnh.DataBindings.Add("Text", bS1, "Anh", false, DataSourceUpdateMode.Never);
 
             chkMoi.DataBindings.Clear();
-            Binding gt = new Binding("Checked", bS1, "Moi", false, DataSourceUpdateMode.Never);
+            Binding gt = new Binding("Checked", bS1, "TrangThai", false, DataSourceUpdateMode.Never);
             gt.Format += (s, e) =>
             {
                 e.Value = 1;
@@ -87,8 +88,8 @@ namespace BLL
             dtpNgayThem.DataBindings.Clear();
             dtpNgayThem.DataBindings.Add("Value", bS1, "NgayCapNhat", false, DataSourceUpdateMode.Never);
 
-            numSoLuongTon.DataBindings.Clear();
-            numSoLuongTon.DataBindings.Add("Value", bS1, "SoLuongTon", false, DataSourceUpdateMode.Never);
+            //numSoLuongTon.DataBindings.Clear();
+            //numSoLuongTon.DataBindings.Add("Value", bS1, "SoLuongTon", false, DataSourceUpdateMode.Never);
 
             txtMoTa.DataBindings.Clear();
             txtMoTa.DataBindings.Add("Text", bS1, "MoTa", false, DataSourceUpdateMode.Never);
@@ -108,6 +109,15 @@ namespace BLL
             cboGiong.DisplayMember = "TenGiong";
         }
 
+        //InsertThuCung Linq
+        public bool ThemLinq(string tenTC, decimal giaBan, string moTa, string anh, DateTime ngayCapNhap, int maGiong, int maLoai, bool trangThai)
+        {
+            if (data.ThemLinq(tenTC, giaBan, moTa, anh, ngayCapNhap, maGiong, maLoai, trangThai) == true)
+            {
+                return true;
+            }
+            return false;
+        }
 
         public void Them(ThuCungDTO info)
         {

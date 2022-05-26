@@ -14,7 +14,6 @@ namespace DTO
         private string moTa;
         private string anh;
         private DateTime ngayCapNhat;
-        private int soLuongTon;
         private int maGiong;
         private int maLoai;
         private bool moi;
@@ -25,7 +24,6 @@ namespace DTO
         public string MoTa { get => moTa; set => moTa = value; }
         public string Anh { get => anh; set => anh = value; }
         public DateTime NgayCapNhat { get => ngayCapNhat; set => ngayCapNhat = value; }
-        public int SoLuongTon { get => soLuongTon; set => soLuongTon = value; }
         public int MaGiong { get => maGiong; set => maGiong = value; }
         public int MaLoai { get => maLoai; set => maLoai = value; }
         public bool Moi { get => moi; set => moi = value; }

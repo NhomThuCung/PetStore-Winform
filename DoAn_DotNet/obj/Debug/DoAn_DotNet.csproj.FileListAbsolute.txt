@@ -85,3 +85,5 @@ E:\HocTap\HK6\QuanLyThuCung\DoAn_DotNet\bin\Debug\BLL.pdb
 E:\HocTap\HK6\QuanLyThuCung\DoAn_DotNet\bin\Debug\DAL.pdb
 E:\HocTap\HK6\QuanLyThuCung\DoAn_DotNet\bin\Debug\DAL.dll.config
 E:\HocTap\HK6\QuanLyThuCung\DoAn_DotNet\bin\Debug\DTO.pdb
+E:\HocTap\HK6\QuanLyThuCung\DoAn_DotNet\bin\Debug\DTO.dll.config
+E:\HocTap\HK6\QuanLyThuCung\DoAn_DotNet\obj\Debug\DoAn_DotNet.csproj.CopyComplete

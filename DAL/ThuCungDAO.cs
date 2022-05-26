@@ -20,13 +20,13 @@ namespace DAL
 
         public DataTable DanhSachTC()
         {
-            string sql = "SELECT MaTC, TenTC, GiaBan, SoLuongTon, Moi FROM ThuCung";
+            string sql = "SELECT MaTC, TenTC, GiaBan, TrangThai FROM ThuCung";
             return data.QuerySQL(sql);
         }
 
         public DataTable DanhSachTC(string tenTC)
         {
-            string sql = "SELECT MaTC, TenTC, GiaBan, SoLuongTon, Moi FROM ThuCung WHERE TenTC LIKE '%" + tenTC + "%'";
+            string sql = "SELECT MaTC, TenTC, GiaBan, TrangThai FROM ThuCung WHERE TenTC LIKE '%" + tenTC + "%'";
             return data.QuerySQL(sql);
         }
 
@@ -42,19 +42,46 @@ namespace DAL
             return data.QuerySQL(sql);
         }
 
+        //InsertThemLinq
+        public bool ThemLinq(string tenTC, decimal giaBan, string moTa, string anh, DateTime ngayCapNhap, int maGiong, int maLoai, bool trangThai)
+        {
+            QuanLyPetStoreDataContext db = new QuanLyPetStoreDataContext();
+            try
+            {
+                ThuCung tc = new ThuCung();
+                tc.TenTC = tenTC;
+                tc.GiaBan = giaBan;
+                tc.MoTa = moTa;
+                tc.Anh = anh;
+                tc.NgayCapNhat = ngayCapNhap;
+                tc.MaGiong = maGiong;
+                tc.MaLoai = maLoai;
+                tc.TrangThai = trangThai;
+                db.ThuCungs.InsertOnSubmit(tc);
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+
+
         public void Them(ThuCungDTO info)
         {
-            string sql = "INSERT INTO ThuCung(TenTC, GiaBan, MoTa, Anh, NgayCapNhat, SoLuongTon, MaGiong, MaLoai, Moi) " +
+            string sql = "INSERT INTO ThuCung(TenTC, GiaBan, MoTa, Anh, NgayCapNhat, MaGiong, MaLoai, Moi) " +
                 "VALUES(N'" + info.TenTC + "', " + info.GiaBan + ", N'" + info.MoTa + "', N'" + info.Anh + "'" +
-                ", N'" + info.NgayCapNhat.ToString("yyyy-MM-dd") + "', " + info.SoLuongTon + ", " + info.MaGiong + ", " + info.MaLoai + ", '" + info.Moi + "')";
+                ", N'" + info.NgayCapNhat.ToString("yyyy-MM-dd") + "', " + info.MaGiong + ", " + info.MaLoai + ", '" + info.Moi + "')";
             data.ExecuteSQL(sql);
         }
 
         public void Sua(ThuCungDTO info, int maTC)
         {
             string sql = "UPDATE ThuCung SET TenTC = N'" + info.TenTC + "', GiaBan = " + info.GiaBan + "" +
-                ", MoTa = N'" + info.MoTa + "', Anh = N'" + info.Anh + "', NgayCapNhat = N'" + info.NgayCapNhat.ToString("yyyy-MM-dd") + "', SoLuongTon = " + info.SoLuongTon + "" +
-                ", MaGiong = " + info.MaGiong + ", MaLoai = " + info.MaLoai + ", Moi = '" + info.Moi + "' WHERE MaTC = " + maTC;
+                ", MoTa = N'" + info.MoTa + "', Anh = N'" + info.Anh + "', NgayCapNhat = N'" + info.NgayCapNhat.ToString("yyyy-MM-dd") + "', " +
+                " MaGiong = " + info.MaGiong + ", MaLoai = " + info.MaLoai + ", Moi = '" + info.Moi + "' WHERE MaTC = " + maTC;
             data.ExecuteSQL(sql);
         }
 

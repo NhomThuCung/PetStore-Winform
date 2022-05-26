@@ -51,7 +51,6 @@ namespace DoAn_DotNet.GUI
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lsvThongKeThuCungBC = new System.Windows.Forms.ListView();
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -59,7 +58,6 @@ namespace DoAn_DotNet.GUI
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -208,9 +206,9 @@ namespace DoAn_DotNet.GUI
             // 
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(503, 0);
+            this.label2.Location = new System.Drawing.Point(519, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(526, 27);
+            this.label2.Size = new System.Drawing.Size(510, 27);
             this.label2.TabIndex = 2;
             this.label2.Text = "TOP 10 THÚ CƯNG BÁN CHẠY";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -221,7 +219,7 @@ namespace DoAn_DotNet.GUI
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Location = new System.Drawing.Point(3, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(494, 27);
+            this.label11.Size = new System.Drawing.Size(510, 27);
             this.label11.TabIndex = 1;
             this.label11.Text = "TOP 10 ĐƠN HÀNG";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -232,7 +230,6 @@ namespace DoAn_DotNet.GUI
             this.columnHeader4,
             this.columnHeader5,
             this.columnHeader6,
-            this.columnHeader7,
             this.columnHeader8});
             this.lsvThongKeDonHang.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lsvThongKeDonHang.FullRowSelect = true;
@@ -241,7 +238,7 @@ namespace DoAn_DotNet.GUI
             this.lsvThongKeDonHang.Location = new System.Drawing.Point(3, 30);
             this.lsvThongKeDonHang.MultiSelect = false;
             this.lsvThongKeDonHang.Name = "lsvThongKeDonHang";
-            this.lsvThongKeDonHang.Size = new System.Drawing.Size(494, 237);
+            this.lsvThongKeDonHang.Size = new System.Drawing.Size(510, 237);
             this.lsvThongKeDonHang.TabIndex = 3;
             this.lsvThongKeDonHang.UseCompatibleStateImageBehavior = false;
             this.lsvThongKeDonHang.View = System.Windows.Forms.View.Details;
@@ -254,22 +251,17 @@ namespace DoAn_DotNet.GUI
             // columnHeader5
             // 
             this.columnHeader5.Text = "Mã Đơn Hàng";
-            this.columnHeader5.Width = 108;
+            this.columnHeader5.Width = 111;
             // 
             // columnHeader6
             // 
             this.columnHeader6.Text = "Ngày Tạo";
-            this.columnHeader6.Width = 114;
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "SL Thú Cưng";
-            this.columnHeader7.Width = 100;
+            this.columnHeader6.Width = 165;
             // 
             // columnHeader8
             // 
             this.columnHeader8.Text = "Tổng Tiền";
-            this.columnHeader8.Width = 132;
+            this.columnHeader8.Width = 174;
             // 
             // lsvThongKeThuCungBC
             // 
@@ -278,16 +270,15 @@ namespace DoAn_DotNet.GUI
             this.columnHeader14,
             this.columnHeader10,
             this.columnHeader11,
-            this.columnHeader12,
-            this.columnHeader13});
+            this.columnHeader12});
             this.lsvThongKeThuCungBC.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lsvThongKeThuCungBC.FullRowSelect = true;
             this.lsvThongKeThuCungBC.GridLines = true;
             this.lsvThongKeThuCungBC.HideSelection = false;
-            this.lsvThongKeThuCungBC.Location = new System.Drawing.Point(503, 30);
+            this.lsvThongKeThuCungBC.Location = new System.Drawing.Point(519, 30);
             this.lsvThongKeThuCungBC.MultiSelect = false;
             this.lsvThongKeThuCungBC.Name = "lsvThongKeThuCungBC";
-            this.lsvThongKeThuCungBC.Size = new System.Drawing.Size(526, 237);
+            this.lsvThongKeThuCungBC.Size = new System.Drawing.Size(510, 237);
             this.lsvThongKeThuCungBC.TabIndex = 4;
             this.lsvThongKeThuCungBC.UseCompatibleStateImageBehavior = false;
             this.lsvThongKeThuCungBC.View = System.Windows.Forms.View.Details;
@@ -299,28 +290,23 @@ namespace DoAn_DotNet.GUI
             // 
             // columnHeader14
             // 
-            this.columnHeader14.Text = "Mã Thú Cưng";
+            this.columnHeader14.Text = "Mã Giống";
             this.columnHeader14.Width = 94;
             // 
             // columnHeader10
             // 
-            this.columnHeader10.Text = "Tên Thú Cưng";
+            this.columnHeader10.Text = "Tên Giống";
             this.columnHeader10.Width = 142;
             // 
             // columnHeader11
             // 
-            this.columnHeader11.Text = "Giá Bán";
+            this.columnHeader11.Text = "Số Lượng";
             this.columnHeader11.Width = 106;
             // 
             // columnHeader12
             // 
-            this.columnHeader12.Text = "SL Bán";
-            this.columnHeader12.Width = 58;
-            // 
-            // columnHeader13
-            // 
-            this.columnHeader13.Text = "SL Tồn";
-            this.columnHeader13.Width = 59;
+            this.columnHeader12.Text = "Doanh Thu";
+            this.columnHeader12.Width = 112;
             // 
             // frmQLThongKe
             // 
@@ -364,13 +350,11 @@ namespace DoAn_DotNet.GUI
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
-        private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.ColumnHeader columnHeader9;
         private System.Windows.Forms.ColumnHeader columnHeader14;
         private System.Windows.Forms.ColumnHeader columnHeader10;
         private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.ColumnHeader columnHeader12;
-        private System.Windows.Forms.ColumnHeader columnHeader13;
     }
 }

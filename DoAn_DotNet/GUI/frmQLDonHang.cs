@@ -38,7 +38,7 @@ namespace DoAn_DotNet.GUI
             //Bảng chi tiết hoá đơn
             BatTatCT(false);
             ctBLL.HienThiVaoComboBox(cboDH, cboThuCung);
-            ctBLL.HienThiVaoDGV2(bindingNavigator1, dataGridView2, cboDH, cboThuCung, txtGiaBan, txtSoLuong, txtThanhTien, "");
+            ctBLL.HienThiVaoDGV2(bindingNavigator1, dataGridView2, cboDH, cboThuCung, txtGiaBan, txtThanhTien, "");
             dataGridView1.Columns["Column9"].DefaultCellStyle.Format = "c0";
         }
 
@@ -294,7 +294,7 @@ namespace DoAn_DotNet.GUI
                 ChiTietDonHangDTO info = new ChiTietDonHangDTO();
                 info.SoLuong = Convert.ToInt32(txtSoLuong.Text);
 
-                ctBLL.SuaChiTiet(info, Convert.ToInt32(cboThuCung.SelectedValue), Convert.ToInt32(maDHCT));
+                //ctBLL.SuaChiTiet(info, Convert.ToInt32(cboThuCung.SelectedValue), Convert.ToInt32(maDHCT));
                 MessageBox.Show("Sửa chi tiết đơn hàng thành công", "Sửa Chi Tiết Đơn Hàng", MessageBoxButtons.OK);
 
                 // Tải lại lưới
@@ -310,7 +310,7 @@ namespace DoAn_DotNet.GUI
 
         private void btnTimKiemCT_Click(object sender, EventArgs e)
         {
-            ctBLL.HienThiVaoDGV2(bindingNavigator1, dataGridView2, cboDH, cboThuCung, txtGiaBan, txtSoLuong, txtThanhTien, txtTuKhoaCT.Text);
+            ctBLL.HienThiVaoDGV2(bindingNavigator1, dataGridView2, cboDH, cboThuCung, txtGiaBan, txtThanhTien, txtTuKhoaCT.Text);
 
         }
 

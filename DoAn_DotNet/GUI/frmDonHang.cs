@@ -36,10 +36,10 @@ namespace DoAn_DotNet.GUI
         public static int tienNhan = 0;
 
         private bool isThem = false;
-        int maNV = BLL.UserAdminBLL.frmDonHangmaNV;
+        int maNV = UserAdminBLL.frmDonHangmaNV;
         public static int maDH = 0;
 
-        public static int soTC = 0;
+        //public static int soTC = 0;
 
         public frmDonHang()
         {
@@ -58,6 +58,29 @@ namespace DoAn_DotNet.GUI
             dhBLL.HienThiVaoDGV2(dataGridView5, dateTimePicker2, dateTimePicker3);
             dataGridView2.Columns["GiaBan"].DefaultCellStyle.Format = "c0";
             dataGridView5.Columns["Column15"].DefaultCellStyle.Format = "c0";
+
+            //int dong = 0;
+            //for (int cot = 0; cot < dataGridView2.Columns.Count ; cot++)
+            //{
+            //    if (dataGridView2.Columns[cot].Name == "TrangThai")
+            //    {
+            //        if (dataGridView2.CurrentRow.Cells[cot].Value.ToString() == "True")
+            //        {
+            //            //e.Value = "Mới thêm";
+            //            dataGridView2.Rows[dong].Visible = false;
+            //            dong++;
+
+            //        }
+            //        if (dataGridView2.CurrentRow.Cells[cot].Value.ToString() == "False")
+            //        {
+            //            //e.Value = "Thú cưng cũ";
+            //            dataGridView2.Rows[dong].Visible = true;
+            //            dong++;
+
+            //        }
+            //    }
+            //}
+            
         }
 
         public void BatTat(bool tt)
@@ -119,7 +142,7 @@ namespace DoAn_DotNet.GUI
             }
             dataGridView2.CurrentRow.Selected = true;
             txtMaTC.Text = dataGridView2.Rows[e.RowIndex].Cells["MaTC"].FormattedValue.ToString();
-            soTC = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells["SoLuongTon"].FormattedValue.ToString());
+            //soTC = Convert.ToInt32(dataGridView2.Rows[e.RowIndex].Cells["SoLuongTon"].FormattedValue.ToString());
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -134,10 +157,10 @@ namespace DoAn_DotNet.GUI
             {
                 MessageBox.Show("Vui lòng nhập mã thú cưng cần thêm!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (numSoLuong.Value == 0)
-                MessageBox.Show("Số lượng thú cưng phải lớn hơn 0.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            else if (numSoLuong.Value > soTC)
-                MessageBox.Show("Số lượng thú cưng mua phải nhỏ hơn số lượng tồn", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //else if (numSoLuong.Value == 0)
+            //    MessageBox.Show("Số lượng thú cưng phải lớn hơn 0.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //else if (numSoLuong.Value > soTC)
+            //    MessageBox.Show("Số lượng thú cưng mua phải nhỏ hơn số lượng tồn", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             else
             {
                 if (dataGridView4 != null)
@@ -145,7 +168,7 @@ namespace DoAn_DotNet.GUI
                     ChiTietDonHangDTO ctdh = new ChiTietDonHangDTO();
                     ctdh.MaDH = Convert.ToInt32(txtDH.Text);
                     ctdh.MaTC = Convert.ToInt32(txtMaTC.Text);
-                    ctdh.SoLuong = Convert.ToInt32(numSoLuong.Value);
+                    //ctdh.SoLuong = Convert.ToInt32(numSoLuong.Value);
                     ctdh.ThanhTien = Convert.ToDecimal(null);
                     string ma = "";
                     for (int i = 0; i < dataGridView3.Rows.Count; ++i)
@@ -153,7 +176,7 @@ namespace DoAn_DotNet.GUI
                         ma = dataGridView3.Rows[i].Cells["Column1"].Value.ToString();
                         if (txtMaTC.Text == ma)
                         {
-                            ctdhBLL.SuaChiTiet(ctdh,Convert.ToInt32(txtMaTC.Text), Convert.ToInt32(txtDH.Text));
+                            //ctdhBLL.SuaChiTiet(ctdh,Convert.ToInt32(txtMaTC.Text), Convert.ToInt32(txtDH.Text));
                             MessageBox.Show("Sửa Hoá Đơn Thành Công", "Thông Báo");
                             isThem = false;
                         }
@@ -445,12 +468,18 @@ namespace DoAn_DotNet.GUI
 
         private void dataGridView2_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dataGridView2.Columns[e.ColumnIndex].Name == "Moi")
+            if (dataGridView2.Columns[e.ColumnIndex].Name == "TrangThai")
             {
                 if (e.Value.ToString() == "True")
-                    e.Value = "Mới thêm";
+                {
+                    e.Value = "Đã bán";
+
+                }
                 else
-                    e.Value = "Thú cưng cũ";
+                {
+                    e.Value = "Chưa bán";
+
+                }
             }
         }
 

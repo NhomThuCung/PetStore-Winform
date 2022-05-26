@@ -19,6 +19,7 @@ namespace BLL
                                   ComboBox cboMaLoai,
                                   TextBox txtMaGiong,
                                   TextBox txtTenGiong,
+                                  NumericUpDown numSoLuongTon,
                                   RichTextBox txtMoTa,
                                   string tuKhoa)
         {
@@ -37,6 +38,9 @@ namespace BLL
 
             txtTenGiong.DataBindings.Clear();
             txtTenGiong.DataBindings.Add("Text", bS1, "TenGiong", false, DataSourceUpdateMode.Never);
+
+            numSoLuongTon.DataBindings.Clear();
+            numSoLuongTon.DataBindings.Add("Value", bS1, "SoLuongTon", false, DataSourceUpdateMode.Never);
 
             txtMoTa.DataBindings.Clear();
             txtMoTa.DataBindings.Add("Text", bS1, "MoTa", false, DataSourceUpdateMode.Never);
