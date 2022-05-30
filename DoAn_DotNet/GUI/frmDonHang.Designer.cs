@@ -766,6 +766,7 @@ namespace DoAn_DotNet.GUI
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(125, 27);
             this.dateTimePicker1.TabIndex = 23;
+            this.dateTimePicker1.Value = new System.DateTime(2022, 5, 29, 18, 24, 46, 0);
             // 
             // label12
             // 
@@ -1105,7 +1106,7 @@ namespace DoAn_DotNet.GUI
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmDonHang";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "THÊM ĐƠN HÀNG";
+            this.Text = " ";
             this.Load += new System.EventHandler(this.frmDonHang_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

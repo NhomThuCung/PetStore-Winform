@@ -121,6 +121,7 @@ namespace DoAn_DotNet.GUI
                     panelTop.BackColor = color;
                     panelLogo.BackColor = ThemeColor.DoiMauPanelLogo(color, -0.3);
                     btnCloseChilForm.Visible = true;
+
                 }
             }
         }
@@ -165,6 +166,7 @@ namespace DoAn_DotNet.GUI
             this.pnHome.Tag = chilForm;
             chilForm.BringToFront();
             chilForm.Show();
+            panel1.Visible = false;
             lblChilForm.Text = chilForm.Text;
         }
 
@@ -183,7 +185,7 @@ namespace DoAn_DotNet.GUI
 
         private void btnDonHang_Click(object sender, EventArgs e)
         {
-            openChilForm(new frmDonHang(), sender);
+            openChilForm(new frmSell(), sender);
         }
 
         private void btnQLThuCung_Click(object sender, EventArgs e)
@@ -282,6 +284,7 @@ namespace DoAn_DotNet.GUI
             Reset();
             LoadThongTinTong();
             DoanhThuCuaHang();
+            panel1.Visible = true;
         }
 
         private void btnClose_Click(object sender, EventArgs e)

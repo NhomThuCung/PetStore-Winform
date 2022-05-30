@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DAL;
 using DTO;
 using System.Windows.Forms;
+using System.Data;
 
 namespace BLL
 {
@@ -63,6 +64,11 @@ namespace BLL
             dGV.DataSource = bS;
         }
 
+        public DataTable Sell()
+        {
+            return data.Sell();
+        }
+
         public void HienThiVaoComboBox(ComboBox cboMaDH, ComboBox cboThuCung)
         {
             cboMaDH.DataSource = dhDAO.DonHang();
@@ -74,6 +80,41 @@ namespace BLL
             cboThuCung.DisplayMember = "TenTC";
         }
 
+        //Load bảng Linq
+        public List<ChiTietDonHang> DanhSachLinq()
+        {
+            return data.DanhSachLinq();
+        }
+
+        //Thêm Linq
+        public bool ThemLinq(int maDH, int maTC, decimal thanhTien)
+        {
+            if (data.ThemLinq(maDH, maTC, thanhTien) == true)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        //Xoá Linq
+        public bool XoaLinq(int maDH)
+        {
+            if (data.XoaLinq(maDH) == true)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        //Update Linq
+        public bool UpdateLinq(int maDH, int maTC, decimal thanhTien)
+        {
+            if (data.UpdateLinq(maDH, maTC, thanhTien) == true)
+            {
+                return true;
+            }
+            return false;
+        }
         public void Them(ChiTietDonHangDTO info)
         {
             data.Them(info);

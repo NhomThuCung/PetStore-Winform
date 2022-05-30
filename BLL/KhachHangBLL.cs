@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DAL;
 using DTO;
+using System.Data;
 
 namespace BLL
 {
@@ -85,6 +86,47 @@ namespace BLL
 
             bN.BindingSource = bS1;
             dGV.DataSource = bS1;
+        }
+
+        public DataTable DsKHTheoSDT(string soDT)
+        {
+            return data.DsKHTheoSDT(soDT);
+        }
+
+        //Load bảng Linq
+        public List<KhachHang> DanhSachLinq()
+        {
+            return data.DanhSachLinq();
+        }
+
+        //Thêm Linq
+        public bool ThemLinq(string hoTen, string taiKhoan, string matKhau, string email, string diaChi, string dienThoai, string gioiTinh, DateTime ngaySinh, DateTime createdDate)
+        {
+            if (data.ThemLinq(hoTen, taiKhoan, matKhau, email, diaChi, dienThoai, gioiTinh, ngaySinh, createdDate) == true) 
+            {
+                return true;
+            }
+            return false;
+        }
+
+        //Xoá Linq
+        public bool XoaLinq(int maKH)
+        {
+            if (data.XoaLinq(maKH) == true)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        //Update Linq
+        public bool UpdateLinq(int maKH, string hoTen, string taiKhoan, string matKhau, string email, string diaChi, string dienThoai, string gioiTinh, DateTime ngaySinh, DateTime createdDate)
+        {
+            if (data.UpdateLinq(maKH, hoTen, taiKhoan, matKhau, email, diaChi, dienThoai, gioiTinh, ngaySinh, createdDate) == true)
+            {
+                return true;
+            }
+            return false;
         }
 
         public void Them(KhachHangDTO info)

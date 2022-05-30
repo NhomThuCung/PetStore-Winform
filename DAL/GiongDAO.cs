@@ -11,6 +11,7 @@ namespace DAL
     public class GiongDAO
     {
         private Connect data = new Connect();
+        QuanLyPetStoreDataContext db = new QuanLyPetStoreDataContext();
         public DataTable DanhSach()
         {
             string sql = "SELECT * FROM Giong";
@@ -21,6 +22,78 @@ namespace DAL
         {
             string sql = "SELECT * FROM Giong WHERE TenGiong LIKE '%" + tenGiong + "%'";
             return data.QuerySQL(sql);
+        }
+
+        public DataTable LoadCboGiong(int maLoai)
+        {
+            string sql = "SELECT * FROM Giong WHERE MaLoai = " + maLoai + "";
+            return data.QuerySQL(sql);
+        }
+
+        public List<Giong> LoadCboGiongLinq(int maLoai)
+        {
+            return db.Giongs.Where(t => t.MaLoai == maLoai).ToList<Giong>();
+        }
+
+        //Load Giong Linq
+        public List<Giong> DanhSachLinq()
+        {
+            return db.Giongs.Select(t => t).ToList();
+        }
+
+        //Thêm Linq
+        public bool ThemLinq(int maLoai, string tenGiong,int soLuongTon, string moTa)
+        {
+            try
+            {
+                Giong g = new Giong();
+                g.MaLoai = maLoai;
+                g.TenGiong = tenGiong;
+                g.SoLuongTon = soLuongTon;
+                g.MoTa = moTa;
+                db.Giongs.InsertOnSubmit(g);
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        //Xoá Linq
+        public bool XoaLinq(int maGiong)
+        {
+            try
+            {
+                var xoa = db.Giongs.Single(t => t.MaGiong == maGiong);
+                db.Giongs.DeleteOnSubmit(xoa);
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        //Update Linq
+        public bool UpdateLinq(int maLoai, int maGiong, string tenGiong, int soLuongTon, string moTa)
+        {
+            try
+            {
+                var update = db.Giongs.Single(t => t.MaGiong == maGiong);
+                update.MaLoai = maLoai;
+                update.TenGiong = tenGiong;
+                update.SoLuongTon = soLuongTon;
+                update.MoTa = moTa;
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public void Them(GiongDTO info)

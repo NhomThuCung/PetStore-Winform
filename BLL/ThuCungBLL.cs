@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Globalization;
 using System.IO;
 using System.Drawing;
+using System.Data;
 
 namespace BLL
 {
@@ -109,10 +110,51 @@ namespace BLL
             cboGiong.DisplayMember = "TenGiong";
         }
 
-        //InsertThuCung Linq
+        public DataTable DanhSachTCSell()
+        {
+            return data.DanhSachTCSell();
+        }
+
+        public DataTable DanhSachTCSell(int maLoai)
+        {
+            return data.DanhSachTCSell(maLoai);
+        }
+
+        public DataTable DanhSachTCSell(int maLoai,decimal giaBan)
+        {
+            return data.DanhSachTCSell(maLoai, giaBan);
+        }
+
+        //Load bảng Linq
+        public List<ThuCung> DanhSachLinq()
+        {
+            return data.DanhSachLinq();
+        }
+
+        //Thêm Linq
         public bool ThemLinq(string tenTC, decimal giaBan, string moTa, string anh, DateTime ngayCapNhap, int maGiong, int maLoai, bool trangThai)
         {
             if (data.ThemLinq(tenTC, giaBan, moTa, anh, ngayCapNhap, maGiong, maLoai, trangThai) == true)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        //Xoá Linq
+        public bool XoaLinq(int maTC)
+        {
+            if (data.XoaLinq(maTC) == true)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        //Update Linq
+        public bool UpdateLinq(int maTC, string tenTC, decimal giaBan, string moTa, string anh, DateTime ngayCapNhap, int maGiong, int maLoai, bool trangThai)
+        {
+            if (data.UpdateLinq(maTC, tenTC, giaBan, moTa, anh, ngayCapNhap, maGiong,maLoai,trangThai) == true)
             {
                 return true;
             }

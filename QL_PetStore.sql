@@ -81,7 +81,7 @@ CREATE TABLE [dbo].[UserAdmin](
 	[Address] [nvarchar](max) NULL,
 	[Email] [nvarchar](100) NULL,
 	[Phone] [nvarchar](20) NULL,
-	[CreateDate] [date] NULL,
+	[CreateDate] [datetime] NULL,
 	[MaQuyen] [int] NOT NULL,
 	[TienLuong] [decimal](18, 0) NULL,
 PRIMARY KEY CLUSTERED 
@@ -150,7 +150,7 @@ CREATE TABLE [dbo].[ThuCung](
 	[GiaBan] [decimal](18, 0) NOT NULL,
 	[MoTa] [nvarchar](max) NULL,
 	[Anh] [nvarchar](max) NULL,
-	[NgayCapNhat] [date] NULL,
+	[NgayCapNhat] [datetime] NULL,
 	[MaGiong] [int] NULL,
 	[MaLoai] [int] NULL,
 	[TrangThai] [bit] NULL,
@@ -169,7 +169,7 @@ GO
 CREATE TABLE [dbo].[DonHang](
 	[MaDH] [int] IDENTITY(1,1) NOT NULL,
 	[ID] [int] NULL,
-	[CreatedDate] [date] NULL,
+	[CreatedDate] [datetime] NULL,
 	[MaKH] [int] NULL,
 	[NguoiNhan] [nvarchar](100) NULL,
 	[Email] [nvarchar](100) NULL,
@@ -216,7 +216,7 @@ CREATE TABLE [dbo].[KhachHang](
 	[DienThoai] [nvarchar](20) NULL,
 	[GioiTinh] [nvarchar](3) NULL,
 	[NgaySinh] [date] NULL,
-	[CreatedDate] [date] NULL,	
+	[CreatedDate] [datetime] NULL,	
  CONSTRAINT [PK_KhachHang] PRIMARY KEY CLUSTERED 
 (
 	[MaKH] ASC
@@ -1130,4 +1130,3 @@ GO
 --RESTORE DATABASE QuanLyPetStore 
 --FROM DISK = 'C:\backupsql\Test_TRAN.trn'
 --WITH FILE=2, RECOVERY
-

@@ -292,7 +292,7 @@ namespace DoAn_DotNet.GUI
             else
             {
                 ChiTietDonHangDTO info = new ChiTietDonHangDTO();
-                info.SoLuong = Convert.ToInt32(txtSoLuong.Text);
+                //info.SoLuong = Convert.ToInt32(txtSoLuong.Text);
 
                 //ctBLL.SuaChiTiet(info, Convert.ToInt32(cboThuCung.SelectedValue), Convert.ToInt32(maDHCT));
                 MessageBox.Show("Sửa chi tiết đơn hàng thành công", "Sửa Chi Tiết Đơn Hàng", MessageBoxButtons.OK);

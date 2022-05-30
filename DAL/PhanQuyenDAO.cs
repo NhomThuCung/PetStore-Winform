@@ -12,6 +12,7 @@ namespace DAL
     public class PhanQuyenDAO
     {
         private Connect data = new Connect();
+        QuanLyPetStoreDataContext db = new QuanLyPetStoreDataContext();
 
         public DataTable DanhSach()
         {
@@ -23,6 +24,61 @@ namespace DAL
         {
             string sql = "SELECT * FROM PhanQuyen Where TenQuyen LIKE N'%" + tenQuyen + "%'";
             return data.QuerySQL(sql);
+        }
+
+        //Load PhanQuyen Linq
+        public List<PhanQuyen> DanhSachLinq()
+        {
+            return db.PhanQuyens.Select(t => t).ToList();
+        }
+
+        //Thêm Linq
+        public bool ThemLinq(string tenQuyen)
+        {
+            try
+            {
+                PhanQuyen pq = new PhanQuyen();
+                pq.TenQuyen = tenQuyen;
+                db.PhanQuyens.InsertOnSubmit(pq);
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        //Xoá Linq
+        public bool XoaLinq(int maQuyen)
+        {
+            try
+            {
+                var xoa = db.PhanQuyens.Single(t => t.MaQuyen == maQuyen);
+                db.PhanQuyens.DeleteOnSubmit(xoa);
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        //Update Linq
+        public bool UpdateLinq(int maQuyen, string tenQuyen)
+        {
+            try
+            {
+                var update = db.PhanQuyens.Single(t => t.MaQuyen == maQuyen);
+                update.TenQuyen = tenQuyen;
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public void Them(PhanQuyenDTO info)

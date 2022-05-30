@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="ChiTietDonHangDTO.cs" />
     <Compile Include="DonHangDTO.cs" />
+    <Compile Include="GioHangDTO.cs" />
     <Compile Include="GiongDTO.cs" />
     <Compile Include="IUserAdmin.cs" />
     <Compile Include="KhachHangDTO.cs" />

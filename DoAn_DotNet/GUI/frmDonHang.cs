@@ -57,30 +57,7 @@ namespace DoAn_DotNet.GUI
             dhBLL.HienThiVaoDGV(dataGridView4);
             dhBLL.HienThiVaoDGV2(dataGridView5, dateTimePicker2, dateTimePicker3);
             dataGridView2.Columns["GiaBan"].DefaultCellStyle.Format = "c0";
-            dataGridView5.Columns["Column15"].DefaultCellStyle.Format = "c0";
-
-            //int dong = 0;
-            //for (int cot = 0; cot < dataGridView2.Columns.Count ; cot++)
-            //{
-            //    if (dataGridView2.Columns[cot].Name == "TrangThai")
-            //    {
-            //        if (dataGridView2.CurrentRow.Cells[cot].Value.ToString() == "True")
-            //        {
-            //            //e.Value = "Mới thêm";
-            //            dataGridView2.Rows[dong].Visible = false;
-            //            dong++;
-
-            //        }
-            //        if (dataGridView2.CurrentRow.Cells[cot].Value.ToString() == "False")
-            //        {
-            //            //e.Value = "Thú cưng cũ";
-            //            dataGridView2.Rows[dong].Visible = true;
-            //            dong++;
-
-            //        }
-            //    }
-            //}
-            
+            dataGridView5.Columns["Column15"].DefaultCellStyle.Format = "c0";   
         }
 
         public void BatTat(bool tt)

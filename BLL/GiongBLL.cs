@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DAL;
 using DTO;
+using System.Data;
 
 namespace BLL
 {
@@ -57,6 +58,48 @@ namespace BLL
             cboGiong.DisplayMember = "TenLoai";
 
         }
+
+        public DataTable LoadCboGiong(int maLoai)
+        {
+            return data.LoadCboGiong(maLoai);
+        }
+
+        //Load bảng Linq
+        public List<Giong> DanhSachLinq()
+        {
+            return data.DanhSachLinq();
+        }
+
+        //Thêm Linq
+        public bool ThemLinq(int maLoai, string tenGiong, int soLuongTon, string moTa)
+        {
+            if (data.ThemLinq(maLoai, tenGiong, soLuongTon, moTa) == true)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        //Xoá Linq
+        public bool XoaLinq(int maGiong)
+        {
+            if (data.XoaLinq(maGiong) == true)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        //Update Linq
+        public bool UpdateLinq(int maLoai, int maGiong, string tenGiong, int soLuongTon, string moTa)
+        {
+            if (data.UpdateLinq(maLoai, maGiong, tenGiong, soLuongTon, moTa) == true)
+            {
+                return true;
+            }
+            return false;
+        }
+
 
         public void Them(GiongDTO info)
         {

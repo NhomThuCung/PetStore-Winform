@@ -36,6 +36,43 @@ namespace BLL
             bN.BindingSource = bS1;
             dGV.DataSource = bS1;
         }
+
+        //Load bảng Linq
+        public List<PhanQuyen> DanhSachLinq()
+        {
+            return data.DanhSachLinq();
+        }
+
+        //Thêm Linq
+        public bool ThemLinq(string tenQuyen)
+        {
+            if (data.ThemLinq(tenQuyen) == true)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        //Xoá Linq
+        public bool XoaLinq(int id)
+        {
+            if (data.XoaLinq(id) == true)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        //Update Linq
+        public bool UpdateLinq(int maQuyen, string tenQuyen)
+        {
+            if (data.UpdateLinq(maQuyen, tenQuyen) == true)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public void Them(PhanQuyenDTO info)
         {
             data.Them(info);

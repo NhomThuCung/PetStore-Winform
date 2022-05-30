@@ -11,11 +11,18 @@ namespace DAL
     public class UserAdminDAO
     {
         private Connect data = new Connect();
+        QuanLyPetStoreDataContext db = new QuanLyPetStoreDataContext();
 
         public DataTable DanhSach()
         {
             string sql = "SELECT * FROM UserAdmin";
             return data.QuerySQL(sql);
+        }
+
+        //Load Danh Sách UserAdmin Linq
+        public List<UserAdmin> DanhSachLinq()
+        {
+            return db.UserAdmins.Select(t => t).ToList();
         }
 
         public DataTable DanhSach_Ten(string tenNV)
@@ -48,6 +55,77 @@ namespace DAL
             string sql = "EXEC sp_BaoCaoDoanhThuCuaHang  " + manv + ", " + thang + ", " + nam + "";
             return data.QuerySQL(sql);
         }
+
+        //Thêm Linq
+        public bool ThemLinq(string userName, string password, string name, string cmnd, DateTime ngaySinh, string address, string email, string phone, DateTime createDate, int maQuyen, decimal tienLuong)
+        {
+            try
+            {
+                UserAdmin user = new UserAdmin();
+                user.UserName = userName;
+                user.Password = password;
+                user.Name = name;
+                user.CMND = cmnd;
+                user.NgaySinh = ngaySinh;
+                user.Address = address;
+                user.Email = email;
+                user.Phone = phone;
+                user.CreateDate = createDate;
+                user.MaQuyen = maQuyen;
+                user.TienLuong = tienLuong;
+                db.UserAdmins.InsertOnSubmit(user);
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        //Xoá Linq
+        public bool XoaLinq(int id)
+        {
+            try
+            {
+                var xoa = db.UserAdmins.Single(t => t.ID == id);
+                db.UserAdmins.DeleteOnSubmit(xoa);
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        //Update Linq
+        public bool UpdateLinq(int id, string userName, string password, string name, string cmnd, DateTime ngaySinh, string address, string email, string phone, DateTime createDate, int maQuyen, decimal tienLuong)
+        {
+            try
+            {
+                var update = db.UserAdmins.Single(t => t.ID == id);
+                update.UserName = userName;
+                update.Password = password;
+                update.Name = name;
+                update.CMND = cmnd;
+                update.NgaySinh = ngaySinh;
+                update.Address = address;
+                update.Email = email;
+                update.Phone = phone;
+                update.CreateDate = createDate;
+                update.MaQuyen = maQuyen;
+                update.TienLuong = tienLuong;
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false; 
+            }
+        }
+
+
 
         public void Them(UserAdminDTO info)
         {

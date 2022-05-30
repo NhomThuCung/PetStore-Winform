@@ -10,6 +10,7 @@ namespace DAL
 {
     public class ThuCungDAO
     {
+        QuanLyPetStoreDataContext db = new QuanLyPetStoreDataContext();
         private Connect data = new Connect();
 
         public DataTable DanhSach()
@@ -18,9 +19,33 @@ namespace DAL
             return data.QuerySQL(sql);
         }
 
+        //Load bảng Linq
+        public List<ThuCung> DanhSachLinq()
+        {
+            return db.ThuCungs.Select(t => t).ToList();
+        }
+
         public DataTable DanhSachTC()
         {
             string sql = "SELECT MaTC, TenTC, GiaBan, TrangThai FROM ThuCung";
+            return data.QuerySQL(sql);
+        }
+
+        public DataTable DanhSachTCSell()
+        {
+            string sql = "SELECT MaTC, TenTC, GiaBan, Anh, MoTa FROM ThuCung Where TrangThai = 'True'";
+            return data.QuerySQL(sql);
+        }
+
+        public DataTable DanhSachTCSell(int maLoai)
+        {
+            string sql = "SELECT MaTC, TenTC, GiaBan, Anh, MoTa FROM ThuCung Where TrangThai = 'True' AND MaLoai = " + maLoai + "";
+            return data.QuerySQL(sql);
+        }
+
+        public DataTable DanhSachTCSell(int maLoai, decimal giaBan)
+        {
+            string sql = "SELECT MaTC, TenTC, GiaBan, Anh, MoTa FROM ThuCung Where TrangThai = 'True' AND MaLoai = " + maLoai + " AND GiaBan BETWEEN 0 AND " + giaBan + "";
             return data.QuerySQL(sql);
         }
 
@@ -42,10 +67,9 @@ namespace DAL
             return data.QuerySQL(sql);
         }
 
-        //InsertThemLinq
+        //Thêm Linq
         public bool ThemLinq(string tenTC, decimal giaBan, string moTa, string anh, DateTime ngayCapNhap, int maGiong, int maLoai, bool trangThai)
         {
-            QuanLyPetStoreDataContext db = new QuanLyPetStoreDataContext();
             try
             {
                 ThuCung tc = new ThuCung();
@@ -68,6 +92,44 @@ namespace DAL
 
         }
 
+        //Xoá Linq
+        public bool XoaLinq(int maTC)
+        {
+            try
+            {
+                var xoa = db.ThuCungs.Single(t => t.MaTC == maTC);
+                db.ThuCungs.DeleteOnSubmit(xoa);
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        //Update Linq
+        public bool UpdateLinq(int maTC, string tenTC, decimal giaBan, string moTa, string anh, DateTime ngayCapNhap, int maGiong, int maLoai, bool trangThai)
+        {
+            try
+            {
+                var update = db.ThuCungs.Single(t => t.MaTC == maTC);
+                update.TenTC = tenTC;
+                update.GiaBan = giaBan;
+                update.MoTa = moTa;
+                update.Anh = anh;
+                update.NgayCapNhat = ngayCapNhap;
+                update.MaGiong = maGiong;
+                update.MaLoai = maLoai;
+                update.TrangThai = trangThai;
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
         public void Them(ThuCungDTO info)
         {

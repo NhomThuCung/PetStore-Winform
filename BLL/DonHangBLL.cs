@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DAL;
 using DTO;
 using System.Windows.Forms;
+using System.Data;
 
 namespace BLL
 {
@@ -102,6 +103,51 @@ namespace BLL
             dGV.DataSource = bS;
         }
 
+        public DataTable DonHangSell(int maKH, DateTime createdDate, int id)
+        {
+            return data.DonHangSell(maKH, createdDate, id);
+        }
+
+        //Load bảng Linq
+        public List<DonHang> DanhSachLinq()
+        {
+            return data.DanhSachLinq();
+        }
+
+        //Thêm Linq
+        public bool ThemLinq(int id, string createdDate, int maKH, string nguoiNhan, string email, string soDT, string diaChi, decimal tongTien, bool status)
+        {
+            if (data.ThemLinq(id, createdDate, maKH, nguoiNhan, email, soDT, diaChi, tongTien, status) == true) 
+            {
+                return true;
+            }
+            return false;
+        }
+
+        //Xoá Linq
+        public bool XoaLinq(int maDH)
+        {
+            if (data.XoaLinq(maDH) == true)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        //Update Linq
+        public bool UpdateLinq(int maDH, int id, string createdDate, int maKH, string nguoiNhan, string email, string soDT, string diaChi, decimal tongTien, bool status)
+        {
+            if (data.UpdateLinq(maDH, id, createdDate, maKH, nguoiNhan, email, soDT, diaChi, tongTien, status) == true)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public ThuCung LayTCTheoMa(int maTC)
+        {
+            return data.LayTCTheoMa(maTC);
+        }
 
         public void Them(DonHangDTO info)
         {

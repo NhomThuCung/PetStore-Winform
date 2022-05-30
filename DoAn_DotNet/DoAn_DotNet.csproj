@@ -149,6 +149,12 @@
     <Compile Include="GUI\frmQLUserAdmin.Designer.cs">
       <DependentUpon>frmQLUserAdmin.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\frmSell.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmSell.Designer.cs">
+      <DependentUpon>frmSell.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\frmThanhToan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -199,6 +205,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmQLUserAdmin.resx">
       <DependentUpon>frmQLUserAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmSell.resx">
+      <DependentUpon>frmSell.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmThanhToan.resx">
       <DependentUpon>frmThanhToan.cs</DependentUpon>

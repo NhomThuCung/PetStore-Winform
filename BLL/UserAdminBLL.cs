@@ -202,6 +202,42 @@ namespace BLL
                 return true;
         }
 
+        //Load bảng Linq
+        public List<UserAdmin> DanhSachLinq()
+        {
+            return data.DanhSachLinq();
+        }
+
+        //Thêm Linq
+        public bool ThemLinq(string userName, string password, string name, string cmnd, DateTime ngaySinh, string address, string email, string phone, DateTime createDate, int maQuyen, decimal tienLuong)
+        { 
+            if (data.ThemLinq(userName, password, name, cmnd, ngaySinh, address, email, phone, createDate, maQuyen, tienLuong) == true)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        //Xoá Linq
+        public bool XoaLinq(int id)
+        {
+            if (data.XoaLinq(id) == true)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        //Update Linq
+        public bool UpdateLinq(int id, string userName, string password, string name, string cmnd, DateTime ngaySinh, string address, string email, string phone, DateTime createDate, int maQuyen, decimal tienLuong)
+        { 
+            if (data.UpdateLinq(id, userName, password, name, cmnd, ngaySinh, address, email, phone, createDate, maQuyen, tienLuong) == true)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public void Them(UserAdminDTO info)
         {
             data.Them(info);
