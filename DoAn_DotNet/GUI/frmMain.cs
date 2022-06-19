@@ -307,26 +307,41 @@ namespace DoAn_DotNet.GUI
 
         private void btnQuanLy_Click(object sender, EventArgs e)
         {
-            ActButton(sender);
-            panelQL.Enabled = true;
-            panelQL.Visible = true;
+            if(panelQL.Visible)
+            {
+                ActButton(sender);
+
+                panelQL.Visible = false;
+                panelQL.Enabled = false;
+
+            }
+            else
+            {
+                ActButton(sender);
+
+                panelQL.Visible = true;
+                panelQL.Enabled = true;
+            }
+
+
         }
 
         private void btnQLGiongLoai_Click(object sender, EventArgs e)
         {
-            panelQuanLy(false);
+            //panelQuanLy(false);
             openChilForm(new frmQLGiongLoai(), sender);
         }
 
         private void btnQLUser_Click(object sender, EventArgs e)
         {
-            panelQuanLy(false);
+
+            //panelQuanLy(false);
             openChilForm(new frmQLUserAdmin(), sender);
         }
 
         private void btnQLDonHang_Click(object sender, EventArgs e)
         {
-            panelQuanLy(false);
+            //panelQuanLy(false);
             openChilForm(new frmQLDonHang(), sender);
 
         }
@@ -412,37 +427,37 @@ namespace DoAn_DotNet.GUI
 
         private void btnQLDoanhThu_Click(object sender, EventArgs e)
         {
-            panelQuanLy(false);
+            //panelQuanLy(false);
             openChilForm(new frmQLThongKe(), sender);
         }
 
         private void btnQLNhapHang_Click(object sender, EventArgs e)
         {
-            panelQuanLy(false);
+            //panelQuanLy(false);
             openChilForm(new frmQLNhapHang(), sender);
         }
 
         private void btnQLNCC_Click(object sender, EventArgs e)
         {
-            panelQuanLy(false);
+            //panelQuanLy(false);
             openChilForm(new frmNhaCungCap(), sender);
         }
 
         private void btnQLDDM_Click(object sender, EventArgs e)
         {
-            panelQuanLy(false);
+            //panelQuanLy(false);
             openChilForm(new frmDonDatMua(), sender);
         }
 
         private void btnQLDoiTra_Click(object sender, EventArgs e)
         {
-            panelQuanLy(false);
+            //panelQuanLy(false);
             openChilForm(new frmOrder(), sender);
         }
 
         private void btnDoiTra_Click(object sender, EventArgs e)
         {
-            panelQuanLy(false);
+            //panelQuanLy(false);
             openChilForm(new frmQLDoiTra(), sender);
         }
     }

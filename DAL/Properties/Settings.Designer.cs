@@ -26,7 +26,7 @@ namespace DAL.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=PHATTAI;Initial Catalog=QL_PetStore;User ID=sa")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DUCTAM\\DUCTAM;Initial Catalog=QL_PetStore;User ID=sa")]
         public string QL_PetStoreConnectionString {
             get {
                 return ((string)(this["QL_PetStoreConnectionString"]));

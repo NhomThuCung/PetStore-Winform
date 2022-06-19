@@ -37,3 +37,42 @@ E:\HocTap\HK6\QuanLyThuCung\DTO\bin\Debug\MimeKit.xml
 E:\HocTap\HK6\QuanLyThuCung\DTO\bin\Debug\zxing.xml
 E:\HocTap\HK6\QuanLyThuCung\DTO\bin\Debug\zxing.presentation.xml
 E:\HocTap\HK6\QuanLyThuCung\DTO\obj\Debug\DTO.csproj.CopyComplete
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\DTO.dll.config
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\DTO.dll
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\DTO.pdb
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\AForge.dll
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\AForge.Video.DirectShow.dll
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\AForge.Video.dll
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\BouncyCastle.Crypto.dll
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\Guna.UI2.dll
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\MailKit.dll
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\MimeKit.dll
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\System.Buffers.dll
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\System.Memory.dll
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\System.Numerics.Vectors.dll
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\System.Text.Encoding.CodePages.dll
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\zxing.dll
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\zxing.presentation.dll
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\AForge.xml
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\AForge.Video.xml
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\AForge.Video.DirectShow.xml
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\BouncyCastle.Crypto.xml
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\MailKit.pdb
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\MailKit.xml
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\MimeKit.pdb
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\MimeKit.xml
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\System.Buffers.xml
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\System.Memory.xml
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\System.Numerics.Vectors.xml
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\System.Text.Encoding.CodePages.xml
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\zxing.xml
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\bin\Debug\zxing.presentation.xml
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\obj\Debug\DTO.csproj.AssemblyReference.cache
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\obj\Debug\DTO.csproj.CopyComplete
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\obj\Debug\DTO.dll
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DTO\obj\Debug\DTO.pdb

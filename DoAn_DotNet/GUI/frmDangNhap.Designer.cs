@@ -69,7 +69,7 @@
             this.txtTenDangNhap.Name = "txtTenDangNhap";
             this.txtTenDangNhap.Size = new System.Drawing.Size(440, 23);
             this.txtTenDangNhap.TabIndex = 1;
-            this.txtTenDangNhap.Text = "Tài Khoản";
+            this.txtTenDangNhap.Text = "admin";
             this.txtTenDangNhap.Enter += new System.EventHandler(this.txtTenDangNhap_Enter);
             this.txtTenDangNhap.Leave += new System.EventHandler(this.txtTenDangNhap_Leave);
             // 
@@ -84,7 +84,7 @@
             this.txtMatKhau.Name = "txtMatKhau";
             this.txtMatKhau.Size = new System.Drawing.Size(440, 23);
             this.txtMatKhau.TabIndex = 2;
-            this.txtMatKhau.Text = "Mật Khẩu";
+            this.txtMatKhau.Text = "123";
             this.txtMatKhau.Enter += new System.EventHandler(this.txtMatKhau_Enter);
             this.txtMatKhau.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMatKhau_KeyDown);
             this.txtMatKhau.Leave += new System.EventHandler(this.txtMatKhau_Leave);

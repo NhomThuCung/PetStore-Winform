@@ -445,7 +445,7 @@ namespace DoAn_DotNet.GUI
             this.btnTimKiem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnTimKiem.Name = "btnTimKiem";
             this.btnTimKiem.Size = new System.Drawing.Size(29, 28);
-            this.btnTimKiem.Text = "Tìm kiếm theo tên khách hàng";
+            this.btnTimKiem.Text = "Tìm kiếm";
             this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
             // 
             // toolStripSeparator2
@@ -481,7 +481,7 @@ namespace DoAn_DotNet.GUI
             this.btnDong.Image = ((System.Drawing.Image)(resources.GetObject("btnDong.Image")));
             this.btnDong.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDong.Name = "btnDong";
-            this.btnDong.Size = new System.Drawing.Size(76, 28);
+            this.btnDong.Size = new System.Drawing.Size(76, 27);
             this.btnDong.Text = "Đóng";
             this.btnDong.Click += new System.EventHandler(this.btnDong_Click);
             // 

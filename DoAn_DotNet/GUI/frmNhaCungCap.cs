@@ -79,8 +79,16 @@ namespace DoAn_DotNet.GUI
         {
             if (MessageBox.Show("Bạn có muốn xóa nhà cung cấp " + txtTenNCC.Text + " không?", "Xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
-                NCCbll.XoaLinq(Convert.ToInt32(txtMaNCC.Text));
-                MessageBox.Show("Xoá nhà cung cấp thành công", "Xoá", MessageBoxButtons.OK);
+                if (NCCbll.XoaLinq(Convert.ToInt32(txtMaNCC.Text)))
+                {
+                    MessageBox.Show("Xoá nhà cung cấp thành công", "Xoá", MessageBoxButtons.OK);
+
+                }
+                else
+                {
+                    MessageBox.Show("Xoá nhà cung cấp không thành công", "Lỗi", MessageBoxButtons.OK);
+
+                }
             }
 
             // Tải lại lưới
@@ -161,7 +169,7 @@ namespace DoAn_DotNet.GUI
                 {
                     if (NCCbll.UpdateLinq(Convert.ToInt32(maNCC), txtTenNCC.Text, txtSDT.Text, txtEmail.Text, txtDiaChi.Text))
                     {
-                        MessageBox.Show("Update nhà cung cấp thành công", "Update Nhà Cung Cấp", MessageBoxButtons.OK);
+                        MessageBox.Show("Cập nhật nhà cung cấp thành công", "Cập nhật nhà Cung Cấp", MessageBoxButtons.OK);
                     }
                 }
 

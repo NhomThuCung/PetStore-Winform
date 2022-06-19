@@ -26,7 +26,7 @@ namespace DTO.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=PHATTAI;Initial Catalog=QL_PetStore;User ID=sa;Password=123")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DUCTAM\\DUCTAM;Initial Catalog=QL_PetStore;User ID=sa;Password=123")]
         public string QL_PetStoreConnectionString {
             get {
                 return ((string)(this["QL_PetStoreConnectionString"]));
@@ -36,7 +36,7 @@ namespace DTO.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=PHATTAI;Initial Catalog=QuanLyPetStore;User ID=sa;Password=123")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DUCTAM\\DUCTAM;Initial Catalog=QuanLyPetStore;User ID=sa;Password=123")]
         public string QuanLyPetStoreConnectionString {
             get {
                 return ((string)(this["QuanLyPetStoreConnectionString"]));
@@ -46,8 +46,8 @@ namespace DTO.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=PHATTAI;Initial Catalog=QL_PetStore;Persist Security Info=True;User I" +
-            "D=sa;Password=123")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DUCTAM\\DUCTAM;Initial Catalog=QL_PetStore;Persist Security Info=True;" +
+            "User ID=sa;Password=123")]
         public string QL_PetStoreConnectionString1 {
             get {
                 return ((string)(this["QL_PetStoreConnectionString1"]));

@@ -19,3 +19,24 @@ E:\HocTap\HK6\QuanLyThuCung\DAL\bin\Debug\AForge.Video.xml
 E:\HocTap\HK6\QuanLyThuCung\DAL\bin\Debug\AForge.Video.DirectShow.xml
 E:\HocTap\HK6\QuanLyThuCung\DAL\bin\Debug\zxing.xml
 E:\HocTap\HK6\QuanLyThuCung\DAL\bin\Debug\zxing.presentation.xml
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DAL\bin\Debug\DAL.dll.config
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DAL\bin\Debug\DAL.dll
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DAL\bin\Debug\DAL.pdb
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DAL\bin\Debug\AForge.dll
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DAL\bin\Debug\AForge.Video.DirectShow.dll
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DAL\bin\Debug\AForge.Video.dll
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DAL\bin\Debug\DTO.dll
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DAL\bin\Debug\zxing.dll
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DAL\bin\Debug\zxing.presentation.dll
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DAL\bin\Debug\DTO.pdb
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DAL\bin\Debug\DTO.dll.config
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DAL\bin\Debug\AForge.xml
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DAL\bin\Debug\AForge.Video.xml
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DAL\bin\Debug\AForge.Video.DirectShow.xml
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DAL\bin\Debug\zxing.xml
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DAL\bin\Debug\zxing.presentation.xml
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DAL\obj\Debug\DAL.csproj.AssemblyReference.cache
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DAL\obj\Debug\DAL.csproj.CopyComplete
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DAL\obj\Debug\DAL.dll
+D:\OneDrive - Ho Chi Minh city University of Food Industry\Hufi\Semester6\Phat Trien Phan Mem\Do an\QuanLyThuCung\DAL\obj\Debug\DAL.pdb

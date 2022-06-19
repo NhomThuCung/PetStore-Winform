@@ -34,6 +34,16 @@ namespace DoAn_DotNet.GUI
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.bN = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem1 = new System.Windows.Forms.ToolStripLabel();
@@ -127,16 +137,6 @@ namespace DoAn_DotNet.GUI
             this.label2 = new System.Windows.Forms.Label();
             this.cboDH = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -209,6 +209,86 @@ namespace DoAn_DotNet.GUI
             this.dataGridView1.TabIndex = 15;
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
             // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "MaDH";
+            this.Column1.HeaderText = "Mã Đơn Hàng";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "MaNV";
+            this.Column2.HeaderText = "Mã Nhân Viên";
+            this.Column2.MinimumWidth = 6;
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "CreatedDate";
+            this.Column3.HeaderText = "Ngày Tạo";
+            this.Column3.MinimumWidth = 6;
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "MaKH";
+            this.Column4.HeaderText = "Mã Khách Hàng";
+            this.Column4.MinimumWidth = 6;
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "NguoiNhan";
+            this.Column5.HeaderText = "Người Nhận";
+            this.Column5.MinimumWidth = 6;
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            // 
+            // Column6
+            // 
+            this.Column6.DataPropertyName = "Email";
+            this.Column6.HeaderText = "Email";
+            this.Column6.MinimumWidth = 6;
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            // 
+            // Column7
+            // 
+            this.Column7.DataPropertyName = "Phone";
+            this.Column7.HeaderText = "Số Điện Thoại";
+            this.Column7.MinimumWidth = 6;
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            // 
+            // Column8
+            // 
+            this.Column8.DataPropertyName = "Address";
+            this.Column8.HeaderText = "Địa Chỉ";
+            this.Column8.MinimumWidth = 6;
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            // 
+            // Column9
+            // 
+            this.Column9.DataPropertyName = "TongTien";
+            this.Column9.HeaderText = "Tổng Tiền";
+            this.Column9.MinimumWidth = 6;
+            this.Column9.Name = "Column9";
+            this.Column9.ReadOnly = true;
+            // 
+            // Column10
+            // 
+            this.Column10.DataPropertyName = "TrangThai";
+            this.Column10.HeaderText = "Trạng Thái";
+            this.Column10.MinimumWidth = 6;
+            this.Column10.Name = "Column10";
+            this.Column10.ReadOnly = true;
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.bN);
@@ -260,14 +340,14 @@ namespace DoAn_DotNet.GUI
             this.bN.MovePreviousItem = this.bindingNavigatorMovePreviousItem1;
             this.bN.Name = "bN";
             this.bN.PositionItem = this.bindingNavigatorPositionItem1;
-            this.bN.Size = new System.Drawing.Size(1016, 30);
+            this.bN.Size = new System.Drawing.Size(1016, 31);
             this.bN.TabIndex = 13;
             this.bN.Text = "bindingNavigator1";
             // 
             // bindingNavigatorCountItem1
             // 
             this.bindingNavigatorCountItem1.Name = "bindingNavigatorCountItem1";
-            this.bindingNavigatorCountItem1.Size = new System.Drawing.Size(61, 27);
+            this.bindingNavigatorCountItem1.Size = new System.Drawing.Size(61, 28);
             this.bindingNavigatorCountItem1.Text = "của {0}";
             this.bindingNavigatorCountItem1.ToolTipText = "Tổng số";
             // 
@@ -277,7 +357,7 @@ namespace DoAn_DotNet.GUI
             this.bindingNavigatorMoveFirstItem1.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem1.Image")));
             this.bindingNavigatorMoveFirstItem1.Name = "bindingNavigatorMoveFirstItem1";
             this.bindingNavigatorMoveFirstItem1.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem1.Size = new System.Drawing.Size(29, 27);
+            this.bindingNavigatorMoveFirstItem1.Size = new System.Drawing.Size(29, 28);
             this.bindingNavigatorMoveFirstItem1.Text = "Đầu tiên";
             // 
             // bindingNavigatorMovePreviousItem1
@@ -286,18 +366,19 @@ namespace DoAn_DotNet.GUI
             this.bindingNavigatorMovePreviousItem1.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem1.Image")));
             this.bindingNavigatorMovePreviousItem1.Name = "bindingNavigatorMovePreviousItem1";
             this.bindingNavigatorMovePreviousItem1.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem1.Size = new System.Drawing.Size(29, 27);
+            this.bindingNavigatorMovePreviousItem1.Size = new System.Drawing.Size(29, 28);
             this.bindingNavigatorMovePreviousItem1.Text = "Về trước";
             // 
             // bindingNavigatorSeparator3
             // 
             this.bindingNavigatorSeparator3.Name = "bindingNavigatorSeparator3";
-            this.bindingNavigatorSeparator3.Size = new System.Drawing.Size(6, 30);
+            this.bindingNavigatorSeparator3.Size = new System.Drawing.Size(6, 31);
             // 
             // bindingNavigatorPositionItem1
             // 
             this.bindingNavigatorPositionItem1.AccessibleName = "Position";
             this.bindingNavigatorPositionItem1.AutoSize = false;
+            this.bindingNavigatorPositionItem1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bindingNavigatorPositionItem1.Name = "bindingNavigatorPositionItem1";
             this.bindingNavigatorPositionItem1.Size = new System.Drawing.Size(80, 27);
             this.bindingNavigatorPositionItem1.Text = "0";
@@ -306,7 +387,7 @@ namespace DoAn_DotNet.GUI
             // bindingNavigatorSeparator4
             // 
             this.bindingNavigatorSeparator4.Name = "bindingNavigatorSeparator4";
-            this.bindingNavigatorSeparator4.Size = new System.Drawing.Size(6, 30);
+            this.bindingNavigatorSeparator4.Size = new System.Drawing.Size(6, 31);
             // 
             // bindingNavigatorMoveNextItem1
             // 
@@ -314,7 +395,7 @@ namespace DoAn_DotNet.GUI
             this.bindingNavigatorMoveNextItem1.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem1.Image")));
             this.bindingNavigatorMoveNextItem1.Name = "bindingNavigatorMoveNextItem1";
             this.bindingNavigatorMoveNextItem1.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem1.Size = new System.Drawing.Size(29, 27);
+            this.bindingNavigatorMoveNextItem1.Size = new System.Drawing.Size(29, 28);
             this.bindingNavigatorMoveNextItem1.Text = "Về sau";
             // 
             // bindingNavigatorMoveLastItem1
@@ -323,18 +404,18 @@ namespace DoAn_DotNet.GUI
             this.bindingNavigatorMoveLastItem1.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem1.Image")));
             this.bindingNavigatorMoveLastItem1.Name = "bindingNavigatorMoveLastItem1";
             this.bindingNavigatorMoveLastItem1.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem1.Size = new System.Drawing.Size(29, 27);
+            this.bindingNavigatorMoveLastItem1.Size = new System.Drawing.Size(29, 28);
             this.bindingNavigatorMoveLastItem1.Text = "Cuối cùng";
             // 
             // bindingNavigatorSeparator5
             // 
             this.bindingNavigatorSeparator5.Name = "bindingNavigatorSeparator5";
-            this.bindingNavigatorSeparator5.Size = new System.Drawing.Size(6, 30);
+            this.bindingNavigatorSeparator5.Size = new System.Drawing.Size(6, 31);
             // 
             // bindingNavigatorSeparator2
             // 
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 30);
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 31);
             // 
             // btnSua
             // 
@@ -342,7 +423,7 @@ namespace DoAn_DotNet.GUI
             this.btnSua.Image = ((System.Drawing.Image)(resources.GetObject("btnSua.Image")));
             this.btnSua.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(29, 27);
+            this.btnSua.Size = new System.Drawing.Size(29, 28);
             this.btnSua.Text = "Sửa";
             this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
@@ -352,21 +433,21 @@ namespace DoAn_DotNet.GUI
             this.btnXoa.Image = ((System.Drawing.Image)(resources.GetObject("btnXoa.Image")));
             this.btnXoa.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(29, 27);
+            this.btnXoa.Size = new System.Drawing.Size(29, 28);
             this.btnXoa.Text = "Xóa";
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 30);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 31);
             // 
             // btnHuy
             // 
             this.btnHuy.Image = ((System.Drawing.Image)(resources.GetObject("btnHuy.Image")));
             this.btnHuy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnHuy.Name = "btnHuy";
-            this.btnHuy.Size = new System.Drawing.Size(64, 27);
+            this.btnHuy.Size = new System.Drawing.Size(64, 28);
             this.btnHuy.Text = "Hủy";
             this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
             // 
@@ -375,14 +456,14 @@ namespace DoAn_DotNet.GUI
             this.btnLuu.Image = ((System.Drawing.Image)(resources.GetObject("btnLuu.Image")));
             this.btnLuu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnLuu.Name = "btnLuu";
-            this.btnLuu.Size = new System.Drawing.Size(62, 27);
+            this.btnLuu.Size = new System.Drawing.Size(62, 28);
             this.btnLuu.Text = "Lưu";
             this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 30);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
             // 
             // btnTaiLai
             // 
@@ -390,25 +471,26 @@ namespace DoAn_DotNet.GUI
             this.btnTaiLai.Image = ((System.Drawing.Image)(resources.GetObject("btnTaiLai.Image")));
             this.btnTaiLai.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnTaiLai.Name = "btnTaiLai";
-            this.btnTaiLai.Size = new System.Drawing.Size(29, 27);
+            this.btnTaiLai.Size = new System.Drawing.Size(29, 28);
             this.btnTaiLai.Text = "Tải lại";
             this.btnTaiLai.Click += new System.EventHandler(this.btnTaiLai_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 30);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 31);
             // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(83, 27);
+            this.toolStripLabel1.Size = new System.Drawing.Size(83, 28);
             this.toolStripLabel1.Text = "Tìm kiếm:";
             // 
             // txtTuKhoa
             // 
+            this.txtTuKhoa.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtTuKhoa.Name = "txtTuKhoa";
-            this.txtTuKhoa.Size = new System.Drawing.Size(164, 30);
+            this.txtTuKhoa.Size = new System.Drawing.Size(164, 31);
             this.txtTuKhoa.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTuKhoa_KeyDown);
             // 
             // btnTimKiem
@@ -417,35 +499,35 @@ namespace DoAn_DotNet.GUI
             this.btnTimKiem.Image = ((System.Drawing.Image)(resources.GetObject("btnTimKiem.Image")));
             this.btnTimKiem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnTimKiem.Name = "btnTimKiem";
-            this.btnTimKiem.Size = new System.Drawing.Size(29, 27);
-            this.btnTimKiem.Text = "Tìm kiếm theo tên khách hàng";
+            this.btnTimKiem.Size = new System.Drawing.Size(29, 28);
+            this.btnTimKiem.Text = "Tìm kiếm";
             this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 30);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
             // 
             // btnXuatExcel
             // 
             this.btnXuatExcel.Image = ((System.Drawing.Image)(resources.GetObject("btnXuatExcel.Image")));
             this.btnXuatExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnXuatExcel.Name = "btnXuatExcel";
-            this.btnXuatExcel.Size = new System.Drawing.Size(69, 27);
+            this.btnXuatExcel.Size = new System.Drawing.Size(69, 28);
             this.btnXuatExcel.Text = "Xuất";
             this.btnXuatExcel.Click += new System.EventHandler(this.btnXuatExcel_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 30);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
             // 
             // btnDong
             // 
             this.btnDong.Image = ((System.Drawing.Image)(resources.GetObject("btnDong.Image")));
             this.btnDong.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDong.Name = "btnDong";
-            this.btnDong.Size = new System.Drawing.Size(76, 27);
+            this.btnDong.Size = new System.Drawing.Size(76, 28);
             this.btnDong.Text = "Đóng";
             this.btnDong.Click += new System.EventHandler(this.btnDong_Click);
             // 
@@ -833,6 +915,7 @@ namespace DoAn_DotNet.GUI
             // 
             this.toolStripTextBox1.AccessibleName = "Position";
             this.toolStripTextBox1.AutoSize = false;
+            this.toolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolStripTextBox1.Name = "toolStripTextBox1";
             this.toolStripTextBox1.Size = new System.Drawing.Size(65, 27);
             this.toolStripTextBox1.Text = "0";
@@ -942,6 +1025,7 @@ namespace DoAn_DotNet.GUI
             // 
             // txtTuKhoaCT
             // 
+            this.txtTuKhoaCT.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtTuKhoaCT.Name = "txtTuKhoaCT";
             this.txtTuKhoaCT.Size = new System.Drawing.Size(132, 30);
             this.txtTuKhoaCT.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTuKhoaCT_KeyDown);
@@ -1096,86 +1180,6 @@ namespace DoAn_DotNet.GUI
             this.label16.Size = new System.Drawing.Size(80, 20);
             this.label16.TabIndex = 0;
             this.label16.Text = "Hoá Đơn:";
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "MaDH";
-            this.Column1.HeaderText = "Mã Đơn Hàng";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "MaNV";
-            this.Column2.HeaderText = "Mã Nhân Viên";
-            this.Column2.MinimumWidth = 6;
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "CreatedDate";
-            this.Column3.HeaderText = "Ngày Tạo";
-            this.Column3.MinimumWidth = 6;
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "MaKH";
-            this.Column4.HeaderText = "Mã Khách Hàng";
-            this.Column4.MinimumWidth = 6;
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            // 
-            // Column5
-            // 
-            this.Column5.DataPropertyName = "NguoiNhan";
-            this.Column5.HeaderText = "Người Nhận";
-            this.Column5.MinimumWidth = 6;
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            // 
-            // Column6
-            // 
-            this.Column6.DataPropertyName = "Email";
-            this.Column6.HeaderText = "Email";
-            this.Column6.MinimumWidth = 6;
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            // 
-            // Column7
-            // 
-            this.Column7.DataPropertyName = "Phone";
-            this.Column7.HeaderText = "Số Điện Thoại";
-            this.Column7.MinimumWidth = 6;
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
-            // 
-            // Column8
-            // 
-            this.Column8.DataPropertyName = "Address";
-            this.Column8.HeaderText = "Địa Chỉ";
-            this.Column8.MinimumWidth = 6;
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
-            // 
-            // Column9
-            // 
-            this.Column9.DataPropertyName = "TongTien";
-            this.Column9.HeaderText = "Tổng Tiền";
-            this.Column9.MinimumWidth = 6;
-            this.Column9.Name = "Column9";
-            this.Column9.ReadOnly = true;
-            // 
-            // Column10
-            // 
-            this.Column10.DataPropertyName = "TrangThai";
-            this.Column10.HeaderText = "Trạng Thái";
-            this.Column10.MinimumWidth = 6;
-            this.Column10.Name = "Column10";
-            this.Column10.ReadOnly = true;
             // 
             // frmQLDonHang
             // 
