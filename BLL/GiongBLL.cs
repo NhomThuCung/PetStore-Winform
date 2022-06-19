@@ -58,6 +58,19 @@ namespace BLL
             cboGiong.DisplayMember = "TenLoai";
 
         }
+        public DataTable LayMaLoai(int maGiong)
+        {
+            return data.LayMaLoai(maGiong);
+        }
+
+        public DataTable DanhSach()
+        {
+            return data.DanhSach();
+        }
+        public DataTable DanhSach(int maGiong)
+        {
+            return data.DanhSach(maGiong);
+        }
 
         public DataTable LoadCboGiong(int maLoai)
         {

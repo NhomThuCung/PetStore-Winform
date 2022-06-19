@@ -17,6 +17,12 @@ namespace DAL
             string sql = "SELECT * FROM Loai";
             return data.QuerySQL(sql);
         }
+
+        public DataTable DanhSach(int maLoai)
+        {
+            string sql = "SELECT * FROM Loai Where MaLoai = " + maLoai + "";
+            return data.QuerySQL(sql);
+        }
         public DataTable DanhSach_TenLoai(string tenLoai)
         {
             string sql = "SELECT * FROM Loai WHERE TenLoai LIKE '%" + tenLoai + "%'";

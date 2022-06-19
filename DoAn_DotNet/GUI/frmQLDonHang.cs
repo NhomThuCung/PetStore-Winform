@@ -153,15 +153,15 @@ namespace DoAn_DotNet.GUI
             {
                 DonHangDTO info = new DonHangDTO();
 
-                info.Id = Convert.ToInt32(txtID.Text);
+                info.MaNV = Convert.ToInt32(txtID.Text);
                 info.CreatedDate = dtpNgayTao.Value;
                 info.MaKH = Convert.ToInt32(txtMaKH.Text);
                 info.NguoiNhan = txtHoTen.Text;
                 info.Email = txtEmail.Text;
-                info.SoDT = txtDienThoai.Text;
-                info.DiaChi = txtDiaChi.Text;
+                info.Phone = txtDienThoai.Text;
+                info.Address = txtDiaChi.Text;
                 info.TongTien = Convert.ToDecimal(null);
-                info.Status = checkBox1.Checked ? true : false;
+                info.TrangThai = checkBox1.Checked ? 1 : 0;
 
                 dhBLL.SuaDonHang(info, Convert.ToInt32(maDH));
                 MessageBox.Show("Sửa hoá đơn thành công", "Sửa hoá đơn", MessageBoxButtons.OK);
@@ -383,7 +383,7 @@ namespace DoAn_DotNet.GUI
         {
             if (dataGridView1.Columns[e.ColumnIndex].Name == "Column10")
             {
-                if (e.Value.ToString() == "True")
+                if (e.Value.ToString() == "1")
                     e.Value = "Đã thanh toán";
                 else
                     e.Value = "Chưa thanh toán";

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,7 +36,10 @@ namespace BLL
             bN.BindingSource = bS1;
             dGV.DataSource = bS1;
         }
-
+        public DataTable DanhSach()
+        {
+            return data.DanhSach();
+        }
 
         public List<Loai> LoadCboLoai(int maLoai)
         {
@@ -47,6 +51,8 @@ namespace BLL
         {
             return data.DanhSachLinq();
         }
+
+
 
         //Thêm Linq
         public bool ThemLinq(string tenLoai)

@@ -49,11 +49,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Video, Version=2.2.5.0, Culture=neutral, PublicKeyToken=cbfb6e07d173c401, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Video.2.2.5\lib\AForge.Video.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Video.DirectShow, Version=2.2.5.0, Culture=neutral, PublicKeyToken=61ea4348d43881b7, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Video.DirectShow.2.2.5\lib\AForge.Video.DirectShow.dll</HintPath>
+    </Reference>
     <Reference Include="AxShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="Guna.UI2, Version=2.0.3.2, Culture=neutral, PublicKeyToken=4015e4865bda28a4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Guna.UI2.WinForms.2.0.3.2\lib\net40\Guna.UI2.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -73,6 +85,12 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="zxing, Version=0.16.8.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.8\lib\net47\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.16.8.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.8\lib\net47\zxing.presentation.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CrystalReport2.cs">
@@ -81,8 +99,32 @@
       <DependentUpon>CrystalReport2.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Custom\Category.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Custom\Category.Designer.cs">
+      <DependentUpon>Category.cs</DependentUpon>
+    </Compile>
     <Compile Include="Custom\Encrypt.cs" />
     <Compile Include="Custom\loadMaDH.cs" />
+    <Compile Include="Custom\Order.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Custom\Order.Designer.cs">
+      <DependentUpon>Order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Custom\product.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Custom\product.Designer.cs">
+      <DependentUpon>product.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmCode.Designer.cs">
+      <DependentUpon>frmCode.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\frmDangNhap.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,11 +143,17 @@
     <Compile Include="GUI\frmDoiMK.Designer.cs">
       <DependentUpon>frmDoiMK.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\frmDonHang.cs">
+    <Compile Include="GUI\frmOrder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\frmDonHang.Designer.cs">
-      <DependentUpon>frmDonHang.cs</DependentUpon>
+    <Compile Include="GUI\frmOrder.Designer.cs">
+      <DependentUpon>frmOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmDonDatMua.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmDonDatMua.Designer.cs">
+      <DependentUpon>frmDonDatMua.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\frmKhachHang.cs">
       <SubType>Form</SubType>
@@ -119,6 +167,24 @@
     <Compile Include="GUI\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\frmNhaCungCap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmNhaCungCap.Designer.cs">
+      <DependentUpon>frmNhaCungCap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmProduct.Designer.cs">
+      <DependentUpon>frmProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmQLDoiTra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmQLDoiTra.Designer.cs">
+      <DependentUpon>frmQLDoiTra.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\frmQLDonHang.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,17 +197,17 @@
     <Compile Include="GUI\frmQLGiongLoai.Designer.cs">
       <DependentUpon>frmQLGiongLoai.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\frmQLNhapHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmQLNhapHang.Designer.cs">
+      <DependentUpon>frmQLNhapHang.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\frmQLThongKe.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\frmQLThongKe.Designer.cs">
       <DependentUpon>frmQLThongKe.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\frmQLThuCung.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\frmQLThuCung.Designer.cs">
-      <DependentUpon>frmQLThuCung.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\frmQLUserAdmin.cs">
       <SubType>Form</SubType>
@@ -173,6 +239,18 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CrystalReport2.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Custom\Category.resx">
+      <DependentUpon>Category.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Custom\Order.resx">
+      <DependentUpon>Order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Custom\product.resx">
+      <DependentUpon>product.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmCode.resx">
+      <DependentUpon>frmCode.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmDangNhap.resx">
       <DependentUpon>frmDangNhap.cs</DependentUpon>
     </EmbeddedResource>
@@ -182,8 +260,11 @@
     <EmbeddedResource Include="GUI\frmDoiMK.resx">
       <DependentUpon>frmDoiMK.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\frmDonHang.resx">
-      <DependentUpon>frmDonHang.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\frmOrder.resx">
+      <DependentUpon>frmOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmDonDatMua.resx">
+      <DependentUpon>frmDonDatMua.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmKhachHang.resx">
       <DependentUpon>frmKhachHang.cs</DependentUpon>
@@ -191,17 +272,26 @@
     <EmbeddedResource Include="GUI\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmNhaCungCap.resx">
+      <DependentUpon>frmNhaCungCap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmProduct.resx">
+      <DependentUpon>frmProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmQLDoiTra.resx">
+      <DependentUpon>frmQLDoiTra.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmQLDonHang.resx">
       <DependentUpon>frmQLDonHang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmQLGiongLoai.resx">
       <DependentUpon>frmQLGiongLoai.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmQLNhapHang.resx">
+      <DependentUpon>frmQLNhapHang.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmQLThongKe.resx">
       <DependentUpon>frmQLThongKe.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\frmQLThuCung.resx">
-      <DependentUpon>frmQLThuCung.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmQLUserAdmin.resx">
       <DependentUpon>frmQLUserAdmin.cs</DependentUpon>
@@ -216,6 +306,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

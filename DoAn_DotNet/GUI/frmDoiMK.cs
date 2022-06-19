@@ -17,8 +17,8 @@ namespace DoAn_DotNet.GUI
     {
         frmDangNhap fDN = new frmDangNhap();
 
-        string taiKhoan = BLL.UserAdminBLL.frmDoiMKtaiKhoan;
-        int maNV = BLL.UserAdminBLL.frmDoiMKmaNV;
+        string taiKhoan = BLL.NhanVienBLL.frmDoiMKtaiKhoan;
+        int maNV = BLL.NhanVienBLL.frmDoiMKmaNV;
 
         public frmDoiMK()
         {
@@ -72,7 +72,7 @@ namespace DoAn_DotNet.GUI
             {
                 if (txtMatKhauMoi.Text == txtXacNhan.Text)
                 {
-                    UserAdminBLL tk = new UserAdminBLL();
+                    NhanVienBLL tk = new NhanVienBLL();
                     string encrypt_mkcu = Encrypt.Instance.MD5Encrypt(txtMatKhauCu.Text);
                     if (tk.DangNhap(taiKhoan, encrypt_mkcu))
                     {

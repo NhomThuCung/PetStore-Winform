@@ -14,15 +14,21 @@ namespace DAL
         QuanLyPetStoreDataContext db = new QuanLyPetStoreDataContext();
 
 
-        public DataTable DonHangSell(int maKH, DateTime createdDate, int id)
+        public DataTable DonHangSell(int maKH, DateTime createdDate, int maNV)
         {
-            string sql = "SELECT MaDH FROM DonHang Where MaKH = " + maKH + " AND createdDate = '" + createdDate.ToString("yyyy-MM-dd HH:mm:ss:fff") + "' AND ID = " + id + "";
+            string sql = "SELECT MaDH FROM DonHang Where MaKH = " + maKH + " AND createdDate = '" + createdDate.ToString("yyyy-MM-dd HH:mm:ss:fff") + "' AND MaNV = " + maNV + "";
             return data.QuerySQL(sql);
         }
 
         public DataTable DonHang()
         {
             string sql = "SELECT * FROM DonHang";
+            return data.QuerySQL(sql);
+        }
+
+        public DataTable DonHang(int maDH)
+        {
+            string sql = "SELECT * FROM DonHang WHERE MaDH = " + maDH + "";
             return data.QuerySQL(sql);
         }
 
@@ -44,6 +50,12 @@ namespace DAL
             return data.QuerySQL(sql);
         }
 
+        public DataTable ThanhTienTheoMaDH(int maDH)
+        {
+            string sql = "SELECT TongTien FROM DonHang Where MaDH = " + maDH + "";
+            return data.QuerySQL(sql);
+        }
+
         public DataTable DonHang_Report(int maDH)
         {
             string sql = "SELECT ChiTietDonHang.MaDH, ThuCung.TenTC, ThuCung.GiaBan, ChiTietDonHang.ThanhTien FROM ChiTietDonHang INNER JOIN ThuCung ON ChiTietDonHang.MaTC = ThuCung.MaTC AND ChiTietDonHang.MaDH = " + maDH + "";
@@ -52,7 +64,7 @@ namespace DAL
 
         public DataTable DonHang_SoDT(string soDT)
         {
-            string sql = "SELECT * FROM DonHang where SoDT LIKE '%" + soDT + "%'";
+            string sql = "SELECT * FROM DonHang where Phone LIKE '%" + soDT + "%'";
             return data.QuerySQL(sql);
         }
 
@@ -92,20 +104,20 @@ namespace DAL
         }
 
         //Thêm Linq
-        public bool ThemLinq(int id, string createdDate, int maKH, string nguoiNhan, string email, string soDT, string diaChi, decimal tongTien, bool status)
+        public bool ThemLinq(int maNV, string createdDate, int maKH, string nguoiNhan, string email, string phone, string address, decimal tongTien, int trangThai)
         {
             try
             {
                 DonHang dh = new DonHang();
-                dh.ID = id;
+                dh.MaNV = maNV;
                 dh.CreatedDate = DateTime.Parse(createdDate);
                 dh.MaKH = maKH;
                 dh.NguoiNhan = nguoiNhan;
                 dh.Email = email;
-                dh.SoDT = soDT;
-                dh.DiaChi = diaChi;
+                dh.Phone = phone;
+                dh.Address = address;
                 dh.TongTien = tongTien;
-                dh.Status = status;
+                dh.TrangThai = trangThai;
 
                 db.DonHangs.InsertOnSubmit(dh);
                 db.SubmitChanges();
@@ -134,20 +146,20 @@ namespace DAL
         }
 
         //Update Linq
-        public bool UpdateLinq(int maDH, int id, string createdDate, int maKH, string nguoiNhan, string email, string soDT, string diaChi, decimal tongTien, bool status)
+        public bool UpdateLinq(int maDH, int maNV, string createdDate, int maKH, string nguoiNhan, string email, string phone, string address, decimal tongTien, int trangThai)
         {
             try
             {
                 var update = db.DonHangs.Single(t => t.MaDH == maDH);
-                update.ID = id;
+                update.MaNV = maNV;
                 update.CreatedDate = DateTime.Now;
                 update.MaKH = maKH;
                 update.NguoiNhan = nguoiNhan;
                 update.Email = email;
-                update.SoDT = soDT;
-                update.DiaChi = diaChi;
+                update.Phone = phone;
+                update.Address = address;
                 update.TongTien = tongTien;
-                update.Status = status;
+                update.TrangThai = trangThai;
                 db.SubmitChanges();
                 return true;
             }
@@ -159,21 +171,30 @@ namespace DAL
 
         public void Them(DonHangDTO info)
         {
-            string sql = "INSERT INTO DonHang(ID, CreatedDate, MaKH, NguoiNhan, Email, SoDT, DiaChi, TongTien, Status)" +
-                " VALUES(" + info.Id + ", '" + info.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss.000") + "'," + info.MaKH + ", N'" + info.NguoiNhan + "', N'" + info.Email + "', N'" + info.SoDT + "', N'" + info.DiaChi + "', CAST(N'" + info.TongTien + "'AS Decimal(18, 0)), '" + info.Status + "')";
+            string sql = "INSERT INTO DonHang(MaNV, CreatedDate, MaKH, NguoiNhan, Email, Phone, Address, TongTien, TrangThai)" +
+                " VALUES(" + info.MaNV + ", '" + info.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss.fff") + "'," + info.MaKH + ", N'" + info.NguoiNhan + "', N'" + info.Email + "', N'" + info.Phone + "', N'" + info.Address + "', CAST(N'" + info.TongTien + "'AS Decimal(18, 0)), '" + info.TrangThai + "')";
             data.ExecuteSQL(sql);
         }
 
         public void SuaDonHang(DonHangDTO info, int maDH)
         {
-            string sql = "UPDATE DonHang SET ID =" + info.Id + ", CreatedDate = '"+ info.CreatedDate.ToString("yyyy-MM-dd") + "', MaKH = " + info.MaKH + ", NguoiNhan = N'" + info.NguoiNhan + "', Email =  N'" + info.Email + "',SoDT = N'" + info.SoDT + "', DiaChi= N'" + info.DiaChi + "', TongTien = CAST(N'" + info.TongTien + "'AS Decimal(18, 0)), Status = '" + info.Status + "' WHERE MaDH = " + maDH;
+            string sql = "UPDATE DonHang SET MaNV =" + info.MaNV + ", CreatedDate = '"+ info.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss.fff") + "', MaKH = " + info.MaKH + ", NguoiNhan = N'" + info.NguoiNhan + "', Email =  N'" + info.Email + "',Phone = N'" + info.Phone + "', Address = N'" + info.Address + "', TongTien = CAST(N'" + info.TongTien + "'AS Decimal(18, 0)), TrangThai = '" + info.TrangThai + "' WHERE MaDH = " + maDH;
             data.ExecuteSQL(sql);
         }
 
-        public void Sua(DonHangDTO info, int maDH)
+        public bool Sua(DonHangDTO info, int maDH)
         {
-            string sql = "UPDATE DonHang SET Status = '" + info.Status + "' WHERE MaDH = " + maDH;
-            data.ExecuteSQL(sql);
+            try
+            {
+                string sql = "UPDATE DonHang SET TrangThai = '" + info.TrangThai + "' WHERE MaDH = " + maDH;
+                data.ExecuteSQL(sql);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            
         }
 
         public void Xoa(DonHangDTO info)

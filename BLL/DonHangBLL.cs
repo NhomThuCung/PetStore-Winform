@@ -66,7 +66,7 @@ namespace BLL
             txtMaDH.DataBindings.Add("Text", bS, "MaDH", false, DataSourceUpdateMode.Never);
 
             txtMaNV.DataBindings.Clear();
-            txtMaNV.DataBindings.Add("Text", bS, "ID", false, DataSourceUpdateMode.Never);
+            txtMaNV.DataBindings.Add("Text", bS, "MaNV", false, DataSourceUpdateMode.Never);
 
             dtpNgayTao.DataBindings.Clear();
             dtpNgayTao.DataBindings.Add("Value", bS, "CreatedDate", false, DataSourceUpdateMode.Never);
@@ -81,10 +81,10 @@ namespace BLL
             txtEmail.DataBindings.Add("Text", bS, "Email", false, DataSourceUpdateMode.Never);
 
             txtSDT.DataBindings.Clear();
-            txtSDT.DataBindings.Add("Text", bS, "SoDT", false, DataSourceUpdateMode.Never);
+            txtSDT.DataBindings.Add("Text", bS, "Phone", false, DataSourceUpdateMode.Never);
 
             txtDiaChi.DataBindings.Clear();
-            txtDiaChi.DataBindings.Add("Text", bS, "DiaChi", false, DataSourceUpdateMode.Never);
+            txtDiaChi.DataBindings.Add("Text", bS, "Address", false, DataSourceUpdateMode.Never);
 
             txtTongTien.DataBindings.Clear();
             txtTongTien.DataBindings.Add("Text", bS, "TongTien", false, DataSourceUpdateMode.Never);
@@ -92,7 +92,7 @@ namespace BLL
             txtTongTien.DataBindings[0].FormatString = "c0";
 
             chkTinhTrang.DataBindings.Clear();
-            Binding gt = new Binding("Checked", bS, "Status", false, DataSourceUpdateMode.Never);
+            Binding gt = new Binding("Checked", bS, "TrangThai", false, DataSourceUpdateMode.Never);
             gt.Format += (s, e) =>
             {
                 e.Value = 1;
@@ -103,9 +103,34 @@ namespace BLL
             dGV.DataSource = bS;
         }
 
-        public DataTable DonHangSell(int maKH, DateTime createdDate, int id)
+
+        public DataTable DonHang()
         {
-            return data.DonHangSell(maKH, createdDate, id);
+            return data.DonHang();
+        }
+        public DataTable DonHang(int maDH)
+        {
+            return data.DonHang(maDH);
+        }
+        public DataTable DonHang_SoDT(string phone)
+        {
+            return data.DonHang_SoDT(phone);
+        }
+
+
+        public DataTable ThanhTienTheoMaDH(int maDH)
+        {
+            return data.ThanhTienTheoMaDH(maDH);
+        }
+
+        public DataTable DonHang_Report(int maDH)
+        {
+            return data.DonHang_Report(maDH);
+        }
+
+        public DataTable DonHangSell(int maKH, DateTime createdDate, int maNV)
+        {
+            return data.DonHangSell(maKH, createdDate, maNV);
         }
 
         //Load bảng Linq
@@ -115,9 +140,9 @@ namespace BLL
         }
 
         //Thêm Linq
-        public bool ThemLinq(int id, string createdDate, int maKH, string nguoiNhan, string email, string soDT, string diaChi, decimal tongTien, bool status)
+        public bool ThemLinq(int maNV, string createdDate, int maKH, string nguoiNhan, string email, string phone, string address, decimal tongTien, int trangThai)
         {
-            if (data.ThemLinq(id, createdDate, maKH, nguoiNhan, email, soDT, diaChi, tongTien, status) == true) 
+            if (data.ThemLinq(maNV, createdDate, maKH, nguoiNhan, email, phone, address, tongTien, trangThai) == true) 
             {
                 return true;
             }
@@ -135,9 +160,9 @@ namespace BLL
         }
 
         //Update Linq
-        public bool UpdateLinq(int maDH, int id, string createdDate, int maKH, string nguoiNhan, string email, string soDT, string diaChi, decimal tongTien, bool status)
+        public bool UpdateLinq(int maDH, int maNV, string createdDate, int maKH, string nguoiNhan, string email, string phone, string address, decimal tongTien, int trangThai)
         {
-            if (data.UpdateLinq(maDH, id, createdDate, maKH, nguoiNhan, email, soDT, diaChi, tongTien, status) == true)
+            if (data.UpdateLinq(maDH, maNV, createdDate, maKH, nguoiNhan, email, phone, address, tongTien, trangThai) == true)
             {
                 return true;
             }
@@ -154,9 +179,13 @@ namespace BLL
             data.Them(info);
         }
 
-        public void Sua(DonHangDTO info, int maDH)
+        public bool Sua(DonHangDTO info, int maDH)
         {
-            data.Sua(info, maDH);
+            if (data.Sua(info, maDH))
+            {
+                return true;
+            }
+            return false;
         }
 
         public void SuaDonHang(DonHangDTO info, int maDH)

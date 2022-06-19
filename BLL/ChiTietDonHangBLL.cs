@@ -80,6 +80,23 @@ namespace BLL
             cboThuCung.DisplayMember = "TenTC";
         }
 
+        public DataTable DanhSach(int maDH)
+        {
+            return data.DanhSach(maDH);
+        }
+
+
+        public DataTable DanhSachCT_TC(string maDH)
+        {
+            return data.DanhSachCT_TC(maDH);
+        }
+
+        //Kiểm tra thú cưng
+        public List<ChiTietDonHang> KiemTraMaTCLinq(int maTC)
+        {
+            return data.KiemTraMaTCLinq(maTC);
+        }
+
         //Load bảng Linq
         public List<ChiTietDonHang> DanhSachLinq()
         {
@@ -124,10 +141,14 @@ namespace BLL
         {
             data.Sua(info, maDH);
         }
-        //public void SuaChiTiet(ChiTietDonHangDTO info, int maTC, int maHD)
-        //{
-        //    data.SuaChiTiet(info, maTC, maHD);
-        //}
+        public bool SuaMaTC(ChiTietDonHangDTO info, int maTC)
+        {
+            if (data.SuaMaTC(info, maTC))
+            {
+                return true;
+            }
+            return false;
+        }
 
         public void Xoa(ChiTietDonHangDTO info)
         {

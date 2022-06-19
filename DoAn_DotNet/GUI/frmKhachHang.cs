@@ -18,7 +18,7 @@ namespace DoAn_DotNet.GUI
     {
         private bool isThem = false;
         private string maKhach = ""; // Mã khách hàng cũ
-        public static int maQuyen = BLL.UserAdminBLL.frmKhachHangmaQuyen; //Mã quyền
+        public static int maQuyen = BLL.NhanVienBLL.frmKhachHangmaQuyen; //Mã quyền
         KhachHangBLL khBLL = new KhachHangBLL();
 
         public frmKhachHang()
@@ -50,6 +50,7 @@ namespace DoAn_DotNet.GUI
             btnLuu.Enabled = tt;
             btnHuy.Enabled = tt;
 
+            dataGridView1.Enabled = !tt;
             btnThem.Enabled = !tt;
             btnSua.Enabled = !tt;
             btnXoa.Enabled = !tt;
@@ -127,10 +128,10 @@ namespace DoAn_DotNet.GUI
                 MessageBox.Show("Tên khách hàng không được bỏ trống!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else if (txtTenKhach.Text.Length > 50)
                 MessageBox.Show("Tên khách hàng không vượt quá 50 ký tự!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else if (txtTaiKhoan.Text.Trim() == "")
-                MessageBox.Show("Tài khoản không được bỏ trống", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else if (txtMatKhau.Text.Length < 8)
-                MessageBox.Show("Mật khẩu phải từ 8 ký tự trở lên", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //else if (txtTaiKhoan.Text.Trim() == "")
+            //    MessageBox.Show("Tài khoản không được bỏ trống", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //else if (txtMatKhau.Text.Length < 8)
+            //    MessageBox.Show("Mật khẩu phải từ 8 ký tự trở lên", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else if (txtDiaChi.Text.Trim() == "")
                 MessageBox.Show("Địa chỉ không được bỏ trống!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else if (IsValidEmail(txtEmail.Text) == false)
@@ -142,7 +143,7 @@ namespace DoAn_DotNet.GUI
             else
             {
                 KhachHangDTO info = new KhachHangDTO();
-                UserAdminBLL tk = new UserAdminBLL();
+                NhanVienBLL tk = new NhanVienBLL();
                 string encrypt_pass = Encrypt.Instance.MD5Encrypt(txtMatKhau.Text);
                 info.HoTen = txtTenKhach.Text.Trim();
                 info.TaiKhoan = txtTaiKhoan.Text.Trim();
@@ -150,9 +151,9 @@ namespace DoAn_DotNet.GUI
                 info.NgaySinh = dtpNgaySinh.Value;
                 info.CreateDate = dtpNgayTao.Value;
                 info.Email = txtEmail.Text.Trim();
-                info.Phone = txtSDT.Text.Trim();
+                info.DienThoai = txtSDT.Text.Trim();
                 info.GioiTinh = chkGioiTinh.Checked ? "Nữ" : "Nam";
-                info.DiaChi = txtDiaChi.Text.Trim();
+                info.Address = txtDiaChi.Text.Trim();
 
                 if (isThem)
                 {
@@ -215,8 +216,8 @@ namespace DoAn_DotNet.GUI
                     khach.TaiKhoan = sheet.Cells[cellRowIndex, 3].Value;
                     khach.MatKhau = sheet.Cells[cellRowIndex, 4].Value;
                     khach.Email = sheet.Cells[cellRowIndex, 5].Value;
-                    khach.DiaChi = sheet.Cells[cellRowIndex, 6].Value;
-                    khach.Phone = sheet.Cells[cellRowIndex, 7].Value.ToString();
+                    khach.Address = sheet.Cells[cellRowIndex, 6].Value;
+                    khach.DienThoai = sheet.Cells[cellRowIndex, 7].Value.ToString();
                     khach.GioiTinh = sheet.Cells[cellRowIndex, 8].Value;
                     khach.NgaySinh = Convert.ToDateTime(String.Format("{0:MM/dd/yyyy}", sheet.Cells[cellRowIndex, 9].Value));
                     khach.CreateDate = Convert.ToDateTime(String.Format("{0:MM/dd/yyyy}", sheet.Cells[cellRowIndex, 10].Value));

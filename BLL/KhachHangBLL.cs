@@ -82,7 +82,7 @@ namespace BLL
             txtSDT.DataBindings.Add("Text", bS1, "DienThoai", false, DataSourceUpdateMode.Never);
 
             txtDiaChi.DataBindings.Clear();
-            txtDiaChi.DataBindings.Add("Text", bS1, "DiaChi", false, DataSourceUpdateMode.Never);
+            txtDiaChi.DataBindings.Add("Text", bS1, "Address", false, DataSourceUpdateMode.Never);
 
             bN.BindingSource = bS1;
             dGV.DataSource = bS1;
@@ -100,9 +100,9 @@ namespace BLL
         }
 
         //Thêm Linq
-        public bool ThemLinq(string hoTen, string taiKhoan, string matKhau, string email, string diaChi, string dienThoai, string gioiTinh, DateTime ngaySinh, DateTime createdDate)
+        public bool ThemLinq(string hoTen, string taiKhoan, string matKhau, string email, string address, string dienThoai, string gioiTinh, DateTime ngaySinh, DateTime createdDate)
         {
-            if (data.ThemLinq(hoTen, taiKhoan, matKhau, email, diaChi, dienThoai, gioiTinh, ngaySinh, createdDate) == true) 
+            if (data.ThemLinq(hoTen, taiKhoan, matKhau, email, address, dienThoai, gioiTinh, ngaySinh, createdDate) == true) 
             {
                 return true;
             }
@@ -120,9 +120,9 @@ namespace BLL
         }
 
         //Update Linq
-        public bool UpdateLinq(int maKH, string hoTen, string taiKhoan, string matKhau, string email, string diaChi, string dienThoai, string gioiTinh, DateTime ngaySinh, DateTime createdDate)
+        public bool UpdateLinq(int maKH, string hoTen, string taiKhoan, string matKhau, string email, string address, string dienThoai, string gioiTinh, DateTime ngaySinh, DateTime createdDate)
         {
-            if (data.UpdateLinq(maKH, hoTen, taiKhoan, matKhau, email, diaChi, dienThoai, gioiTinh, ngaySinh, createdDate) == true)
+            if (data.UpdateLinq(maKH, hoTen, taiKhoan, matKhau, email, address, dienThoai, gioiTinh, ngaySinh, createdDate) == true)
             {
                 return true;
             }

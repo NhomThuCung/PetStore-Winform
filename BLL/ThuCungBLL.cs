@@ -110,6 +110,41 @@ namespace BLL
             cboGiong.DisplayMember = "TenGiong";
         }
 
+        public string LayGiaBanTC(int maTC)
+        {
+            return data.LayGiaBanTC(maTC);
+        }
+
+        public DataTable DanhSach()
+        {
+            return data.DanhSach();
+        }
+
+
+        public DataTable DanhSachTCTheoMa()
+        {
+            return data.DanhSachTCTheoMa();
+        }
+
+        public string LayTenTC(int maTC)
+        {
+            return data.LayTenTC(maTC);
+        }
+
+        public DataTable LayMaTCTheoNgay(DateTime createDate, int maGiong)
+        {
+            return data.LayMaTCTheoNgay(createDate, maGiong);
+        }
+        public DataTable DanhSachTCTheoMaTen(string maTenTC)
+        {
+            return data.DanhSachTCTheoMaTen(maTenTC);
+        }
+        public DataTable DanhSachTCTheoMa(int maTC)
+        {
+            return data.DanhSachTCTheoMa(maTC);
+        }
+
+
         public DataTable DanhSachTCSell()
         {
             return data.DanhSachTCSell();
@@ -132,9 +167,9 @@ namespace BLL
         }
 
         //Thêm Linq
-        public bool ThemLinq(string tenTC, decimal giaBan, string moTa, string anh, DateTime ngayCapNhap, int maGiong, int maLoai, bool trangThai)
+        public bool ThemLinq(string tenTC, decimal giaBan, string moTa, string anh, DateTime createDate, DateTime ngayCapNhat, int maGiong, int maLoai, int trangThai)
         {
-            if (data.ThemLinq(tenTC, giaBan, moTa, anh, ngayCapNhap, maGiong, maLoai, trangThai) == true)
+            if (data.ThemLinq(tenTC, giaBan, moTa, anh, createDate, ngayCapNhat, maGiong, maLoai, trangThai) == true)
             {
                 return true;
             }
@@ -152,23 +187,69 @@ namespace BLL
         }
 
         //Update Linq
-        public bool UpdateLinq(int maTC, string tenTC, decimal giaBan, string moTa, string anh, DateTime ngayCapNhap, int maGiong, int maLoai, bool trangThai)
+        public bool UpdateLinq(int maTC, string tenTC, decimal giaBan, string moTa, string anh, DateTime createDate, DateTime ngayCapNhat, int maGiong, int maLoai, int trangThai)
         {
-            if (data.UpdateLinq(maTC, tenTC, giaBan, moTa, anh, ngayCapNhap, maGiong,maLoai,trangThai) == true)
+            if (data.UpdateLinq(maTC, tenTC, giaBan, moTa, anh, createDate, ngayCapNhat, maGiong,maLoai,trangThai) == true)
             {
                 return true;
             }
             return false;
         }
 
-        public void Them(ThuCungDTO info)
+        public bool UpdateLinqChiTiet(int maTC, string tenTC, decimal giaBan, DateTime ngayCapNhat, int maGiong, int maLoai)
         {
-            data.Them(info);
+            if (data.UpdateLinqChiTiet(maTC, tenTC, giaBan, ngayCapNhat, maGiong, maLoai) == true)
+            {
+                return true;
+            }
+            return false;
         }
 
-        public void Sua(ThuCungDTO info, int maTC)
+        public bool Them(ThuCungDTO info)
         {
-            data.Sua(info, maTC);
+            if (data.Them(info))
+            {
+                return true;
+            }
+            return false; 
+        }
+
+        public bool ThemTCChiTiet(ThuCungDTO info)
+        {
+            if (data.ThemTCChiTiet(info))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool Sua(ThuCungDTO info, int maTC)
+        {
+            if (data.Sua(info, maTC))
+            {
+                return true;
+            }
+            return false;
+           
+        }
+
+        public bool SuaTrangThai(ThuCungDTO info, int maTC)
+        {
+            if (data.SuaTrangThai(info, maTC))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool SuaThuCungChiTiet(ThuCungDTO info, int maTC)
+        {
+            if (data.SuaThuCungChiTiet(info, maTC))
+            {
+                return true;
+            }
+            return false;
+
         }
 
         public void Xoa(ThuCungDTO info)

@@ -19,11 +19,47 @@ namespace DAL
             return data.QuerySQL(sql);
         }
 
+        public string LayTenTC(int maTC)
+        {
+            return db.ThuCungs.SingleOrDefault(t => t.MaTC == maTC).TenTC;
+        }
+
+        public string LayGiaBanTC(int maTC)
+        {
+            return db.ThuCungs.SingleOrDefault(t => t.MaTC == maTC).GiaBan.ToString();
+        }
+
+        public DataTable DanhSachTCTheoMa(int maTC)
+        {
+            string sql = "SELECT * FROM ThuCung WHERE MaTC = " + maTC + "";
+            return data.QuerySQL(sql);
+        }
+
+        public DataTable DanhSachTCTheoMa()
+        {
+            string sql = "SELECT Top 1 MaTC FROM ThuCung ORDER BY MaTC DESC";
+            return data.QuerySQL(sql);
+        }
+
+        public DataTable LayMaTCTheoNgay(DateTime createDate, int maGiong)
+        {
+            string sql = "SELECT * FROM ThuCung WHERE CreateDate = '" + createDate.ToString("yyyy-MM-dd HH:mm:ss.fff") + "' AND MaGiong = " + maGiong + "";
+            return data.QuerySQL(sql);
+        }
+
+
+        public DataTable DanhSachTCTheoMaTen(string maTenTC)
+        {
+            string sql = "SELECT * FROM ThuCung WHERE MaTC LIKE '%" + maTenTC + "%' OR TenTC LIKE '%" + maTenTC + "%'";
+            return data.QuerySQL(sql);
+        }
+
         //Load bảng Linq
         public List<ThuCung> DanhSachLinq()
         {
             return db.ThuCungs.Select(t => t).ToList();
         }
+
 
         public DataTable DanhSachTC()
         {
@@ -33,19 +69,19 @@ namespace DAL
 
         public DataTable DanhSachTCSell()
         {
-            string sql = "SELECT MaTC, TenTC, GiaBan, Anh, MoTa FROM ThuCung Where TrangThai = 'True'";
+            string sql = "SELECT MaTC, TenTC, GiaBan, Anh, MoTa FROM ThuCung Where TrangThai = 0";
             return data.QuerySQL(sql);
         }
 
         public DataTable DanhSachTCSell(int maLoai)
         {
-            string sql = "SELECT MaTC, TenTC, GiaBan, Anh, MoTa FROM ThuCung Where TrangThai = 'True' AND MaLoai = " + maLoai + "";
+            string sql = "SELECT MaTC, TenTC, GiaBan, Anh, MoTa FROM ThuCung Where TrangThai = 0 AND MaLoai = " + maLoai + "";
             return data.QuerySQL(sql);
         }
 
         public DataTable DanhSachTCSell(int maLoai, decimal giaBan)
         {
-            string sql = "SELECT MaTC, TenTC, GiaBan, Anh, MoTa FROM ThuCung Where TrangThai = 'True' AND MaLoai = " + maLoai + " AND GiaBan BETWEEN 0 AND " + giaBan + "";
+            string sql = "SELECT MaTC, TenTC, GiaBan, Anh, MoTa FROM ThuCung Where TrangThai = 0 AND MaLoai = " + maLoai + " AND GiaBan BETWEEN 0 AND " + giaBan + "";
             return data.QuerySQL(sql);
         }
 
@@ -68,7 +104,7 @@ namespace DAL
         }
 
         //Thêm Linq
-        public bool ThemLinq(string tenTC, decimal giaBan, string moTa, string anh, DateTime ngayCapNhap, int maGiong, int maLoai, bool trangThai)
+        public bool ThemLinq(string tenTC, decimal giaBan, string moTa, string anh, DateTime createDate, DateTime ngayCapNhat, int maGiong, int maLoai, int trangThai)
         {
             try
             {
@@ -77,7 +113,8 @@ namespace DAL
                 tc.GiaBan = giaBan;
                 tc.MoTa = moTa;
                 tc.Anh = anh;
-                tc.NgayCapNhat = ngayCapNhap;
+                tc.CreateDate = createDate;
+                tc.NgayCapNhat = ngayCapNhat;
                 tc.MaGiong = maGiong;
                 tc.MaLoai = maLoai;
                 tc.TrangThai = trangThai;
@@ -109,7 +146,7 @@ namespace DAL
         }
 
         //Update Linq
-        public bool UpdateLinq(int maTC, string tenTC, decimal giaBan, string moTa, string anh, DateTime ngayCapNhap, int maGiong, int maLoai, bool trangThai)
+        public bool UpdateLinq(int maTC, string tenTC, decimal giaBan, string moTa, string anh, DateTime createDate, DateTime ngayCapNhat, int maGiong, int maLoai, int trangThai)
         {
             try
             {
@@ -118,7 +155,8 @@ namespace DAL
                 update.GiaBan = giaBan;
                 update.MoTa = moTa;
                 update.Anh = anh;
-                update.NgayCapNhat = ngayCapNhap;
+                update.CreateDate = createDate;
+                update.NgayCapNhat = ngayCapNhat;
                 update.MaGiong = maGiong;
                 update.MaLoai = maLoai;
                 update.TrangThai = trangThai;
@@ -131,20 +169,104 @@ namespace DAL
             }
         }
 
-        public void Them(ThuCungDTO info)
+        //Update Linq
+        public bool UpdateLinqChiTiet(int maTC, string tenTC, decimal giaBan, DateTime ngayCapNhat, int maGiong, int maLoai)
         {
-            string sql = "INSERT INTO ThuCung(TenTC, GiaBan, MoTa, Anh, NgayCapNhat, MaGiong, MaLoai, Moi) " +
-                "VALUES(N'" + info.TenTC + "', " + info.GiaBan + ", N'" + info.MoTa + "', N'" + info.Anh + "'" +
-                ", N'" + info.NgayCapNhat.ToString("yyyy-MM-dd") + "', " + info.MaGiong + ", " + info.MaLoai + ", '" + info.Moi + "')";
-            data.ExecuteSQL(sql);
+            try
+            {
+                var update = db.ThuCungs.Single(t => t.MaTC == maTC);
+                update.TenTC = tenTC;
+                update.GiaBan = giaBan;
+                update.NgayCapNhat = ngayCapNhat;
+                update.MaGiong = maGiong;
+                update.MaLoai = maLoai;
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
-        public void Sua(ThuCungDTO info, int maTC)
+        public bool Them(ThuCungDTO info)
         {
-            string sql = "UPDATE ThuCung SET TenTC = N'" + info.TenTC + "', GiaBan = " + info.GiaBan + "" +
-                ", MoTa = N'" + info.MoTa + "', Anh = N'" + info.Anh + "', NgayCapNhat = N'" + info.NgayCapNhat.ToString("yyyy-MM-dd") + "', " +
-                " MaGiong = " + info.MaGiong + ", MaLoai = " + info.MaLoai + ", Moi = '" + info.Moi + "' WHERE MaTC = " + maTC;
-            data.ExecuteSQL(sql);
+            try
+            {
+                string sql = "INSERT INTO ThuCung(TenTC, GiaBan, MoTa, Anh, CreateDate, NgayCapNhat, NgayBan, MaGiong, MaLoai, TrangThai) " +
+                   "VALUES(N'" + info.TenTC + "', " + info.GiaBan + ", N'" + info.MoTa + "', N'" + info.Anh + "'" +
+                   ", N'" + info.CreateDate.ToString("yyyy-MM-dd HH:mm:ss.fff") + "', N'" + info.NgayCapNhat.ToString("yyyy-MM-dd HH:mm:ss.fff") + "', N'" + info.NgayBan.ToString("yyyy-MM-dd HH:mm:ss.fff") + "', " + info.MaGiong + ", " + info.MaLoai + ", '" + info.TrangThai + "')";
+                data.ExecuteSQL(sql);
+                return true;
+            }
+            catch 
+            {
+                return false;               
+            }
+            
+        }
+
+        public bool ThemTCChiTiet(ThuCungDTO info)
+        {
+            try
+            {
+                string sql = "INSERT INTO ThuCung(TenTC, GiaBan, Anh, CreateDate, NgayCapNhat, MaGiong, MaLoai, TrangThai) " +
+                   "VALUES(N'" + info.TenTC + "', " + info.GiaBan + ", N'" + info.Anh + "'" +
+                   ", N'" + info.CreateDate.ToString("yyyy-MM-dd HH:mm:ss.fff") + "', N'" + info.NgayCapNhat.ToString("yyyy-MM-dd HH:mm:ss.fff") + "', " + info.MaGiong + ", " + info.MaLoai + ", " + info.TrangThai + ")";
+                data.ExecuteSQL(sql);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+
+        public bool Sua(ThuCungDTO info, int maTC)
+        {
+            try
+            {
+                string sql = "UPDATE ThuCung SET TenTC = N'" + info.TenTC + "', GiaBan = " + info.GiaBan + "" +
+               ", MoTa = N'" + info.MoTa + "', Anh = N'" + info.Anh + "', NgayCapNhat = N'" + info.NgayCapNhat.ToString("yyyy-MM-dd HH:mm:ss.fff") + "', " +
+               " MaGiong = " + info.MaGiong + ", MaLoai = " + info.MaLoai + ", TrangThai = '" + info.TrangThai + "' WHERE MaTC = " + maTC;
+                data.ExecuteSQL(sql);
+                return true;
+            }
+            catch 
+            {
+                return false;
+            }
+        }
+
+        public bool SuaThuCungChiTiet(ThuCungDTO info, int maTC)
+        {
+            try
+            {
+                string sql = "UPDATE ThuCung SET TenTC = N'" + info.TenTC + "', GiaBan = " + info.GiaBan + "" +
+               ", Anh = N'" + info.Anh + "', NgayCapNhat = N'" + info.NgayCapNhat.ToString("yyyy-MM-dd HH:mm:ss.fff") + "', " +
+               " MaGiong = " + info.MaGiong + ", MaLoai = " + info.MaLoai + ", TrangThai = " + info.TrangThai + " WHERE MaTC = " + maTC;
+                data.ExecuteSQL(sql);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool SuaTrangThai(ThuCungDTO info, int maTC)
+        {
+            try
+            {
+                string sql = "UPDATE ThuCung SET TrangThai = " + info.TrangThai + " WHERE MaTC = " + maTC;
+                data.ExecuteSQL(sql);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public void Xoa(ThuCungDTO info)

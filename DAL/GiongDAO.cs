@@ -17,6 +17,17 @@ namespace DAL
             string sql = "SELECT * FROM Giong";
             return data.QuerySQL(sql);
         }
+        public DataTable DanhSach(int maGiong)
+        {
+            string sql = "SELECT * FROM Giong where MaGiong = " + maGiong + "";
+            return data.QuerySQL(sql);
+        }
+
+        public DataTable LayMaLoai(int maGiong)
+        {
+            string sql = "SELECT * FROM Giong Where maGiong = " + maGiong + "";
+            return data.QuerySQL(sql);
+        }
 
         public DataTable DanhSach_TenGiong(string tenGiong)
         {

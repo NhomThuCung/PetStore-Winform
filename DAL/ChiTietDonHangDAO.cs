@@ -18,10 +18,33 @@ namespace DAL
             return data.QuerySQL(sql);
         }
 
+        public DataTable DanhSach(int maDH)
+        {
+            string sql = "SELECT * FROM ChiTietDonHang WHERE MaDH = " + maDH + "";
+            return data.QuerySQL(sql);
+        }
+
+        public DataTable DanhSachCT_TC(string maDH)
+        {
+            string sql = "SELECT CT.MaTC, TC.Anh, TC.TenTC, TC.GiaBan FROM ChiTietDonHang CT, ThuCung TC where CT.MaTC = TC.MaTC AND MaDH = " + maDH + "";
+            return data.QuerySQL(sql);
+        }
+
         public DataTable Sell()
         {
             string sql = "SELECT MaDH, TC.TenTC, ThanhTien FROM ChiTietDonHang CTDH, ThuCung TC where  CTDH.MaTC = TC.MaTC";
             return data.QuerySQL(sql);
+        }
+
+        public DataTable KiemTraMaTC(int maTC)
+        {
+            string sql = "SELECT MaTC FROM ChiTietDonHang where MaTC = " + maTC + "";
+            return data.QuerySQL(sql);
+        }
+
+        public List<ChiTietDonHang> KiemTraMaTCLinq(int maTC)
+        {
+            return db.ChiTietDonHangs.Where(t => t.MaTC == maTC).ToList();
         }
 
         public DataTable DanhSach_KetHop()
@@ -117,11 +140,22 @@ namespace DAL
             data.ExecuteSQL(sql);
         }
 
-        //public void SuaChiTiet(ChiTietDonHangDTO info, int maTC, int maHD)
-        //{
-        //    string sql = "UPDATE ChiTietDonHang SET SoLuong = " + info.SoLuong + " WHERE MaTC = " + maTC + " AND MaDH = "+ maHD +"";
-        //    data.ExecuteSQL(sql);
-        //}
+        public bool SuaMaTC(ChiTietDonHangDTO info, int maTC)
+        {
+            try
+            {
+                string sql = "UPDATE ChiTietDonHang SET MaTC = " + info.MaTC + " WHERE MaTC = " + maTC;
+                data.ExecuteSQL(sql);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            
+        }
+
+
 
         public void Xoa(ChiTietDonHangDTO info)
         {

@@ -42,5 +42,16 @@ namespace DTO.Properties {
                 return ((string)(this["QuanLyPetStoreConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=PHATTAI;Initial Catalog=QL_PetStore;Persist Security Info=True;User I" +
+            "D=sa;Password=123")]
+        public string QL_PetStoreConnectionString1 {
+            get {
+                return ((string)(this["QL_PetStoreConnectionString1"]));
+            }
+        }
     }
 }

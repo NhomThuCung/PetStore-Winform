@@ -12,11 +12,13 @@ namespace DTO
         private string tenTC;
         private decimal giaBan;
         private string moTa;
-        private string anh;
+        private string anh; 
+        private DateTime createDate;
         private DateTime ngayCapNhat;
+        private DateTime ngayBan;
         private int maGiong;
         private int maLoai;
-        private bool moi;
+        private int trangThai;
 
         public int MaTC { get => maTC; set => maTC = value; }
         public string TenTC { get => tenTC; set => tenTC = value; }
@@ -26,6 +28,8 @@ namespace DTO
         public DateTime NgayCapNhat { get => ngayCapNhat; set => ngayCapNhat = value; }
         public int MaGiong { get => maGiong; set => maGiong = value; }
         public int MaLoai { get => maLoai; set => maLoai = value; }
-        public bool Moi { get => moi; set => moi = value; }
+        public int TrangThai { get => trangThai; set => trangThai = value; }
+        public DateTime CreateDate { get => createDate; set => createDate = value; }
+        public DateTime NgayBan { get => ngayBan; set => ngayBan = value; }
     }
 }

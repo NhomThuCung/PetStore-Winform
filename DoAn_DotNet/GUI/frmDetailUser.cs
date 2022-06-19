@@ -16,13 +16,13 @@ namespace DoAn_DotNet.GUI
 {
     public partial class frmDetailUser : Form
     {
-        public static string taiKhoan = BLL.UserAdminBLL.frmDetailUsertaiKhoan;
-        public static string hoTen = BLL.UserAdminBLL.frmDetailUserhoTen;
-        public static string cmnd = BLL.UserAdminBLL.frmDetailUsercmnd;
-        public static DateTime ngaySinh = BLL.UserAdminBLL.frmDetailUserngaySinh;
-        public static int maQuyen = BLL.UserAdminBLL.frmDetailUsermaQuyen;
-        public static int maNV = BLL.UserAdminBLL.frmDetailUsermaNV;
-        public static int tienLuong = BLL.UserAdminBLL.frmDetailUsertienLuong;
+        public static string taiKhoan = BLL.NhanVienBLL.frmDetailUsertaiKhoan;
+        public static string hoTen = BLL.NhanVienBLL.frmDetailUserhoTen;
+        public static string cmnd = BLL.NhanVienBLL.frmDetailUsercmnd;
+        public static DateTime ngaySinh = BLL.NhanVienBLL.frmDetailUserngaySinh;
+        public static int maQuyen = BLL.NhanVienBLL.frmDetailUsermaQuyen;
+        public static int maNV = BLL.NhanVienBLL.frmDetailUsermaNV;
+        public static int tienLuong = BLL.NhanVienBLL.frmDetailUsertienLuong;
 
         public frmDetailUser()
         {
@@ -33,7 +33,7 @@ namespace DoAn_DotNet.GUI
         {
             try
             {
-                UserAdminBLL tk = new UserAdminBLL();
+                NhanVienBLL tk = new NhanVienBLL();
 
                 txtMaNV.Text = maNV.ToString();
                 txtHoTen.Text = hoTen;

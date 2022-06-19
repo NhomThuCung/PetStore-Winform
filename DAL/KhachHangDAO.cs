@@ -15,7 +15,7 @@ namespace DAL
 
         public DataTable DanhSach()
         {
-            string sql = "SELECT MaKH, HoTen, Email, DiaChi, DienThoai FROM KhachHang";
+            string sql = "SELECT MaKH, HoTen, Email, Address, DienThoai FROM KhachHang";
             return data.QuerySQL(sql);
         }
 
@@ -33,19 +33,19 @@ namespace DAL
 
         public DataTable DanhSach_TenKH(string tenKH)
         {
-            string sql = "SELECT MaKH, HoTen, Email, DiaChi, DienThoai FROM KhachHang WHERE HoTen LIKE '%" + tenKH + "%'";
+            string sql = "SELECT MaKH, HoTen, Email, Address, DienThoai FROM KhachHang WHERE HoTen LIKE '%" + tenKH + "%'";
             return data.QuerySQL(sql);
         }
 
         public DataTable DanhSach_SoDT(string soDT)
         {
-            string sql = "SELECT MaKH, HoTen, Email, DiaChi, DienThoai FROM KhachHang WHERE DienThoai LIKE '%" + soDT + "%'";
+            string sql = "SELECT MaKH, HoTen, Email, Address, DienThoai FROM KhachHang WHERE DienThoai LIKE '%" + soDT + "%'";
             return data.QuerySQL(sql);
         }
 
         public DataTable DsKHTheoSDT(string soDT)
         {
-            string sql = "SELECT MaKH, HoTen, Email, DiaChi, DienThoai FROM KhachHang WHERE DienThoai = " + soDT + "";
+            string sql = "SELECT MaKH, HoTen, Email, Address, DienThoai FROM KhachHang WHERE DienThoai = " + soDT + "";
             return data.QuerySQL(sql);
         }
 
@@ -56,7 +56,7 @@ namespace DAL
         }
 
         //Thêm Linq
-        public bool ThemLinq(string hoTen, string taiKhoan, string matKhau, string email, string diaChi, string dienThoai, string gioiTinh, DateTime ngaySinh, DateTime createdDate)
+        public bool ThemLinq(string hoTen, string taiKhoan, string matKhau, string email, string address, string dienThoai, string gioiTinh, DateTime ngaySinh, DateTime createdDate)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace DAL
                 kh.TaiKhoan = taiKhoan;
                 kh.MatKhau = matKhau;
                 kh.Email = email;
-                kh.DiaChi = diaChi;
+                kh.Address = address;
                 kh.DienThoai = dienThoai;
                 kh.GioiTinh = gioiTinh;
                 kh.NgaySinh = ngaySinh;
@@ -98,7 +98,7 @@ namespace DAL
         }
 
         //Update Linq
-        public bool UpdateLinq(int maKH, string hoTen, string taiKhoan, string matKhau, string email, string diaChi, string dienThoai, string gioiTinh, DateTime ngaySinh, DateTime createdDate)
+        public bool UpdateLinq(int maKH, string hoTen, string taiKhoan, string matKhau, string email, string address, string dienThoai, string gioiTinh, DateTime ngaySinh, DateTime createdDate)
         {
             try
             {
@@ -107,7 +107,7 @@ namespace DAL
                 update.TaiKhoan = taiKhoan;
                 update.MatKhau = matKhau;
                 update.Email = email;
-                update.DiaChi = diaChi;
+                update.Address = address;
                 update.DienThoai = dienThoai;
                 update.GioiTinh = gioiTinh;
                 update.NgaySinh = ngaySinh;
@@ -123,17 +123,17 @@ namespace DAL
 
         public void Them(KhachHangDTO info)
         {
-            string sql = "INSERT INTO KhachHang(HoTen, TaiKhoan, MatKhau, Email, DiaChi, DienThoai, GioiTinh, NgaySinh, CreatedDate) " +
+            string sql = "INSERT INTO KhachHang(HoTen, TaiKhoan, MatKhau, Email, Address, DienThoai, GioiTinh, NgaySinh, CreatedDate) " +
                 "VALUES(N'" + info.HoTen + "', '" + info.TaiKhoan + "', '" + info.MatKhau + "', N'" + info.Email + "'" +
-                ", N'" + info.DiaChi + "', N'" + info.Phone + "', N'" + info.GioiTinh + "', N'" + info.NgaySinh.ToString("yyyy-MM-dd") + "', N'" + info.CreateDate.ToString("yyyy-MM-dd") + "')";
+                ", N'" + info.Address + "', N'" + info.DienThoai + "', N'" + info.GioiTinh + "', N'" + info.NgaySinh.ToString("yyyy-MM-dd") + "', N'" + info.CreateDate.ToString("yyyy-MM-dd HH:mm:ss.fff") + "')";
             data.ExecuteSQL(sql);
         }
 
         public void Sua(KhachHangDTO info, int maKhach)
         {
             string sql = "UPDATE KhachHang SET HoTen = N'" + info.HoTen + "', TaiKhoan = '" + info.TaiKhoan + "'" +
-                ", MatKhau = '" + info.MatKhau + "', Email = N'" + info.Email + "', DiaChi = N'" + info.DiaChi + "', DienThoai = N'" + info.Phone + "'" +
-                ", GioiTinh = N'" + info.GioiTinh + "', NgaySinh = N'" + info.NgaySinh.ToString("yyyy-MM-dd") + "', CreatedDate = N'" + info.CreateDate.ToString("yyyy-MM-dd") + "' WHERE MaKH = " + maKhach;
+                ", MatKhau = '" + info.MatKhau + "', Email = N'" + info.Email + "', Address = N'" + info.Address + "', DienThoai = N'" + info.DienThoai + "'" +
+                ", GioiTinh = N'" + info.GioiTinh + "', NgaySinh = N'" + info.NgaySinh.ToString("yyyy-MM-dd") + "', CreatedDate = N'" + info.CreateDate.ToString("yyyy-MM-dd HH:mm:ss.fff") + "' WHERE MaKH = " + maKhach;
             data.ExecuteSQL(sql);
         }
 

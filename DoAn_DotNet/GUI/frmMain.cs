@@ -19,25 +19,14 @@ namespace DoAn_DotNet.GUI
     public partial class frmMain : Form
     {
         frmDangNhap fDN = null;
-        frmDonHang fDH = null;
-        frmDoiMK fDMK = null;
-        frmDetailUser fDU = null;
-
-        //Form quản lý
-        frmQLThuCung fQLTC = null;
-        frmKhachHang fKH = null;
-        frmQLGiongLoai fQLGL = null;
-        frmQLUserAdmin fQLUA = null;
-        frmQLDonHang fQLDH = null;
-        frmQLThongKe fQLTK = null;
 
         const int Quyen_ThongThuong = 0;
         const int Quyen_QuanLy = 1;
         const int Quyen_NhanVien = 2;
 
-        public static int maNV = BLL.UserAdminBLL.frmMainmaNV;
-        public static string hoVaTen = BLL.UserAdminBLL.frmMainhoVaTen;
-        public static int quyenHan = BLL.UserAdminBLL.frmMainquyenHan;
+        public static int maNV = BLL.NhanVienBLL.frmMainmaNV;
+        public static string hoVaTen = BLL.NhanVienBLL.frmMainhoVaTen;
+        public static int quyenHan = BLL.NhanVienBLL.frmMainquyenHan;
 
         private Button currentButton;
         private Random random;
@@ -190,7 +179,7 @@ namespace DoAn_DotNet.GUI
 
         private void btnQLThuCung_Click(object sender, EventArgs e)
         {
-            openChilForm(new frmQLThuCung(), sender);
+            openChilForm(new frmProduct(), sender);
         }
 
         private void btnQLKhachHang_Click(object sender, EventArgs e)
@@ -223,13 +212,13 @@ namespace DoAn_DotNet.GUI
                 }
                 else
                 {
-                    UserAdminBLL tk = new UserAdminBLL();
+                    NhanVienBLL tk = new NhanVienBLL();
                     string encrypt_pass = Encrypt.Instance.MD5Encrypt(fDN.txtMatKhau.Text);
                     if (tk.DangNhap(fDN.txtTenDangNhap.Text.Trim(), encrypt_pass))
                     {
-                        maNV = BLL.UserAdminBLL.frmMainmaNV;
-                        hoVaTen = BLL.UserAdminBLL.frmMainhoVaTen;
-                        quyenHan = BLL.UserAdminBLL.frmMainquyenHan;
+                        maNV = BLL.NhanVienBLL.frmMainmaNV;
+                        hoVaTen = BLL.NhanVienBLL.frmMainhoVaTen;
+                        quyenHan = BLL.NhanVienBLL.frmMainquyenHan;
                         // Đăng nhập thành công
                         if (quyenHan == Quyen_QuanLy)
                         {
@@ -339,6 +328,7 @@ namespace DoAn_DotNet.GUI
         {
             panelQuanLy(false);
             openChilForm(new frmQLDonHang(), sender);
+
         }
 
         private void panelTop_MouseDown(object sender, MouseEventArgs e)
@@ -361,8 +351,8 @@ namespace DoAn_DotNet.GUI
             DataTable dt = new DataTable();
             try
             {
-                UserAdminBLL user =  new UserAdminBLL();
-                UserAdminDAO ds = new UserAdminDAO();
+                NhanVienBLL user =  new NhanVienBLL();
+                NhanVienDAO ds = new NhanVienDAO();
                 if (user.LayThongTinTong(maNV, DateTime.Today.Month, DateTime.Today.Year)==false)
                 {
                     dt = ds.LayThongTinTong(maNV, DateTime.Today.Month, DateTime.Today.Year);
@@ -392,7 +382,7 @@ namespace DoAn_DotNet.GUI
             try
             {
                 DataTable dt = new DataTable();
-                UserAdminDAO ds = new UserAdminDAO();
+                NhanVienDAO ds = new NhanVienDAO();
 
                 dt = ds.BaoCaoDoanhThuCuaHang(maNV, DateTime.Today.Month, DateTime.Today.Year);
                 if (dt != null)
@@ -426,5 +416,34 @@ namespace DoAn_DotNet.GUI
             openChilForm(new frmQLThongKe(), sender);
         }
 
+        private void btnQLNhapHang_Click(object sender, EventArgs e)
+        {
+            panelQuanLy(false);
+            openChilForm(new frmQLNhapHang(), sender);
+        }
+
+        private void btnQLNCC_Click(object sender, EventArgs e)
+        {
+            panelQuanLy(false);
+            openChilForm(new frmNhaCungCap(), sender);
+        }
+
+        private void btnQLDDM_Click(object sender, EventArgs e)
+        {
+            panelQuanLy(false);
+            openChilForm(new frmDonDatMua(), sender);
+        }
+
+        private void btnQLDoiTra_Click(object sender, EventArgs e)
+        {
+            panelQuanLy(false);
+            openChilForm(new frmOrder(), sender);
+        }
+
+        private void btnDoiTra_Click(object sender, EventArgs e)
+        {
+            panelQuanLy(false);
+            openChilForm(new frmQLDoiTra(), sender);
+        }
     }
 }

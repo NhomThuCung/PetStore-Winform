@@ -7,28 +7,43 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DoAn_DotNet.Custom;
 using DTO;
 using DAL;
 using BLL;
+using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace DoAn_DotNet.GUI
 {
     public partial class frmSell : Form
     {
+        //Gọi frm tương tác
+        frmKhachHang fKH = null;
+        frmThanhToan fTT = null;
+
+        //Gọi BLL tương tác
         ChiTietDonHangBLL bllCTDH = new ChiTietDonHangBLL();
-        ThuCungDAO tc = new ThuCungDAO();
         KhachHangBLL bllKhachHang = new KhachHangBLL();
-        DonHangBLL bllDonHang = new DonHangBLL();
         LoaiBLL bllLoai = new LoaiBLL();
         GiongBLL bllGiong = new GiongBLL();
+        DonHangBLL bllDonHang = new DonHangBLL();
+
+        //Gọi DAO tương tác
+        ThuCungDAO tc = new ThuCungDAO();
+
+        //Variable(Biến lưu trữ)
+        string tenTC = "";
         string anh = "";
         string ma = "";
         decimal giaBan = 0;
-        int maNV = UserAdminBLL.frmDonHangmaNV;
-        frmKhachHang fKH = null;
-        DonHangBLL dhBLL = new DonHangBLL();
-        DataTable dt = new DataTable();
+        int maNV = NhanVienBLL.frmDonHangmaNV;
         int soLuongTC = 0;
+        int dongSLTC;
+        double tongTien = 0;
+        public static int maDH = 0;
+        DataTable dt = new DataTable();
+
 
         public frmSell()
         {
@@ -36,31 +51,32 @@ namespace DoAn_DotNet.GUI
         }
 
         private void frmSell_Load(object sender, EventArgs e)
-        {
-            //Load Số Thú Cưng
-            lblSoLuongTC.Text = tc.DanhSachTCSell().Rows.Count.ToString();
-            //Load Time
-            HienThiThoiGian();
-
-            //Load Thú Cưng
-            LoadThuCung();
-
+        {            
             //Mã Nhân Viên
             txtMaNV.Text = maNV.ToString();
 
-            //Đặt tên cho cột trong datagirdview
-            dt.Columns.Add("MaTC", typeof(int));
-            dt.Columns.Add("TenTC", typeof(String));
-            dt.Columns.Add("GiaBan", typeof(Decimal));
+            //Load Số Thú Cưng
+            lblSoLuongTC.Text = tc.DanhSachTCSell().Rows.Count.ToString();
 
+            //Load Time
+            HienThiThoiGian();
+            //Load Thú Cưng
+            LoadThuCung();
             //Load cbo
             LoadCboThuCung();
+            //Load BatTat
+            BatTat(false);
 
+
+
+            //Format tiền cho dataGridView1
+            dataGridView1.Columns["Column3"].DefaultCellStyle.Format = "c0";
 
         }
 
         public void LoadThuCung()
         {
+            pnDSThuCung.Controls.Clear();
             //Gọi Thú Cưng in pnBtnThuCung
             int StartY = 10;
             int x = 20;
@@ -69,28 +85,27 @@ namespace DoAn_DotNet.GUI
             int dem = 0;
             Button[] btn = new Button[tc.DanhSachTCSell().Rows.Count];
 
-            Button[] hinh = new Button[tc.DanhSachTCSell().Rows.Count];
+            //Button[] hinh = new Button[tc.DanhSachTCSell().Rows.Count];
+
+            Guna.UI2.WinForms.Guna2Button[] hinh = new Guna.UI2.WinForms.Guna2Button[tc.DanhSachTCSell().Rows.Count];
+
             for (int i = 0; i < tc.DanhSachTCSell().Rows.Count; i++)
             {
                 btn[i] = new Button();
+                hinh[i] = new Guna.UI2.WinForms.Guna2Button();
+                
 
-                hinh[i] = new Button();
-
+                tenTC = tc.DanhSachTCSell().Rows[i][1].ToString();
                 anh = tc.DanhSachTCSell().Rows[i][3].ToString();
-                //anh = dataGridView3.Rows[i].Cells["Column9"].FormattedValue.ToString();
                 ma = tc.DanhSachTCSell().Rows[i][0].ToString();
                 giaBan = Convert.ToDecimal(tc.DanhSachTCSell().Rows[i][2].ToString());
-                //ma = dataGridView3.Rows[i].Cells["MaTC"].FormattedValue.ToString();
-                //btn[i].BackgroundImage = Image.FromFile(System.Windows.Forms.Application.StartupPath + "\\img\\" + dataGridView3.Rows[i].Cells["Column9"].FormattedValue.ToString() + "");
+
                 btn[i].BackgroundImage = Image.FromFile(System.Windows.Forms.Application.StartupPath + "\\img\\" + anh + "");
                 btn[i].BackgroundImageLayout = ImageLayout.Stretch;
-
-                //hinh[i].BackgroundImage = Image.FromFile(System.Windows.Forms.Application.StartupPath + "\\img\\" + anh + "");
-                //hinh[i].BackgroundImageLayout = ImageLayout.Stretch;
-
                 btn[i].Size = new System.Drawing.Size(200, 200);
-
                 hinh[i].Size = new System.Drawing.Size(200, 50);
+                hinh[i].BorderRadius = 10;
+                hinh[i].FillColor = Color.FromArgb(255, 128, 128);
 
                 if (dem == 5)
                 {
@@ -101,26 +116,30 @@ namespace DoAn_DotNet.GUI
                     x = 20;
                     y += 270;
                 }
+
                 btn[i].Location = new Point(StartX, StartY);
-
                 hinh[i].Location = new Point(x, y);
-                StartX += 210;
 
+                StartX += 210;
                 x += 210;
 
                 btn[i].Name = ma;
                 hinh[i].Name = ma;
-                string chu = "Thú Cưng " + ma + "\n Giá Bán: " + giaBan + "";
-                //btn[i].Text = chu;
+                string textButton;
+                if (tenTC.Length > 20)
+                {
+                    textButton = "" + tenTC.Substring(0,20) + "...\n Giá Bán: " + giaBan.ToString("c0") + "";
+                }
+                else
+                    textButton = "" + tenTC + "\n Giá Bán: " + giaBan.ToString("c0") + "";
 
-                hinh[i].Text = chu;
-                //btn[i].ImageAlign = ContentAlignment.TopCenter;
+                hinh[i].Text = textButton;
                 btn[i].TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-                //btn[i].TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+
                 hinh[i].Click += new System.EventHandler(this.btnProductPet_Click);
-                btn[i].UseVisualStyleBackColor = true;
-                pnBtnThuCung.Controls.Add(btn[i]);
-                pnBtnThuCung.Controls.Add(hinh[i]);
+
+                pnDSThuCung.Controls.Add(btn[i]);
+                pnDSThuCung.Controls.Add(hinh[i]);
 
                 dem++;
             }
@@ -134,13 +153,47 @@ namespace DoAn_DotNet.GUI
 
         }
 
+        public void TinhTongTienTC()
+        {
+            //Tính tiền
+            double total = 0;
+            for (int i = 0; i < dataGridView1.Rows.Count; ++i)
+            {
+                total += Convert.ToDouble(dataGridView1.Rows[i].Cells["Column3"].Value);
+            }
+            tongTien = total;
+            txtTongTien.Text = total.ToString();
+            System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("vi-vn");
+            decimal value = decimal.Parse(txtTongTien.Text, System.Globalization.NumberStyles.AllowThousands);
+            txtTongTien.Text = String.Format(culture, "{0:C0}", value);
+            txtTongTien.Select(txtTongTien.Text.Length, 0);
+        }
+
+        public void BatTat(bool tt)
+        {
+            //dataGridView1.Enabled = tt;
+
+            txtTienNhan.Enabled = tt;
+             
+            btnThanhToan.Enabled = tt;
+            btnInHoaDon.Enabled = tt;
+
+            //pnBtnThuCung.Enabled = tt;
+
+            //groupBox1.Enabled = tt;
+        }
 
         private void btnProductPet_Click(object sender, EventArgs e)
         {
+            Guna.UI2.WinForms.Guna2Button pic = (Guna.UI2.WinForms.Guna2Button)sender;
 
-            Button pic = (Button)sender;
-            txtMaTC.Text = pic.Name;
-
+            if (!dt.Columns.Contains("MaTC") && !dt.Columns.Contains("TenTC") && !dt.Columns.Contains("GiaBan"))
+            {
+                //Đặt tên cho cột trong datagirdview
+                dt.Columns.Add("MaTC", typeof(int));
+                dt.Columns.Add("TenTC", typeof(String));
+                dt.Columns.Add("GiaBan", typeof(Decimal));
+            }
             bool kt = false;
             ThuCung tc = bllDonHang.LayTCTheoMa(int.Parse(pic.Name));
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
@@ -154,48 +207,52 @@ namespace DoAn_DotNet.GUI
             {
                 dt.Rows.Add(tc.MaTC, tc.TenTC, tc.GiaBan);
                 dataGridView1.DataSource = dt;
+
+                TinhTongTienTC();
             }
             else
             {
                 MessageBox.Show("Thú cưng đã được thêm vào giỏ hàng!!!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
-
-
-
-            ChiTietDonHang ctdh = new ChiTietDonHang();
-
-            ctdh.MaTC = tc.MaTC; ;
-            ctdh.ThanhTien = tc.GiaBan;
-
-
-            //var giohang = new List<GioHangDTO>();
-            //giohang.Add(gh);
-            //foreach (var item in giohang)
-            //{
-            //    item.MaTC = tc.MaTC.ToString(); ;
-            //    item.TenTC = tc.TenTC;
-            //    item.GiaBan = tc.GiaBan;
-            //}
-
-
         }
 
         private void txtSDT_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (bllKhachHang.DsKHTheoSDT(txtSDT.Text).Rows.Count > 0)
+                if (txtSDT.Text.Trim() == "")
+                    MessageBox.Show("Vui lòng nhập số điện thoại khách hàng", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (bllKhachHang.DsKHTheoSDT(txtSDT.Text).Rows.Count > 0)
                 {
                     txtMaKH.Text = bllKhachHang.DsKHTheoSDT(txtSDT.Text).Rows[0][0].ToString();
                     txtTenKH.Text = bllKhachHang.DsKHTheoSDT(txtSDT.Text).Rows[0][1].ToString();
                     txtEmail.Text = bllKhachHang.DsKHTheoSDT(txtSDT.Text).Rows[0][2].ToString();
                     txtDiaChi.Text = bllKhachHang.DsKHTheoSDT(txtSDT.Text).Rows[0][3].ToString();
+                    BatTat(true);
+                    btnInHoaDon.Enabled = false;
                 }
                 else
                 {
-                    MessageBox.Show("Số điện thoại khách hàng chưa có!!!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (MessageBox.Show("Không tìm thấy số điện thoại khách hàng", "Thông Báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        if (fKH == null || fKH.IsDisposed)
+                        {
+                            fKH = new frmKhachHang();
+                            fKH.Show();
+                        }
+                        else
+                            fKH.Activate();
+                    }
                 }
+            }
+        }
+
+        private void txtSDT_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("Vui lòng nhập số", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -209,14 +266,14 @@ namespace DoAn_DotNet.GUI
             else
                 fKH.Activate();
         }
-        private bool IsValidEmail(string eMail)
+
+        private bool IsValidEmaill(string eMail)
         {
             bool Result = false;
 
             try
             {
                 var eMailValidator = new System.Net.Mail.MailAddress(eMail);
-
                 Result = (eMail.LastIndexOf(".") > eMail.LastIndexOf("@"));
             }
             catch
@@ -227,56 +284,43 @@ namespace DoAn_DotNet.GUI
             return Result;
         }
 
-        private void btnThemDon_Click(object sender, EventArgs e)
+        private bool IsValidEmail(string eMail)
         {
-            if (txtTenKH.Text.Trim() == "")
-                MessageBox.Show("Vui lòng nhập tên khách hàng", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else if (txtEmail.Text.Trim() == "")
-                MessageBox.Show("Vui lòng nhập email khách hàng", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else if (txtSDT.Text.Trim() == "")
-                MessageBox.Show("Vui lòng nhập số điện thoại khách hàng", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else if (txtDiaChi.Text.Trim() == "")
-                MessageBox.Show("Vui lòng nhập địa chỉ khách hàng", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else if (txtSDT.Text.Length > 15)
-                MessageBox.Show("Số điện thoại không vượt quá 15 số", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else if (IsValidEmail(txtEmail.Text) == false)
-                MessageBox.Show("Email không đúng định dạng", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else
-            if (MessageBox.Show("Bạn có muốn thêm đơn mới không?", "Thêm Đơn Mới", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+            if (string.IsNullOrWhiteSpace(eMail))
+                return false;
+
+            try
             {
-                DonHangDTO dh = new DonHangDTO();
-                dh.Id = Convert.ToInt32(txtMaNV.Text);
-                dh.CreatedDate = DateTime.Now;
-                string gio = DateTime.Now.ToString();
-                dh.MaKH = Convert.ToInt32(txtMaKH.Text);
-                dh.NguoiNhan = txtTenKH.Text;
-                dh.Email = txtEmail.Text;
-                dh.SoDT = txtSDT.Text;
-                dh.DiaChi = txtDiaChi.Text;
-                dh.TongTien = Convert.ToDecimal(null);
-                dh.Status = Convert.ToBoolean(0);
-
-
-                dhBLL.Them(dh);
-
-                //dhBLL.ThemLinq(Convert.ToInt32(txtMaNV.Text), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.000"),
-                //    Convert.ToInt32(txtMaKH.Text), txtTenKH.Text, txtEmail.Text, txtSDT.Text, txtDiaChi.Text,
-                //    Convert.ToDecimal(null), Convert.ToBoolean(0));
-
-                txtDH.Text = dhBLL.DonHangSell(Convert.ToInt32(txtMaKH.Text), DateTime.Parse(gio), Convert.ToInt32(txtMaNV.Text)).Rows[0][0].ToString();
-                MessageBox.Show("Thêm Thành Công", "Đơn Hàng");
-                frmSell_Load(sender, e);
-
-                //if (dataGridView3.Rows.Count == 0)
-                //{
-                //    BatTat(true);
-                //}
-                //else
-                //{
-                //    BatTat(true);
-                //    btnXoaDon.Enabled = false;
-                //    maDH = Convert.ToInt32(txtDH.Text);
-                //}
+                //Đọc tên miền email
+                eMail = Regex.Replace(eMail, @"(@)(.+)$", DomainMapper,
+                                      RegexOptions.None, TimeSpan.FromMilliseconds(200));
+                //Kiểm tra miền của email và chuẩn hoá nó
+                string DomainMapper(Match match)
+                {
+                    // Sử dụng lớp IdnMapping để chuyển đổi tên miền Unicode.
+                    var idn = new IdnMapping();
+                    // Kéo ra và xử lý tên miền (ném ArgumentException vào không hợp lệ)
+                    string domainName = idn.GetAscii(match.Groups[2].Value);
+                    return match.Groups[1].Value + domainName;
+                }
+            }
+            catch (RegexMatchTimeoutException e)
+            {
+                return false;
+            }
+            catch (ArgumentException e)
+            {
+                return false;
+            }
+            try
+            {
+                return Regex.IsMatch(eMail,
+                    @"^[^@\s]+@[^@\s]+\.[^@\s]+$",
+                    RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                return false;
             }
         }
 
@@ -301,9 +345,10 @@ namespace DoAn_DotNet.GUI
             int maThuCung = int.Parse(cboLoaiTC.SelectedValue.ToString());
             decimal tien = 10000000;
             decimal giaBanThuCung = trackBar1.Value * tien;
-            pnBtnThuCung.Controls.Clear();
-            groupBox1.Controls.Remove(lblSoLuongTC);
+            pnDSThuCung.Controls.Clear();
+            gBoxTimKiem.Controls.Remove(lblSoLuongTC);
 
+            pnDSThuCung.Controls.Clear();
             if (trackBar1.Value == 0)
             {
                 //Gọi Thú Cưng in pnBtnThuCung
@@ -314,31 +359,29 @@ namespace DoAn_DotNet.GUI
                 int dem = 0;
                 soLuongTC = tc.DanhSachTCSell(maThuCung).Rows.Count;
                 lblSoLuongTC.Text = soLuongTC.ToString();
-                groupBox1.Controls.Add(lblSoLuongTC);
+                gBoxTimKiem.Controls.Add(lblSoLuongTC);
                 Button[] btn = new Button[tc.DanhSachTCSell(maThuCung).Rows.Count];
 
-                Button[] hinh = new Button[tc.DanhSachTCSell(maThuCung).Rows.Count];
+                Guna.UI2.WinForms.Guna2Button[] hinh = new Guna.UI2.WinForms.Guna2Button[tc.DanhSachTCSell(maThuCung).Rows.Count];
                 for (int i = 0; i < tc.DanhSachTCSell(maThuCung).Rows.Count; i++)
                 {
                     btn[i] = new Button();
 
-                    hinh[i] = new Button();
+                    hinh[i] = new Guna.UI2.WinForms.Guna2Button();
 
+                    tenTC = tc.DanhSachTCSell(maThuCung).Rows[i][1].ToString();
                     anh = tc.DanhSachTCSell(maThuCung).Rows[i][3].ToString();
-                    //anh = dataGridView3.Rows[i].Cells["Column9"].FormattedValue.ToString();
                     ma = tc.DanhSachTCSell(maThuCung).Rows[i][0].ToString();
                     giaBan = Convert.ToDecimal(tc.DanhSachTCSell(maThuCung).Rows[i][2].ToString());
-                    //ma = dataGridView3.Rows[i].Cells["MaTC"].FormattedValue.ToString();
-                    //btn[i].BackgroundImage = Image.FromFile(System.Windows.Forms.Application.StartupPath + "\\img\\" + dataGridView3.Rows[i].Cells["Column9"].FormattedValue.ToString() + "");
                     btn[i].BackgroundImage = Image.FromFile(System.Windows.Forms.Application.StartupPath + "\\img\\" + anh + "");
                     btn[i].BackgroundImageLayout = ImageLayout.Stretch;
-
-                    //hinh[i].BackgroundImage = Image.FromFile(System.Windows.Forms.Application.StartupPath + "\\img\\" + anh + "");
-                    //hinh[i].BackgroundImageLayout = ImageLayout.Stretch;
 
                     btn[i].Size = new System.Drawing.Size(200, 200);
 
                     hinh[i].Size = new System.Drawing.Size(200, 50);
+                    hinh[i].BorderRadius = 10;
+                    hinh[i].FillColor = Color.FromArgb(255, 128, 128);
+
 
                     if (dem == 5)
                     {
@@ -359,17 +402,19 @@ namespace DoAn_DotNet.GUI
                     btn[i].Name = ma;
                     hinh[i].Name = ma;
 
-                    string chu = "Thú Cưng " + ma + "\n Giá Bán: " + giaBan + "";
-                    //btn[i].Text = chu;
+                    string textButton;
+                    if (tenTC.Length > 20)
+                    {
+                        textButton = "" + tenTC.Substring(0, 20) + "...\n Giá Bán: " + giaBan.ToString("c0") + "";
+                    }
+                    else
+                        textButton = "" + tenTC + "\n Giá Bán: " + giaBan.ToString("c0") + "";
 
-                    hinh[i].Text = chu;
-                    //btn[i].ImageAlign = ContentAlignment.TopCenter;
+                    hinh[i].Text = textButton;
                     btn[i].TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-                    //btn[i].TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
                     hinh[i].Click += new System.EventHandler(this.btnProductPet_Click);
-                    btn[i].UseVisualStyleBackColor = true;
-                    pnBtnThuCung.Controls.Add(btn[i]);
-                    pnBtnThuCung.Controls.Add(hinh[i]);
+                    pnDSThuCung.Controls.Add(btn[i]);
+                    pnDSThuCung.Controls.Add(hinh[i]);
 
                     dem++;
                 }
@@ -385,32 +430,29 @@ namespace DoAn_DotNet.GUI
 
                 soLuongTC = tc.DanhSachTCSell(maThuCung, giaBanThuCung).Rows.Count;
                 lblSoLuongTC.Text = soLuongTC.ToString();
-                groupBox1.Controls.Add(lblSoLuongTC);
+                gBoxTimKiem.Controls.Add(lblSoLuongTC);
 
                 Button[] btn = new Button[tc.DanhSachTCSell(maThuCung, giaBanThuCung).Rows.Count];
 
-                Button[] hinh = new Button[tc.DanhSachTCSell(maThuCung, giaBanThuCung).Rows.Count];
+                Guna.UI2.WinForms.Guna2Button[] hinh = new Guna.UI2.WinForms.Guna2Button[tc.DanhSachTCSell(maThuCung, giaBanThuCung).Rows.Count];
                 for (int i = 0; i < tc.DanhSachTCSell(maThuCung, giaBanThuCung).Rows.Count; i++)
                 {
                     btn[i] = new Button();
 
-                    hinh[i] = new Button();
+                    hinh[i] = new Guna.UI2.WinForms.Guna2Button();
 
+                    tenTC = tc.DanhSachTCSell(maThuCung, giaBanThuCung).Rows[i][1].ToString();
                     anh = tc.DanhSachTCSell(maThuCung, giaBanThuCung).Rows[i][3].ToString();
-                    //anh = dataGridView3.Rows[i].Cells["Column9"].FormattedValue.ToString();
                     ma = tc.DanhSachTCSell(maThuCung, giaBanThuCung).Rows[i][0].ToString();
                     giaBan = Convert.ToDecimal(tc.DanhSachTCSell(maThuCung, giaBanThuCung).Rows[i][2].ToString());
-                    //ma = dataGridView3.Rows[i].Cells["MaTC"].FormattedValue.ToString();
-                    //btn[i].BackgroundImage = Image.FromFile(System.Windows.Forms.Application.StartupPath + "\\img\\" + dataGridView3.Rows[i].Cells["Column9"].FormattedValue.ToString() + "");
                     btn[i].BackgroundImage = Image.FromFile(System.Windows.Forms.Application.StartupPath + "\\img\\" + anh + "");
                     btn[i].BackgroundImageLayout = ImageLayout.Stretch;
-
-                    //hinh[i].BackgroundImage = Image.FromFile(System.Windows.Forms.Application.StartupPath + "\\img\\" + anh + "");
-                    //hinh[i].BackgroundImageLayout = ImageLayout.Stretch;
 
                     btn[i].Size = new System.Drawing.Size(200, 200);
 
                     hinh[i].Size = new System.Drawing.Size(200, 50);
+                    hinh[i].BorderRadius = 10;
+                    hinh[i].FillColor = Color.FromArgb(255, 128, 128);
 
                     if (dem == 5)
                     {
@@ -422,45 +464,33 @@ namespace DoAn_DotNet.GUI
                         y += 270;
                     }
                     btn[i].Location = new Point(StartX, StartY);
-
                     hinh[i].Location = new Point(x, y);
                     StartX += 210;
-
                     x += 210;
 
                     btn[i].Name = ma;
                     hinh[i].Name = ma;
-                    string chu = "Thú Cưng " + ma + "\n Giá Bán: " + giaBan + "";
-                    //btn[i].Text = chu;
 
-                    hinh[i].Text = chu;
-                    //btn[i].ImageAlign = ContentAlignment.TopCenter;
+                    string textButton;
+                    if (tenTC.Length > 20)
+                    {
+                        textButton = "" + tenTC.Substring(0, 20) + "...\n Giá Bán: " + giaBan.ToString("c0") + "";
+                    }
+                    else
+                        textButton = "" + tenTC + "\n Giá Bán: " + giaBan.ToString("c0") + "";
+
+                    hinh[i].Text = textButton;
                     btn[i].TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-                    //btn[i].TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+
                     hinh[i].Click += new System.EventHandler(this.btnProductPet_Click);
                     btn[i].UseVisualStyleBackColor = true;
-                    pnBtnThuCung.Controls.Add(btn[i]);
-                    pnBtnThuCung.Controls.Add(hinh[i]);
+                    pnDSThuCung.Controls.Add(btn[i]);
+                    pnDSThuCung.Controls.Add(hinh[i]);
 
                     dem++;
                 }
             }
 
-        }
-
-        private void menuItem1_Click(object sender, System.EventArgs e)
-        {
-            if (dt.Rows.Count > int.Parse(txtMaTC.Text))
-            {
-                dt.Rows[int.Parse(txtMaTC.Text)].Delete();
-                dt.AcceptChanges();
-                dataGridView1.ClearSelection();
-            }
-            else
-            {
-                MessageBox.Show("Vui lòng chọn dòng bạn muốn xoá!!!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -470,7 +500,8 @@ namespace DoAn_DotNet.GUI
                 return;
             }
             dataGridView1.CurrentRow.Selected = true;
-            txtMaTC.Text = e.RowIndex.ToString();
+            //txtMaTC.Text = e.RowIndex.ToString();
+            dongSLTC = e.RowIndex;
             //txtMaTC.Text = dataGridView1.Rows[e.RowIndex].Cells["Column1"].FormattedValue.ToString();
         }
 
@@ -491,6 +522,156 @@ namespace DoAn_DotNet.GUI
                 Point pt = new Point(e.X, e.Y);
                 ctx.Show(dataGridView1, pt);
             }
+        }
+
+        private void menuItem1_Click(object sender, System.EventArgs e)
+        {
+            if (dt.Rows.Count > dongSLTC)
+            {
+                dt.Rows[dongSLTC].Delete();
+                dt.AcceptChanges();
+                dataGridView1.ClearSelection();
+
+                TinhTongTienTC();
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn dòng bạn muốn xoá!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnThanhToan_Click(object sender, EventArgs e)
+        {
+            bool ktThuCung = false;
+            if (dataGridView1.Rows.Count > 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    if (bllCTDH.KiemTraMaTCLinq(int.Parse(dt.Rows[i][0].ToString())).Count > 0)
+                    {
+                        ktThuCung = true;
+                    }
+                }
+                if (ktThuCung == true)
+                    MessageBox.Show("Thú cưng đã bán!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (txtMaKH.Text.Trim() == "")
+                    MessageBox.Show("Vui lòng kiểm tra mã khách hàng!", "Thanh Toán", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (txtTenKH.Text.Trim() == "")
+                    MessageBox.Show("Vui lòng nhập tên khách hàng!", "Thanh Toán", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (txtEmail.Text.Trim() == "")
+                    MessageBox.Show("Vui lòng nhập email khách hàng!", "Thanh Toán", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (IsValidEmail(txtEmail.Text) == false)
+                    MessageBox.Show("Email không đúng định dạng!", "Thanh Toán", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (txtDiaChi.Text.Trim() == "")
+                    MessageBox.Show("Vui lòng nhập địa chỉ khách hàng!", "Thanh Toán", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (txtSDT.Text.Trim() == "")
+                    MessageBox.Show("Vui lòng nhập số điện thoại khách hàng!", "Thanh Toán", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (txtSDT.Text.Length < 10 && txtSDT.Text.Length > 12)
+                    MessageBox.Show("Nhập sai định dạng số điện thoại!", "Thanh Toán", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (txtTienNhan.TextLength == 0)
+                    MessageBox.Show("Vui lòng nhập tiền nhận từ khách!", "Thanh Toán", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (Convert.ToDouble(txtTienNhan.Text) < tongTien)
+                    MessageBox.Show("Tiền nhận phải lớn hơn tổng tiền!", "Thanh Toán", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (MessageBox.Show("Bạn có muốn thanh toán hoá đơn không?", "Thanh Toán", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    DonHangDTO dh = new DonHangDTO();
+                    dh.MaNV = Convert.ToInt32(txtMaNV.Text);
+                    dh.CreatedDate = DateTime.Now;
+                    DateTime gio = DateTime.Now;
+                    dh.MaKH = Convert.ToInt32(txtMaKH.Text);
+                    dh.NguoiNhan = txtTenKH.Text;
+                    dh.Email = txtEmail.Text;
+                    dh.Phone = txtSDT.Text;
+                    dh.Address = txtDiaChi.Text;
+                    dh.TongTien = Convert.ToDecimal(null);
+                    dh.TrangThai = 1;
+
+                    bllDonHang.Them(dh);
+                    maDH = Convert.ToInt32(bllDonHang.DonHangSell(Convert.ToInt32(txtMaKH.Text), gio, Convert.ToInt32(txtMaNV.Text)).Rows[0][0].ToString());
+
+                    if (maDH == 0)
+                    {
+                        MessageBox.Show("Vui lòng tạo hoá đơn!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        //var templateHtml = "";
+                        //var orderSummaryHtml = "";
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            int maTC = int.Parse(dt.Rows[i][0].ToString());
+                            decimal thanhTien = decimal.Parse(dt.Rows[i][2].ToString());
+                            bllCTDH.ThemLinq(maDH, maTC, thanhTien);
+
+                            //Tính tiền thừa
+                            CultureInfo info = new CultureInfo("vi-VN");
+                            double tienThua = Convert.ToDouble(txtTienNhan.Text) - tongTien;
+                            txtTienThua.Text = tienThua.ToString("c0", info);
+
+                        }
+                        //decimal emailThanhTien = decimal.Parse(bllDonHang.ThanhTienTheoMaDH(maDH).Rows[0][0].ToString());
+                        //string content = $@"Cám ơn khách hàng {dh.NguoiNhan} đã mua thú cưng tại StorePet với mã đơn hàng là {maDH} và tổng thanh toán là {emailThanhTien.ToString("c0")} cảm ơn quý khách Hẹn gặp quý khách lần sau";
+                        //string to = dh.Email;
+                        //string from = "zeedijkdinh@gmail.com";
+                        //string pass = "1234567890taiAa";
+                        //if (SendMail.sendMail(from, to, content, pass) == true)
+                        //{
+                        //    MessageBox.Show("Gửi Mail Thanh Toán Thành Công", "Thông Báo");
+                        //}
+                        //else
+                        //{
+                        //    MessageBox.Show("Gửi email không thành công", "Thông Báo");
+                        //}
+
+                        decimal emailThanhTien = decimal.Parse(bllDonHang.ThanhTienTheoMaDH(maDH).Rows[0][0].ToString());
+
+                        string content = $@"Cám ơn khách hàng {dh.NguoiNhan} đã mua thú cưng tại StorePet với mã đơn hàng là {maDH} và tổng thanh toán là {emailThanhTien.ToString("c0")} cảm ơn quý khách Hẹn gặp quý khách lần sau";
+                        string to = dh.Email;
+                        string Subject = "Phiếu Thanh Toán Hóa Đơn Cửa Hàng Thú Cưng";
+                        if (SendMail.Send(to, Subject, content) == true)
+                        {
+                            MessageBox.Show("Gửi Mail Thanh Toán Thành Công", "Thông Báo");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Gửi email không thành công", "Thông Báo");
+                        }
+                        MessageBox.Show("Thanh Toán Thành Công", "Thông Báo");
+                        frmSell_Load(sender, e);
+                        btnInHoaDon.Enabled = true;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng thêm thú cưng để thanh toán", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnInHoaDon_Click(object sender, EventArgs e)
+        {
+            if (fTT == null || fTT.IsDisposed)
+            {
+                fTT = new frmThanhToan();
+                loadMaDH.maDH = maDH;
+                fTT.Show();
+            }
+            else
+                fTT.Activate();
+        }
+
+        private void cboLoaiTC_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void txtTienNhan_TextChanged(object sender, EventArgs e)
+        {
+            if (txtTienNhan.Text == "" || txtTienNhan.Text == "0") return;
+            decimal number;
+            number = decimal.Parse(txtTienNhan.Text, System.Globalization.NumberStyles.Currency);
+            txtTienNhan.Text = number.ToString("#,#");
+            txtTienNhan.SelectionStart = txtTienNhan.Text.Length;
         }
     }
 }

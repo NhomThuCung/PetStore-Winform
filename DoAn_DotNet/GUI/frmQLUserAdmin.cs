@@ -19,7 +19,7 @@ namespace DoAn_DotNet.GUI
         private bool isThem = false;
         private bool isThemQuyen = false;
         private string maNV = ""; // Mã nhân viên cũ
-        UserAdminBLL userBLL = new UserAdminBLL();
+        NhanVienBLL userBLL = new NhanVienBLL();
 
         private string maQuyen = ""; // Mã Quyền cũ
         PhanQuyenBLL pBLL = new PhanQuyenBLL();
@@ -63,6 +63,7 @@ namespace DoAn_DotNet.GUI
             btnLuu.Enabled = tt;
             btnHuy.Enabled = tt;
 
+            dataGridView1.Enabled = !tt;
             btnThem.Enabled = !tt;
             btnSua.Enabled = !tt;
             btnXoa.Enabled = !tt;
@@ -123,8 +124,8 @@ namespace DoAn_DotNet.GUI
         {
             if (MessageBox.Show("Bạn có muốn xóa user " + txtHoTen.Text + " không?", "Xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
-                UserAdminDTO info = new UserAdminDTO();
-                info.Id = Convert.ToInt32(txtID.Text);
+                NhanVienDTO info = new NhanVienDTO();
+                info.MaNV = Convert.ToInt32(txtID.Text);
                 userBLL.Xoa(info);
                 MessageBox.Show("Xoá khách user công", "Xoá", MessageBoxButtons.OK);
             }
@@ -183,8 +184,8 @@ namespace DoAn_DotNet.GUI
                 MessageBox.Show("Bạn chưa chọn quyền!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
-                UserAdminDTO info = new UserAdminDTO();
-                UserAdminBLL tk = new UserAdminBLL();
+                NhanVienDTO info = new NhanVienDTO();
+                NhanVienBLL tk = new NhanVienBLL();
                 string encrypt_pass = Encrypt.Instance.MD5Encrypt(txtMatKhau.Text);
 
                 info.HoTen = txtHoTen.Text.Trim();
@@ -196,9 +197,8 @@ namespace DoAn_DotNet.GUI
                 info.Email = txtEmail.Text.Trim();
                 info.Phone = txtDienThoai.Text.Trim();
                 info.MaQuyen = Convert.ToInt32(cboMaQuyen.SelectedValue);
-                info.DiaChi = txtDiaChi.Text.Trim();
+                info.Address = txtDiaChi.Text.Trim();
                 info.TienLuong = Convert.ToDecimal(txtTienLuong.Text);
-
                 if (isThem)
                 {
                     userBLL.Them(info);
@@ -251,15 +251,15 @@ namespace DoAn_DotNet.GUI
                 int cellRowIndex = 2;
                 do
                 {
-                    UserAdminBLL uaBLL = new UserAdminBLL();
-                    UserAdminDTO ua = new UserAdminDTO();
-                    ua.Id = Convert.ToInt32(sheet.Cells[cellRowIndex, 1].Value);
+                    NhanVienBLL uaBLL = new NhanVienBLL();
+                    NhanVienDTO ua = new NhanVienDTO();
+                    ua.MaNV = Convert.ToInt32(sheet.Cells[cellRowIndex, 1].Value);
                     ua.UserName = sheet.Cells[cellRowIndex, 2].Value;
                     ua.Password = sheet.Cells[cellRowIndex, 3].Value;
                     ua.HoTen = sheet.Cells[cellRowIndex, 4].Value;
                     ua.Cmnd = sheet.Cells[cellRowIndex, 5].Value.ToString();
                     ua.NgaySinh = Convert.ToDateTime(String.Format("{0:MM/dd/yyyy}", sheet.Cells[cellRowIndex, 6].Value));
-                    ua.DiaChi = sheet.Cells[cellRowIndex, 7].Value;
+                    ua.Address = sheet.Cells[cellRowIndex, 7].Value;
                     ua.Email = sheet.Cells[cellRowIndex, 8].Value;
                     ua.Phone = sheet.Cells[cellRowIndex, 9].Value.ToString();
                     ua.CreateDate = Convert.ToDateTime(String.Format("{0:MM/dd/yyyy}", sheet.Cells[cellRowIndex, 10].Value));
