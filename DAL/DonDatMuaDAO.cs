@@ -19,6 +19,7 @@ namespace DAL
             return data.QuerySQL(sql);
         }
 
+
         public DataTable DonDatMua()
         {
             string sql = "SELECT * FROM DonDatMua";

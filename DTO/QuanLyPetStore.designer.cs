@@ -1059,7 +1059,7 @@ namespace DTO
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaPN", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaPN", DbType="Int NOT NULL")]
 		public int MaPN
 		{
 			get
@@ -1198,12 +1198,12 @@ namespace DTO
 					if ((previousValue != null))
 					{
 						this._ThuCung.Entity = null;
-						previousValue.ChiTietPNs.Remove(this);
+						previousValue.ChiTietPN = null;
 					}
 					this._ThuCung.Entity = value;
 					if ((value != null))
 					{
-						value.ChiTietPNs.Add(this);
+						value.ChiTietPN = this;
 						this._MaTC = value.MaTC;
 					}
 					else
@@ -4214,7 +4214,7 @@ namespace DTO
 		
 		private EntityRef<ChiTietDonHang> _ChiTietDonHang;
 		
-		private EntitySet<ChiTietPN> _ChiTietPNs;
+		private EntityRef<ChiTietPN> _ChiTietPN;
 		
 		private EntityRef<Giong> _Giong;
 		
@@ -4252,7 +4252,7 @@ namespace DTO
 		{
 			this._ThuCungReviews = new EntitySet<ThuCungReview>(new Action<ThuCungReview>(this.attach_ThuCungReviews), new Action<ThuCungReview>(this.detach_ThuCungReviews));
 			this._ChiTietDonHang = default(EntityRef<ChiTietDonHang>);
-			this._ChiTietPNs = new EntitySet<ChiTietPN>(new Action<ChiTietPN>(this.attach_ChiTietPNs), new Action<ChiTietPN>(this.detach_ChiTietPNs));
+			this._ChiTietPN = default(EntityRef<ChiTietPN>);
 			this._Giong = default(EntityRef<Giong>);
 			this._Loai = default(EntityRef<Loai>);
 			OnCreated();
@@ -4528,16 +4528,32 @@ namespace DTO
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ThuCung_ChiTietPN", Storage="_ChiTietPNs", ThisKey="MaTC", OtherKey="MaTC")]
-		public EntitySet<ChiTietPN> ChiTietPNs
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ThuCung_ChiTietPN", Storage="_ChiTietPN", ThisKey="MaTC", OtherKey="MaTC", IsUnique=true, IsForeignKey=false)]
+		public ChiTietPN ChiTietPN
 		{
 			get
 			{
-				return this._ChiTietPNs;
+				return this._ChiTietPN.Entity;
 			}
 			set
 			{
-				this._ChiTietPNs.Assign(value);
+				ChiTietPN previousValue = this._ChiTietPN.Entity;
+				if (((previousValue != value) 
+							|| (this._ChiTietPN.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ChiTietPN.Entity = null;
+						previousValue.ThuCung = null;
+					}
+					this._ChiTietPN.Entity = value;
+					if ((value != null))
+					{
+						value.ThuCung = this;
+					}
+					this.SendPropertyChanged("ChiTietPN");
+				}
 			}
 		}
 		
@@ -4636,18 +4652,6 @@ namespace DTO
 		}
 		
 		private void detach_ThuCungReviews(ThuCungReview entity)
-		{
-			this.SendPropertyChanging();
-			entity.ThuCung = null;
-		}
-		
-		private void attach_ChiTietPNs(ChiTietPN entity)
-		{
-			this.SendPropertyChanging();
-			entity.ThuCung = this;
-		}
-		
-		private void detach_ChiTietPNs(ChiTietPN entity)
 		{
 			this.SendPropertyChanging();
 			entity.ThuCung = null;

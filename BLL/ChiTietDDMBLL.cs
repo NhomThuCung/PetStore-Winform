@@ -25,6 +25,26 @@ namespace BLL
             return data.ChiTietDDM(maDDM);
         }
 
+        public DataTable DsGiongTheoDDM(int maDDM)
+        {
+            return data.DsGiongTheoDDM(maDDM);
+        }
+
+        public DataTable DsGiaMuaSL(int maDDM, int maGiong)
+        {
+            return data.DsGiaMuaSL(maDDM, maGiong);
+        }
+
+        public DataTable DsMuaDuSL(int maDDM, int maGiong)
+        {
+            return data.DsMuaDuSL(maDDM, maGiong);
+        }
+
+        public DataTable DsMuaSL(int maDDM, int maGiong)
+        {
+            return data.DsMuaSL(maDDM, maGiong);
+        }
+
         //Thêm Linq
         public bool ThemLinq(int maDDM, int maGiong, decimal giaMua, int soLuong)
         {

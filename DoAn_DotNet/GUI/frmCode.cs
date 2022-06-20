@@ -34,6 +34,13 @@ namespace DoAn_DotNet.GUI
         frmSell sell = new frmSell();
         MJPEGStream stream;
 
+        //Load thông báo
+        public void Alert(string msg, frmCustomTB.enmType type)
+        {
+            frmCustomTB frm = new frmCustomTB();
+            frm.showAlert(msg, type);
+        }
+
         private void btn_Connect_Click(object sender, EventArgs e)
         {
             if (btn_Connect.Text == "Connect")
@@ -81,13 +88,13 @@ namespace DoAn_DotNet.GUI
                             img.Dispose();
                             this.Close();
                             kt = false;
-                            MessageBox.Show("Thú cưng đã có trong giỏ hàng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            this.Alert("Thú cưng đã có trong giỏ hàng", frmCustomTB.enmType.Error);
                         }
                         timer1.Stop();
                         stream.Stop();
                         if (kt == true)
                         {
-                            MessageBox.Show("Thêm thú cưng thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.Alert("Thú cưng đã được thêm vào giỏ hàng", frmCustomTB.enmType.Success);
                         }
                     }
                     img.Dispose();

@@ -30,14 +30,15 @@ namespace DoAn_DotNet.Custom
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lblTrangThai = new System.Windows.Forms.Label();
             this.pic_TC = new Guna.UI2.WinForms.Guna2PictureBox();
             this.lblGiaBan = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblMoTa = new System.Windows.Forms.Label();
             this.lblTenTC = new System.Windows.Forms.Label();
+            this.picTrangThai = new Guna.UI2.WinForms.Guna2PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pic_TC)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picTrangThai)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -48,17 +49,6 @@ namespace DoAn_DotNet.Custom
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(881, 10);
             this.panel1.TabIndex = 0;
-            // 
-            // lblTrangThai
-            // 
-            this.lblTrangThai.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblTrangThai.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.lblTrangThai.Location = new System.Drawing.Point(845, 0);
-            this.lblTrangThai.Name = "lblTrangThai";
-            this.lblTrangThai.Size = new System.Drawing.Size(36, 67);
-            this.lblTrangThai.TabIndex = 7;
-            this.lblTrangThai.Text = "label1";
-            this.lblTrangThai.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pic_TC
             // 
@@ -111,15 +101,26 @@ namespace DoAn_DotNet.Custom
             this.lblTenTC.TabIndex = 2;
             this.lblTenTC.Text = "lblTenTC";
             // 
+            // picTrangThai
+            // 
+            this.picTrangThai.Dock = System.Windows.Forms.DockStyle.Right;
+            this.picTrangThai.ImageRotate = 0F;
+            this.picTrangThai.Location = new System.Drawing.Point(858, 0);
+            this.picTrangThai.Name = "picTrangThai";
+            this.picTrangThai.Size = new System.Drawing.Size(23, 67);
+            this.picTrangThai.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picTrangThai.TabIndex = 12;
+            this.picTrangThai.TabStop = false;
+            // 
             // Category
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.Controls.Add(this.picTrangThai);
             this.Controls.Add(this.lblGiaBan);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.pic_TC);
-            this.Controls.Add(this.lblTrangThai);
             this.Controls.Add(this.panel1);
             this.Name = "Category";
             this.Size = new System.Drawing.Size(881, 77);
@@ -127,6 +128,7 @@ namespace DoAn_DotNet.Custom
             this.MouseLeave += new System.EventHandler(this.Category_MouseLeave);
             ((System.ComponentModel.ISupportInitialize)(this.pic_TC)).EndInit();
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picTrangThai)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -134,11 +136,11 @@ namespace DoAn_DotNet.Custom
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label lblTrangThai;
         private Guna.UI2.WinForms.Guna2PictureBox pic_TC;
         private System.Windows.Forms.Label lblGiaBan;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblMoTa;
         private System.Windows.Forms.Label lblTenTC;
+        private Guna.UI2.WinForms.Guna2PictureBox picTrangThai;
     }
 }

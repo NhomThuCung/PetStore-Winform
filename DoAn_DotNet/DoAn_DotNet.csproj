@@ -119,12 +119,6 @@
     <Compile Include="Custom\Order.Designer.cs">
       <DependentUpon>Order.cs</DependentUpon>
     </Compile>
-    <Compile Include="Custom\product.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Custom\product.Designer.cs">
-      <DependentUpon>product.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUI\frmCode.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -256,9 +250,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Custom\Order.resx">
       <DependentUpon>Order.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Custom\product.resx">
-      <DependentUpon>product.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmCode.resx">
       <DependentUpon>frmCode.cs</DependentUpon>

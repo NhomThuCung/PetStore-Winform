@@ -19,6 +19,12 @@ namespace DAL
             return data.QuerySQL(sql);
         }
 
+        public DataTable DanhSachTrangThai()
+        {
+            string sql = "SELECT * FROM ThuCung Where TrangThai = 0";
+            return data.QuerySQL(sql);
+        }
+
         public string LayTenTC(int maTC)
         {
             return db.ThuCungs.SingleOrDefault(t => t.MaTC == maTC).TenTC;
@@ -51,6 +57,13 @@ namespace DAL
         public DataTable DanhSachTCTheoMaTen(string maTenTC)
         {
             string sql = "SELECT * FROM ThuCung WHERE MaTC LIKE '%" + maTenTC + "%' OR TenTC LIKE '%" + maTenTC + "%'";
+            return data.QuerySQL(sql);
+        }
+
+        public DataTable CapNhatGiongSoLuongTon(int maGiong)
+        {
+
+            string sql = "EXEC sp_CapNhatGiongSoLuongTon " + maGiong + "";
             return data.QuerySQL(sql);
         }
 
@@ -180,6 +193,22 @@ namespace DAL
                 update.NgayCapNhat = ngayCapNhat;
                 update.MaGiong = maGiong;
                 update.MaLoai = maLoai;
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        //Update Linq
+        public bool UpdateNgayBan(int maTC, DateTime ngayBan)
+        {
+            try
+            {
+                var update = db.ThuCungs.Single(t => t.MaTC == maTC);
+                update.NgayBan = ngayBan;
                 db.SubmitChanges();
                 return true;
             }

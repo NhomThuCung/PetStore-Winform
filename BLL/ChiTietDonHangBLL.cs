@@ -91,6 +91,11 @@ namespace BLL
             return data.KiemTraMaTCLinq(maTC);
         }
 
+        public DataTable KiemTraMaTCCoDK(int maTC)
+        {
+            return data.KiemTraMaTCCoDK(maTC);
+        }
+
         //Load bảng Linq
         public List<ChiTietDonHang> DanhSachLinq()
         {

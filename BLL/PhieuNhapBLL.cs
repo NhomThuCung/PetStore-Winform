@@ -32,6 +32,11 @@ namespace BLL
             return data.PhieuNhapTheoMa(maPN);
         }
 
+        public DataTable LayMaDDMTheoNgay(DateTime ngayNhap)
+        {
+            return data.LayMaDDMTheoNgay(ngayNhap);
+        }
+
         //Thêm Linq
         public bool ThemLinq(int maDDM, int maNV, DateTime ngayNhap, DateTime ngayCapNhat, string noiDung)
         {

@@ -67,7 +67,7 @@ namespace DoAn_DotNet.GUI
             this.txt_url_DroidCam.Name = "txt_url_DroidCam";
             this.txt_url_DroidCam.Size = new System.Drawing.Size(424, 22);
             this.txt_url_DroidCam.TabIndex = 10;
-            this.txt_url_DroidCam.Text = "http://192.168.1.18:4747/video";
+            this.txt_url_DroidCam.Text = "http://192.168.1.17:4747/video";
             // 
             // label1
             // 
@@ -105,7 +105,7 @@ namespace DoAn_DotNet.GUI
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pic_cam);
             this.Name = "frmCode";
-            this.Text = "frmCode";
+            this.Text = "Quét Mã QR";
             ((System.ComponentModel.ISupportInitialize)(this.pic_cam)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

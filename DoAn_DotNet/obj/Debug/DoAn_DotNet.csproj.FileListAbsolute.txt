@@ -153,7 +153,6 @@ E:\HocTap\HK6\QuanLyThuCung - Copy\DoAn_DotNet\bin\Debug\zxing.presentation.xml
 E:\HocTap\HK6\QuanLyThuCung - Copy\DoAn_DotNet\obj\Debug\DoAn_DotNet.csproj.AssemblyReference.cache
 E:\HocTap\HK6\QuanLyThuCung - Copy\DoAn_DotNet\obj\Debug\DoAn_DotNet.Custom.Category.resources
 E:\HocTap\HK6\QuanLyThuCung - Copy\DoAn_DotNet\obj\Debug\DoAn_DotNet.Custom.Order.resources
-E:\HocTap\HK6\QuanLyThuCung - Copy\DoAn_DotNet\obj\Debug\DoAn_DotNet.Custom.product.resources
 E:\HocTap\HK6\QuanLyThuCung - Copy\DoAn_DotNet\obj\Debug\DoAn_DotNet.GUI.frmCode.resources
 E:\HocTap\HK6\QuanLyThuCung - Copy\DoAn_DotNet\obj\Debug\DoAn_DotNet.GUI.frmDangNhap.resources
 E:\HocTap\HK6\QuanLyThuCung - Copy\DoAn_DotNet\obj\Debug\DoAn_DotNet.GUI.frmDetailUser.resources

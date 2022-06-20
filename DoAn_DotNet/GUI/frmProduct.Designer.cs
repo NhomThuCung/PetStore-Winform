@@ -39,6 +39,7 @@ namespace DoAn_DotNet.GUI
             this.btnThem = new Guna.UI2.WinForms.Guna2CircleButton();
             this.pnTabThongTin = new System.Windows.Forms.Panel();
             this.guna2ShadowPanel6 = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            this.pic_QRCode = new Guna.UI2.WinForms.Guna2PictureBox();
             this.btnDongTab = new Guna.UI2.WinForms.Guna2ImageButton();
             this.pic_TC = new Guna.UI2.WinForms.Guna2PictureBox();
             this.btnThemAnh = new Guna.UI2.WinForms.Guna2Button();
@@ -76,16 +77,15 @@ namespace DoAn_DotNet.GUI
             this.txtMaTC = new Guna.UI2.WinForms.Guna2TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.pic_Test = new Guna.UI2.WinForms.Guna2PictureBox();
             this.guna2ShadowPanel4.SuspendLayout();
             this.guna2Panel4.SuspendLayout();
             this.pnTabThongTin.SuspendLayout();
             this.guna2ShadowPanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_QRCode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_TC)).BeginInit();
             this.guna2ShadowPanel7.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_Test)).BeginInit();
             this.SuspendLayout();
             // 
             // guna2Transition1
@@ -212,6 +212,7 @@ namespace DoAn_DotNet.GUI
             // guna2ShadowPanel6
             // 
             this.guna2ShadowPanel6.BackColor = System.Drawing.Color.Transparent;
+            this.guna2ShadowPanel6.Controls.Add(this.pic_QRCode);
             this.guna2ShadowPanel6.Controls.Add(this.btnDongTab);
             this.guna2ShadowPanel6.Controls.Add(this.pic_TC);
             this.guna2ShadowPanel6.Controls.Add(this.btnThemAnh);
@@ -228,6 +229,17 @@ namespace DoAn_DotNet.GUI
             this.guna2ShadowPanel6.ShadowColor = System.Drawing.Color.Black;
             this.guna2ShadowPanel6.Size = new System.Drawing.Size(556, 171);
             this.guna2ShadowPanel6.TabIndex = 8;
+            // 
+            // pic_QRCode
+            // 
+            this.guna2Transition1.SetDecoration(this.pic_QRCode, Guna.UI2.AnimatorNS.DecorationType.None);
+            this.pic_QRCode.ImageRotate = 0F;
+            this.pic_QRCode.Location = new System.Drawing.Point(420, 65);
+            this.pic_QRCode.Name = "pic_QRCode";
+            this.pic_QRCode.Size = new System.Drawing.Size(118, 83);
+            this.pic_QRCode.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pic_QRCode.TabIndex = 51;
+            this.pic_QRCode.TabStop = false;
             // 
             // btnDongTab
             // 
@@ -281,7 +293,6 @@ namespace DoAn_DotNet.GUI
             // 
             this.guna2ShadowPanel7.AutoScroll = true;
             this.guna2ShadowPanel7.BackColor = System.Drawing.Color.Transparent;
-            this.guna2ShadowPanel7.Controls.Add(this.pic_Test);
             this.guna2ShadowPanel7.Controls.Add(this.panel3);
             this.guna2ShadowPanel7.Controls.Add(this.txtMoTa);
             this.guna2ShadowPanel7.Controls.Add(this.txtNgayBan);
@@ -764,6 +775,7 @@ namespace DoAn_DotNet.GUI
             this.txtGiaBan.SelectedText = "";
             this.txtGiaBan.Size = new System.Drawing.Size(402, 25);
             this.txtGiaBan.TabIndex = 6;
+            this.txtGiaBan.TextChanged += new System.EventHandler(this.txtGiaBan_TextChanged);
             this.txtGiaBan.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtGiaBan_KeyPress);
             // 
             // txtTenTC
@@ -824,17 +836,6 @@ namespace DoAn_DotNet.GUI
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // pic_Test
-            // 
-            this.guna2Transition1.SetDecoration(this.pic_Test, Guna.UI2.AnimatorNS.DecorationType.None);
-            this.pic_Test.ImageRotate = 0F;
-            this.pic_Test.Location = new System.Drawing.Point(22, 366);
-            this.pic_Test.Name = "pic_Test";
-            this.pic_Test.Size = new System.Drawing.Size(79, 56);
-            this.pic_Test.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pic_Test.TabIndex = 51;
-            this.pic_Test.TabStop = false;
-            // 
             // frmProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -853,12 +854,12 @@ namespace DoAn_DotNet.GUI
             this.guna2Panel4.PerformLayout();
             this.pnTabThongTin.ResumeLayout(false);
             this.guna2ShadowPanel6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pic_QRCode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_TC)).EndInit();
             this.guna2ShadowPanel7.ResumeLayout(false);
             this.guna2ShadowPanel7.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pic_Test)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -909,6 +910,6 @@ namespace DoAn_DotNet.GUI
         private Guna.UI2.WinForms.Guna2ImageButton btnDongTab;
         private Guna.UI2.WinForms.Guna2PictureBox pic_TC;
         private Guna.UI2.WinForms.Guna2Button btnThemAnh;
-        private Guna.UI2.WinForms.Guna2PictureBox pic_Test;
+        private Guna.UI2.WinForms.Guna2PictureBox pic_QRCode;
     }
 }

@@ -27,6 +27,7 @@ namespace DoAn_DotNet.GUI
         GiongBLL bllGiong = new GiongBLL();
         LoaiBLL bllLoai = new LoaiBLL();
         DonDatMuaBLL bllDonDatMua = new DonDatMuaBLL();
+        ChiTietDDMBLL bllCTDDM = new ChiTietDDMBLL();
         System.Data.DataTable dt;
         int maPN;
         int maTCMoi;
@@ -45,9 +46,9 @@ namespace DoAn_DotNet.GUI
             pnTab.Visible = false;
             dGVPhieuNhap.DataSource = bllPhieuNhap.PhieuNhap();
 
-            cboMaGiong.DataSource = bllGiong.DanhSach();
-            cboMaGiong.ValueMember = "MaGiong";
-            cboMaGiong.DisplayMember = "TenGiong";
+            //cboMaGiong.DataSource = bllGiong.DanhSach();
+            //cboMaGiong.ValueMember = "MaGiong";
+            //cboMaGiong.DisplayMember = "TenGiong";
 
             cboMaDDM.DataSource = bllDonDatMua.DsDDM();
             cboMaDDM.ValueMember = "MaDDM";
@@ -91,7 +92,15 @@ namespace DoAn_DotNet.GUI
             dGVPhieuNhap.Enabled = false;
             dGVChiTietPN.Enabled = false;
 
-            maTCMoi = Convert.ToInt32(bllThuCung.DanhSachTCTheoMa().Rows[0][0].ToString());
+            if (bllThuCung.DanhSach().Rows.Count > 0)
+            {
+                maTCMoi = Convert.ToInt32(bllThuCung.DanhSachTCTheoMa().Rows[0][0].ToString());
+            }
+            else
+            {
+                maTCMoi = 1;
+            }
+            
         }
         public void BatTat(bool tt)
         {
@@ -104,6 +113,10 @@ namespace DoAn_DotNet.GUI
             txtMaDDM.Visible = !tt;
 
             cboMaGiong.Visible = tt;
+            if (isThem==false)
+            {
+                cboMaDDM.Enabled = !tt;
+            }
             txtMaGiong.Visible = !tt;
 
             dtpNgayNhap.Visible = tt;
@@ -139,6 +152,12 @@ namespace DoAn_DotNet.GUI
                 
                 txtMa.Text = dGVPhieuNhap.Rows[e.RowIndex].Cells[0].Value.ToString();
                 txtMaDDM.Text = dGVPhieuNhap.Rows[e.RowIndex].Cells[1].Value.ToString();
+
+                cboMaGiong.DataSource = bllCTDDM.DsGiongTheoDDM(Convert.ToInt32(txtMaDDM.Text));
+                cboMaGiong.ValueMember = "MaGiong";
+                cboMaGiong.DisplayMember = "TenGiong";
+
+
                 cboMaDDM.SelectedValue = Convert.ToInt32(dGVPhieuNhap.Rows[e.RowIndex].Cells[1].Value.ToString());
 
                 txtNgayNhap.Text = dGVPhieuNhap.Rows[e.RowIndex].Cells[3].Value.ToString();
@@ -202,20 +221,25 @@ namespace DoAn_DotNet.GUI
                     this.Alert("Vui lòng nhập tên thú cưng", frmCustomTB.enmType.Error);
                 else if (txtGiaNhap.Text == "")
                     this.Alert("Vui lòng nhập giá nhập", frmCustomTB.enmType.Error);
-                else
+                else 
                 {
                     maTCMoi++;
                     dt.Rows.Add(cboMaGiong.SelectedValue, maTCMoi, txtTenTC.Text, Convert.ToDecimal(txtGiaNhap.Text));
                     dGVChiTietPN.DataSource = dt;
-                    dGVChiTietPN.Columns["GiaNhap"].DefaultCellStyle.Format = "c0";
+                    //dGVChiTietPN.Columns["GiaNhap"].DefaultCellStyle.Format = "c0";
                 }
             }
             else
             {
+
+                int slmua = Convert.ToInt32(bllCTDDM.DsMuaSL(Convert.ToInt32(cboMaDDM.SelectedValue), Convert.ToInt32(cboMaGiong.SelectedValue)).Rows[0][0].ToString());
+                int slmuadu = Convert.ToInt32(bllCTDDM.DsMuaDuSL(Convert.ToInt32(cboMaDDM.SelectedValue), Convert.ToInt32(cboMaGiong.SelectedValue)).Rows[0][0].ToString());
                 if (txtTenTC.Text.Trim() == "")
                     this.Alert("Vui lòng nhập tên thú cưng", frmCustomTB.enmType.Error);
                 else if (txtGiaNhap.Text == "")
                     this.Alert("Vui lòng nhập giá nhập", frmCustomTB.enmType.Error);
+                else if (slmua <= slmuadu)
+                    this.Alert("Số lượng nhập đã đủ ", frmCustomTB.enmType.Error);
                 else
                 {
                     DateTime ngay = DateTime.Now;
@@ -283,7 +307,12 @@ namespace DoAn_DotNet.GUI
         {
             if (isThem)
             {
-                if (dt.Rows.Count > 0)
+                int slmua = Convert.ToInt32(bllCTDDM.DsMuaSL(Convert.ToInt32(cboMaDDM.SelectedValue), Convert.ToInt32(cboMaGiong.SelectedValue)).Rows[0][0].ToString());
+                int slmuadu = Convert.ToInt32(bllCTDDM.DsMuaDuSL(Convert.ToInt32(cboMaDDM.SelectedValue), Convert.ToInt32(cboMaGiong.SelectedValue)).Rows[0][0].ToString());
+
+                if (slmua <= slmuadu)
+                    this.Alert("Số lượng nhập đã đủ ", frmCustomTB.enmType.Error);
+                else if (dt.Rows.Count > 0)
                 {
                     DateTime ngay = DateTime.Now;
                     PhieuNhapDTO info = new PhieuNhapDTO();
@@ -308,6 +337,18 @@ namespace DoAn_DotNet.GUI
                             tc.MaLoai = Convert.ToInt32(bllGiong.LayMaLoai(tc.MaGiong).Rows[0][0].ToString());
                             tc.TrangThai = 0;
 
+                            int maddmtheongay = Convert.ToInt32(bllPhieuNhap.LayMaDDMTheoNgay(ngay).Rows[0][0].ToString());
+
+                            int slmua1 = Convert.ToInt32(bllCTDDM.DsMuaSL(maddmtheongay, Convert.ToInt32(cboMaGiong.SelectedValue)).Rows[0][0].ToString());
+                            int slmuadu1 = Convert.ToInt32(bllCTDDM.DsMuaDuSL(maddmtheongay, Convert.ToInt32(cboMaGiong.SelectedValue)).Rows[0][0].ToString());
+
+
+                            if (slmua1 <= slmuadu1)
+                            {
+                                this.Alert("Số lượng nhập đã đủ ", frmCustomTB.enmType.Error);
+                                break;
+                            }
+                            else
                             if (bllThuCung.ThemTCChiTiet(tc))
                             {
 
@@ -346,6 +387,10 @@ namespace DoAn_DotNet.GUI
             }
             else
             {
+
+                int slmua = Convert.ToInt32(bllCTDDM.DsMuaSL(Convert.ToInt32(cboMaDDM.SelectedValue), Convert.ToInt32(cboMaGiong.SelectedValue)).Rows[0][0].ToString());
+                int slmuadu = Convert.ToInt32(bllCTDDM.DsMuaDuSL(Convert.ToInt32(cboMaDDM.SelectedValue), Convert.ToInt32(cboMaGiong.SelectedValue)).Rows[0][0].ToString());
+
                 if (txtTenTC.Text.Trim() == "")
                     this.Alert("Vui lòng nhập tên thú cưng", frmCustomTB.enmType.Error);
                 else if (txtGiaNhap.Text == "")
@@ -408,7 +453,9 @@ namespace DoAn_DotNet.GUI
                     info.MaLoai = Convert.ToInt32(bllGiong.LayMaLoai(Convert.ToInt32(cboMaGiong.SelectedValue.ToString())).Rows[0][0].ToString());
                     info.TrangThai = 0;
 
-                    if (bllThuCung.ThemTCChiTiet(info))
+                    if (slmua <= slmuadu)
+                        this.Alert("Số lượng nhập đã đủ ", frmCustomTB.enmType.Error);
+                    else if (bllThuCung.ThemTCChiTiet(info))
                     {
                         ChiTietPhieuNhapDTO ctpn = new ChiTietPhieuNhapDTO();
                         ctpn.MaPN = maPN;
@@ -444,6 +491,11 @@ namespace DoAn_DotNet.GUI
         private void btnDongTab_Click(object sender, EventArgs e)
         {
             pnTab.Visible = false;
+            if (isThem)
+            {
+                dGVPhieuNhap.Enabled = true;
+                dGVChiTietPN.Enabled = true;
+            }
         }
 
         private void txtGiaNhap_TextChanged(object sender, EventArgs e)
@@ -465,6 +517,32 @@ namespace DoAn_DotNet.GUI
             {
                 dGVPhieuNhap.DataSource = bllPhieuNhap.PhieuNhapTheoMa(Convert.ToInt32(txtTimKiem.Text));
             }
+        }
+
+        private void cboMaGiong_DropDownClosed(object sender, EventArgs e)
+        {
+            if (bllCTDDM.DsGiaMuaSL(Convert.ToInt32(cboMaDDM.SelectedValue), Convert.ToInt32(cboMaGiong.SelectedValue)).Rows.Count < 1)
+            {
+                this.Alert("Vui lòng chọn đơn đặt mua", frmCustomTB.enmType.Error);
+            }
+            else
+            {
+                lblGiaMua.Text = bllCTDDM.DsGiaMuaSL(Convert.ToInt32(cboMaDDM.SelectedValue), Convert.ToInt32(cboMaGiong.SelectedValue)).Rows[0][2].ToString();
+
+                System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("vi-VN");
+                decimal value = decimal.Parse(lblGiaMua.Text, System.Globalization.NumberStyles.AllowThousands);
+                lblGiaMua.Text = String.Format(culture, "{0:C0}", value);
+                lblSL.Text = bllCTDDM.DsGiaMuaSL(Convert.ToInt32(cboMaDDM.SelectedValue), Convert.ToInt32(cboMaGiong.SelectedValue)).Rows[0][3].ToString();
+
+            }
+
+        }
+
+        private void cboMaDDM_DropDownClosed(object sender, EventArgs e)
+        {
+            cboMaGiong.DataSource = bllCTDDM.DsGiongTheoDDM(Convert.ToInt32(cboMaDDM.SelectedValue));
+            cboMaGiong.ValueMember = "MaGiong";
+            cboMaGiong.DisplayMember = "TenGiong";
         }
     }
 }

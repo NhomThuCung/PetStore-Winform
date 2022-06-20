@@ -29,6 +29,7 @@ namespace DoAn_DotNet.GUI
         LoaiBLL bllLoai = new LoaiBLL();
         GiongBLL bllGiong = new GiongBLL();
         DonHangBLL bllDonHang = new DonHangBLL();
+        ThuCungBLL bllThuCung = new ThuCungBLL();
 
         //Gọi DAO tương tác
         ThuCungDAO tc = new ThuCungDAO();
@@ -271,8 +272,8 @@ namespace DoAn_DotNet.GUI
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (txtSDT.Text.Trim() == "")
-                    this.Alert("Vui lòng nhập số điện thoại khách hàng", frmCustomTB.enmType.Error);
+                if (IsValidVietNamPhoneNumber(txtSDT.Text) == false)
+                    this.Alert("Vui lòng đúng định dạng", frmCustomTB.enmType.Error);
                 else if (bllKhachHang.DsKHTheoSDT(txtSDT.Text).Rows.Count > 0)
                 {
                     txtMaKH.Text = bllKhachHang.DsKHTheoSDT(txtSDT.Text).Rows[0][0].ToString();
@@ -315,23 +316,6 @@ namespace DoAn_DotNet.GUI
             }
             else
                 fKH.Activate();
-        }
-
-        private bool IsValidEmaill(string eMail)
-        {
-            bool Result = false;
-
-            try
-            {
-                var eMailValidator = new System.Net.Mail.MailAddress(eMail);
-                Result = (eMail.LastIndexOf(".") > eMail.LastIndexOf("@"));
-            }
-            catch
-            {
-                Result = false;
-            };
-
-            return Result;
         }
 
         private bool IsValidEmail(string eMail)
@@ -623,10 +607,11 @@ namespace DoAn_DotNet.GUI
                     this.Alert("Số tiền nhận phải lớn hơn số tiền của hoá đơn!", frmCustomTB.enmType.Error);
                 else if (MessageBox.Show("Bạn có muốn thanh toán hoá đơn không?", "Thanh Toán", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
                 {
+                    DateTime gio = DateTime.Now;
+
                     DonHangDTO dh = new DonHangDTO();
                     dh.MaNV = Convert.ToInt32(txtMaNV.Text);
-                    dh.CreatedDate = DateTime.Now;
-                    DateTime gio = DateTime.Now;
+                    dh.CreatedDate = gio;
                     dh.MaKH = Convert.ToInt32(txtMaKH.Text);
                     dh.NguoiNhan = txtTenKH.Text;
                     dh.Email = txtEmail.Text;
@@ -652,6 +637,8 @@ namespace DoAn_DotNet.GUI
                             decimal thanhTien = decimal.Parse(dt.Rows[i][2].ToString());
                             bllCTDH.ThemLinq(maDH, maTC, thanhTien);
 
+                            bllThuCung.UpdateNgayBan(maTC, gio);
+
                             //Tính tiền thừa
                             CultureInfo info = new CultureInfo("vi-VN");
                             double tienThua = Convert.ToDouble(txtTienNhan.Text) - tongTien;
@@ -661,8 +648,8 @@ namespace DoAn_DotNet.GUI
                         decimal emailThanhTien = decimal.Parse(bllDonHang.ThanhTienTheoMaDH(maDH).Rows[0][0].ToString());
                         string content = $@"Cám ơn khách hàng {dh.NguoiNhan} đã mua thú cưng tại StorePet với mã đơn hàng là {maDH} và tổng thanh toán là {emailThanhTien.ToString("c0")} cảm ơn quý khách Hẹn gặp quý khách lần sau";
                         string to = dh.Email;
-                        string from = "zeedijkdinh@gmail.com";
-                        string pass = "1234567890taiAa";
+                        string from = "petstoredpt@gmail.com";
+                        string pass = "1234567890Aa";
                         if (SendMail.sendMail(from, to, content, pass) == true)
                         {
                             this.Alert("Đơn hàng đã được gửi vào Email.", frmCustomTB.enmType.Success);
@@ -718,6 +705,24 @@ namespace DoAn_DotNet.GUI
             }
             else
                 fCode.Activate();
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            txtSDT.Text = "";
+            txtMaKH.Text = "";
+            txtTenKH.Text = "";
+            txtEmail.Text = "";
+            txtDiaChi.Text = "";
+
+            dt.Clear();
+
+            txtTongTien.Text = "";
+            txtTienNhan.Text = "";
+            txtTienThua.Text = "";
+
+            frmSell_Load(sender, e);
+            this.Alert("Load thành công", frmCustomTB.enmType.Success);
         }
     }
 }

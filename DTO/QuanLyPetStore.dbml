@@ -38,7 +38,7 @@
   </Table>
   <Table Name="dbo.ChiTietPN" Member="ChiTietPNs">
     <Type Name="ChiTietPN">
-      <Column Name="MaPN" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaPN" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="MaGiong" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="MaTC" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="GiaNhap" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
@@ -198,7 +198,7 @@
       <Column Name="TrangThai" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="ThuCung_ThuCungReview" Member="ThuCungReviews" ThisKey="MaTC" OtherKey="MaTC" Type="ThuCungReview" />
       <Association Name="ThuCung_ChiTietDonHang" Member="ChiTietDonHang" ThisKey="MaTC" OtherKey="MaTC" Type="ChiTietDonHang" Cardinality="One" />
-      <Association Name="ThuCung_ChiTietPN" Member="ChiTietPNs" ThisKey="MaTC" OtherKey="MaTC" Type="ChiTietPN" />
+      <Association Name="ThuCung_ChiTietPN" Member="ChiTietPN" ThisKey="MaTC" OtherKey="MaTC" Type="ChiTietPN" Cardinality="One" />
       <Association Name="Giong_ThuCung" Member="Giong" ThisKey="MaGiong" OtherKey="MaGiong" Type="Giong" IsForeignKey="true" />
       <Association Name="Loai_ThuCung" Member="Loai" ThisKey="MaLoai" OtherKey="MaLoai" Type="Loai" IsForeignKey="true" />
     </Type>

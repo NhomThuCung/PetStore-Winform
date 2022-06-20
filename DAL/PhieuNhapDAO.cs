@@ -30,6 +30,13 @@ namespace DAL
             string sql = "SELECT MaPN FROM PhieuNhap WHERE NgayNhap = '" + ngayNhap.ToString("yyyy-MM-dd HH:mm:ss.fff") + "'";
             return data.QuerySQL(sql);
         }
+
+        public DataTable LayMaDDMTheoNgay(DateTime ngayNhap)
+        {
+            string sql = "SELECT MaDDM FROM PhieuNhap WHERE NgayNhap = '" + ngayNhap.ToString("yyyy-MM-dd HH:mm:ss.fff") + "'";
+            return data.QuerySQL(sql);
+        }
+
         public DataTable PhieuNhapChiTiet()
         {
             string sql = "SELECT MaPN, MaDDM, NgayNhap, TongSLNhap, TongTienNhap FROM PhieuNhap";

@@ -13,6 +13,7 @@ using DTO;
 using System.IO;
 using System.Drawing.Imaging;
 using Microsoft.Office.Interop.Excel;
+using System.Globalization;
 
 
 namespace DoAn_DotNet.GUI
@@ -41,12 +42,20 @@ namespace DoAn_DotNet.GUI
         private void frmDoiTra_Load(object sender, EventArgs e)
         {
             pnTab.Visible = false;
-            cboThuCung.DataSource = bllTC.DanhSach();
+            cboThuCung.DataSource = bllTC.DanhSachTrangThai();
             cboThuCung.ValueMember = "MaTC";
             cboThuCung.DisplayMember = "TenTC";
+
             loadDH();
             batTat(false);
 
+        }
+
+        //Load thông báo
+        public void Alert(string msg, frmCustomTB.enmType type)
+        {
+            frmCustomTB frm = new frmCustomTB();
+            frm.showAlert(msg, type);
         }
 
         void loadDH()
@@ -61,17 +70,21 @@ namespace DoAn_DotNet.GUI
                 listitem[i].MaDH = Convert.ToInt32(dt.Rows[i][0].ToString());
                 listitem[i].TongTien = Convert.ToDecimal(dt.Rows[i][8].ToString());
                 listitem[i].Dock = DockStyle.Top;
-                if (dt.Rows[i][9].ToString() == "2" || dt.Rows[i][9].ToString() == "3")
+                if (dt.Rows[i][9].ToString() == "3")
                 {
-                    listitem[i].Pic_trangThai = Image.FromFile(System.Windows.Forms.Application.StartupPath + "\\img\\dhhuy.png");
+                    listitem[i].Pic_trangThai = Image.FromFile(System.Windows.Forms.Application.StartupPath + "\\img\\cancel.png");
                 }
-                else if (dt.Rows[i][9].ToString() == "0")
+                else if (dt.Rows[i][9].ToString() == "2")
                 {
-                    listitem[i].Pic_trangThai = Image.FromFile(System.Windows.Forms.Application.StartupPath + "\\img\\chuatt.png");
+                    listitem[i].Pic_trangThai = Image.FromFile(System.Windows.Forms.Application.StartupPath + "\\img\\delete.png");
+                }
+                else if (dt.Rows[i][9].ToString() == "1")
+                {
+                    listitem[i].Pic_trangThai = Image.FromFile(System.Windows.Forms.Application.StartupPath + "\\img\\checked.png");
                 }
                 else
                 {
-                    listitem[i].Pic_trangThai = Image.FromFile(System.Windows.Forms.Application.StartupPath + "\\img\\datt.png");
+                    listitem[i].Pic_trangThai = Image.FromFile(System.Windows.Forms.Application.StartupPath + "\\img\\no-money.png");
                 }
                 pnDSDonHang.Controls.Add(listitem[i]);
                 listitem[i].Click += new EventHandler(this.onclick);
@@ -91,17 +104,21 @@ namespace DoAn_DotNet.GUI
                 listitem[i].MaDH = Convert.ToInt32(dt.Rows[i][0].ToString());
                 listitem[i].TongTien = Convert.ToDecimal(dt.Rows[i][8].ToString());
                 listitem[i].Dock = DockStyle.Top;
-                if (dt.Rows[i][9].ToString() == "2" || dt.Rows[i][9].ToString() == "3")
+                if (dt.Rows[i][9].ToString() == "3")
                 {
-                    listitem[i].Pic_trangThai = Image.FromFile(System.Windows.Forms.Application.StartupPath + "\\img\\dhhuy.png");
+                    listitem[i].Pic_trangThai = Image.FromFile(System.Windows.Forms.Application.StartupPath + "\\img\\cancel.png");
                 }
-                else if (dt.Rows[i][9].ToString() == "0")
+                else if (dt.Rows[i][9].ToString() == "2")
                 {
-                    listitem[i].Pic_trangThai = Image.FromFile(System.Windows.Forms.Application.StartupPath + "\\img\\chuatt.png");
+                    listitem[i].Pic_trangThai = Image.FromFile(System.Windows.Forms.Application.StartupPath + "\\img\\delete.png");
+                }
+                else if (dt.Rows[i][9].ToString() == "1")
+                {
+                    listitem[i].Pic_trangThai = Image.FromFile(System.Windows.Forms.Application.StartupPath + "\\img\\checked.png");
                 }
                 else
                 {
-                    listitem[i].Pic_trangThai = Image.FromFile(System.Windows.Forms.Application.StartupPath + "\\img\\datt.png");
+                    listitem[i].Pic_trangThai = Image.FromFile(System.Windows.Forms.Application.StartupPath + "\\img\\no-money.png");
                 }
                 pnDSDonHang.Controls.Add(listitem[i]);
                 listitem[i].Click += new EventHandler(this.onclick);
@@ -134,7 +151,14 @@ namespace DoAn_DotNet.GUI
             txtEmail.Text = dt2.Rows[0][5].ToString();
             txtPhone.Text = dt2.Rows[0][6].ToString();
             txtAddress.Text = dt2.Rows[0][7].ToString();
+
             txtTongTien.Text = dt2.Rows[0][8].ToString();
+
+            decimal number;
+            number = decimal.Parse(txtTongTien.Text, System.Globalization.NumberStyles.Currency);
+            txtTongTien.Text = number.ToString("c0");
+
+
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
@@ -142,10 +166,16 @@ namespace DoAn_DotNet.GUI
                 Image anh = Image.FromFile(System.Windows.Forms.Application.StartupPath + "\\img\\" + dt.Rows[i][1].ToString() + "");
                 string tenTC = dt.Rows[i][2].ToString();
                 string giaBan = dt.Rows[i][3].ToString();
+
+                decimal number1;
+                number1 = decimal.Parse(giaBan, System.Globalization.NumberStyles.Currency);
+                giaBan = number1.ToString("c0");
+
+
                 guna2DataGridView1.Rows.Add(maTC, anh, tenTC, giaBan);
+
             }
 
-            guna2DataGridView1.Columns["Column3"].DefaultCellStyle.Format = "c0";
         }
 
         private void guna2DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -198,6 +228,9 @@ namespace DoAn_DotNet.GUI
         private void btnDongTab_Click(object sender, EventArgs e)
         {
             pnTab.Visible = false;
+            batTat(false);
+            pnDSDonHang.Enabled = true;
+            guna2DataGridView1.Enabled = true;
         }
 
         private void btnDoiTC_Click(object sender, EventArgs e)
@@ -207,11 +240,21 @@ namespace DoAn_DotNet.GUI
             txtTen.Visible = false;
             batTat(true);
 
+            pnDSDonHang.Enabled = false;
+            guna2DataGridView1.Enabled = false;
+
         }
 
         private void cboThuCung_DropDownClosed(object sender, EventArgs e)
         {
             txtGiaBan.Text = bllTC.LayGiaBanTC(Convert.ToInt32(cboThuCung.SelectedValue));
+
+            if (txtGiaBan.Text == "" || txtGiaBan.Text == "0") return;
+            decimal number;
+            number = decimal.Parse(txtGiaBan.Text, System.Globalization.NumberStyles.Currency);
+            txtGiaBan.Text = number.ToString("#,#");
+            txtGiaBan.SelectionStart = txtGiaBan.Text.Length;
+
             load(Convert.ToInt32(cboThuCung.SelectedValue));
         }
 
@@ -222,6 +265,9 @@ namespace DoAn_DotNet.GUI
             cboThuCung.Visible = false;
             txtTen.Enabled = true;
             txtGiaBan.Visible = false;
+
+            pnDSDonHang.Enabled = false;
+            guna2DataGridView1.Enabled = false;
         }
 
         private void btnSua_Click(object sender, EventArgs e)
@@ -231,6 +277,10 @@ namespace DoAn_DotNet.GUI
             cboThuCung.SelectedValue = maThuCung;
             txtLyDo.Enabled = false;
             txtTinhTrangTC.Enabled = false;
+
+            pnDSDonHang.Enabled = false;
+            guna2DataGridView1.Enabled = false;
+
         }
 
         private void btnLuu_Click(object sender, EventArgs e)
@@ -241,26 +291,26 @@ namespace DoAn_DotNet.GUI
                 int tongngay = tg.Days;
                 if (bllDT.KiemTraMaDHBiDoi(maDH).Rows.Count > 0)
                 {
-                    MessageBox.Show("Đơn hàng đã được đổi", "Đổi Thú Cưng", MessageBoxButtons.OK);
+                    this.Alert("Đơn hàng đã được đổi", frmCustomTB.enmType.Error);
                 }
                 else if (bllDT.KiemTraMaDHTraHang(maDH).Rows.Count > 0)
                 {
-                    MessageBox.Show("Đơn hàng đã được trả hàng", "Đổi Thú Cưng", MessageBoxButtons.OK);
+                    this.Alert("Đơn hàng đã được trả hàng", frmCustomTB.enmType.Error);
                 }
                 else if (tongngay > 15)
                 {
-                    MessageBox.Show("Đơn hàng bạn mua đã quá ngày đổi!!!", "Đổi Đơn Hàng", MessageBoxButtons.OK);
+                    this.Alert("Đơn hàng đã quá ngày đổi", frmCustomTB.enmType.Error);
                 }
                 else if (bllCTDH.KiemTraMaTCLinq(Convert.ToInt32(cboThuCung.SelectedValue.ToString())).Count > 0)
                 {
-                    MessageBox.Show("Thú cưng đã bán", "Đổi Thú Cưng", MessageBoxButtons.OK);
+                    this.Alert("Thú cưng đã bán", frmCustomTB.enmType.Error);
                 }
                 else
                 {
                     if (txtLyDo.Text.Trim() == "")
-                        MessageBox.Show("Vui lòng nhập lý do", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        this.Alert("Vui lòng nhập lý do", frmCustomTB.enmType.Error);
                     else if (txtTinhTrangTC.Text.Trim() == "")
-                        MessageBox.Show("Vui lòng nhập tình trạng thú cưng", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        this.Alert("Vui lòng nhập tình trạng thú cưng", frmCustomTB.enmType.Error);
                     else
                     {
                         DateTime ngay = DateTime.Now;
@@ -281,13 +331,13 @@ namespace DoAn_DotNet.GUI
                             
                             if (bllTC.SuaTrangThai(tc, maThuCung) && bllTC.SuaTrangThai(tc, tc.MaTC) && bllCTDH.SuaMaTC(ctdh, maThuCung))
                             {
-                                MessageBox.Show("Đổi thú cưng thành công!", "Đổi Thú Cưng", MessageBoxButtons.OK);
+                                this.Alert("Đổi thú cưng thành công!", frmCustomTB.enmType.Success);
                                 loadDH();
                             }
                         }
                         else
                         {
-                            MessageBox.Show("Đổi thú cưng thất bại!", "Đổi Thú Cưng", MessageBoxButtons.OK);
+                            this.Alert("Đổi thú cưng thất bại!", frmCustomTB.enmType.Error);
                         }
                     }       
                 }
@@ -298,22 +348,22 @@ namespace DoAn_DotNet.GUI
                 int tongngay = tg.Days;
                 if (bllDT.KiemTraMaDHBiDoi(maDH).Rows.Count > 0)
                 {
-                    MessageBox.Show("Đơn hàng đã được đổi", "Đổi Thú Cưng", MessageBoxButtons.OK);
+                    this.Alert("Đơn hàng đã được đổi", frmCustomTB.enmType.Error);
                 }
                 else if (bllDT.KiemTraMaDHTraHang(maDH).Rows.Count > 0)
                 {
-                    MessageBox.Show("Đơn hàng đã được trả hàng", "Đổi Thú Cưng", MessageBoxButtons.OK);
+                    this.Alert("Đơn hàng đã được trả hàng", frmCustomTB.enmType.Error);
                 }
                 else if (tongngay > 15)
                 {
-                    MessageBox.Show("Đơn hàng bạn mua đã quá ngày đổi!!!", "Đổi Đơn Hàng", MessageBoxButtons.OK);
+                    this.Alert("Đơn hàng đã quá ngày đổi", frmCustomTB.enmType.Error);
                 }
                 else
                 {
                     if (txtLyDo.Text.Trim() == "")
-                        MessageBox.Show("Vui lòng nhập lý do", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        this.Alert("Vui lòng nhập lý do", frmCustomTB.enmType.Error);
                     else if (txtTinhTrangTC.Text.Trim() == "")
-                        MessageBox.Show("Vui lòng nhập tình trạng thú cưng", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        this.Alert("Vui lòng nhập tình trạng thú cưng", frmCustomTB.enmType.Error);
                     else
                     {
                         DateTime ngay = DateTime.Now;
@@ -329,13 +379,13 @@ namespace DoAn_DotNet.GUI
                             dh.TrangThai = 3;
                             if (bllDH.Sua(dh,maDH))
                             {
-                                MessageBox.Show("Trả thú cưng thành công!", "Đổi Thú Cưng", MessageBoxButtons.OK);
+                                this.Alert("Trả thú cưng thành công", frmCustomTB.enmType.Success);
                                 loadDH();
                             }
                         }
                         else
                         {
-                            MessageBox.Show("Trả thú cưng thất bại!", "Đổi Thú Cưng", MessageBoxButtons.OK);
+                            this.Alert("Trả thú cưng thất bại!", frmCustomTB.enmType.Error);
                         }
                     }
                 }
@@ -344,7 +394,7 @@ namespace DoAn_DotNet.GUI
             {
                 if (bllCTDH.KiemTraMaTCLinq(Convert.ToInt32(cboThuCung.SelectedValue.ToString())).Count > 0)
                 {
-                    MessageBox.Show("Thú cưng đã bán", "Đổi Thú Cưng", MessageBoxButtons.OK);
+                    this.Alert("Thú cưng đã bán", frmCustomTB.enmType.Error);
                 }
                 else
                 {
@@ -357,15 +407,17 @@ namespace DoAn_DotNet.GUI
 
                     if (bllTC.SuaTrangThai(tc, maThuCung) && bllTC.SuaTrangThai(tc, tc.MaTC) && bllCTDH.SuaMaTC(ctdh, maThuCung))
                     {
-                        MessageBox.Show("Đổi thú cưng thành công!", "Đổi Thú Cưng", MessageBoxButtons.OK);
+                        this.Alert("Sửa thú cưng thành công", frmCustomTB.enmType.Success);
                         loadDH();
                     }
                     else
                     {
-                        MessageBox.Show("Đổi thú cưng thất bại!", "Đổi Thú Cưng", MessageBoxButtons.OK);
+                        this.Alert("Sửa thú cưng thất bại", frmCustomTB.enmType.Success);
                     }
                 }
             }
+            pnDSDonHang.Enabled = true;
+            guna2DataGridView1.Enabled = true;
         }
 
         private void btnHuy_Click(object sender, EventArgs e)
@@ -377,6 +429,8 @@ namespace DoAn_DotNet.GUI
                 txtTen.Enabled = false;
             }
             batTat(false);
+            pnDSDonHang.Enabled = true;
+            guna2DataGridView1.Enabled = true;
         }
     }
 }

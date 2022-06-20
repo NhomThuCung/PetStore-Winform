@@ -19,6 +19,32 @@ namespace DAL
             return data.QuerySQL(sql);
         }
 
+        public DataTable DsGiongTheoDDM(int maDDM)
+        {
+            string sql = "SELECT G.MaGiong, G.TenGiong, CTDDM.GiaMua, CTDDM.SoLuongMua FROM ChiTietDDM CTDDM, Giong G Where CTDDM.MaGiong = G.MaGiong AND CTDDM.MaDDM =" + maDDM + "";
+            return data.QuerySQL(sql);
+        }
+
+        public DataTable DsGiaMuaSL(int maDDM, int maGiong)
+        {
+            string sql = "SELECT G.MaGiong, G.TenGiong, CTDDM.GiaMua, CTDDM.SoLuongMua FROM ChiTietDDM CTDDM, Giong G Where CTDDM.MaGiong = G.MaGiong AND CTDDM.MaDDM =" + maDDM + " AND CTDDM.MaGiong = " + maGiong + "";
+            return data.QuerySQL(sql);
+        }
+
+        public DataTable DsMuaDuSL(int maDDM, int maGiong)
+        {
+            string sql = "SELECT Count(*) FROM ChiTietPN CTPN, PhieuNhap PN WHERE CTPN.MaPN = PN.MaPN AND MaDDM =" + maDDM + " AND MaGiong = " + maGiong + "";
+            return data.QuerySQL(sql);
+        }
+
+        public DataTable DsMuaSL(int maDDM, int maGiong)
+        {
+            string sql = "SELECT SoLuongMua FROM ChiTietDDM WHERE MaDDM =" + maDDM + " AND MaGiong = " + maGiong + "";
+            return data.QuerySQL(sql);
+        }
+
+
+
         public DataTable ChiTietDDM(int maDDM)
         {
             string sql = "SELECT MaGiong, GiaMua, SoLuongMua FROM ChiTietDDM WHERE MaDDM = " + maDDM + "";

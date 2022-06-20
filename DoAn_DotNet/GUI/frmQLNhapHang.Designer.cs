@@ -43,6 +43,11 @@ namespace DoAn_DotNet.GUI
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lblSL = new System.Windows.Forms.Label();
+            this.lblGiaMua = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.txtMa = new Guna.UI2.WinForms.Guna2TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -71,6 +76,11 @@ namespace DoAn_DotNet.GUI
             this.label5 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dGVPhieuNhap = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.guna2ShadowPanel1 = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            this.guna2Panel4 = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnDongTab = new Guna.UI2.WinForms.Guna2ImageButton();
+            this.txtTimKiem = new Guna.UI2.WinForms.Guna2TextBox();
+            this.btnThem = new Guna.UI2.WinForms.Guna2CircleButton();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -79,15 +89,11 @@ namespace DoAn_DotNet.GUI
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.guna2ShadowPanel1 = new Guna.UI2.WinForms.Guna2ShadowPanel();
-            this.guna2Panel4 = new Guna.UI2.WinForms.Guna2Panel();
-            this.btnDongTab = new Guna.UI2.WinForms.Guna2ImageButton();
-            this.txtTimKiem = new Guna.UI2.WinForms.Guna2TextBox();
-            this.btnThem = new Guna.UI2.WinForms.Guna2CircleButton();
             this.pnTab.SuspendLayout();
             this.guna2ShadowPanel2.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGVChiTietPN)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -123,6 +129,7 @@ namespace DoAn_DotNet.GUI
             // panel4
             // 
             this.panel4.Controls.Add(this.dGVChiTietPN);
+            this.panel4.Controls.Add(this.groupBox1);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(10, 10);
             this.panel4.Name = "panel4";
@@ -170,8 +177,8 @@ namespace DoAn_DotNet.GUI
             this.dGVChiTietPN.RowHeadersWidth = 51;
             this.dGVChiTietPN.RowTemplate.Height = 24;
             this.dGVChiTietPN.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dGVChiTietPN.Size = new System.Drawing.Size(557, 179);
-            this.dGVChiTietPN.TabIndex = 0;
+            this.dGVChiTietPN.Size = new System.Drawing.Size(557, 129);
+            this.dGVChiTietPN.TabIndex = 2;
             this.dGVChiTietPN.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.dGVChiTietPN.ThemeStyle.AlternatingRowsStyle.Font = null;
             this.dGVChiTietPN.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
@@ -218,6 +225,56 @@ namespace DoAn_DotNet.GUI
             this.Column8.MinimumWidth = 6;
             this.Column8.Name = "Column8";
             this.Column8.ReadOnly = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.lblSL);
+            this.groupBox1.Controls.Add(this.lblGiaMua);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox1.Location = new System.Drawing.Point(0, 129);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(557, 50);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Chi Tiết Đơn Đặt Mua";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(363, 22);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(104, 17);
+            this.label9.TabIndex = 83;
+            this.label9.Text = "Số Lượng Mua:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(7, 22);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(91, 17);
+            this.label7.TabIndex = 82;
+            this.label7.Text = "Giá Đặt Mua:";
+            // 
+            // lblSL
+            // 
+            this.lblSL.AutoSize = true;
+            this.lblSL.Location = new System.Drawing.Point(473, 22);
+            this.lblSL.Name = "lblSL";
+            this.lblSL.Size = new System.Drawing.Size(12, 17);
+            this.lblSL.TabIndex = 81;
+            this.lblSL.Text = " ";
+            // 
+            // lblGiaMua
+            // 
+            this.lblGiaMua.AutoSize = true;
+            this.lblGiaMua.Location = new System.Drawing.Point(100, 22);
+            this.lblGiaMua.Name = "lblGiaMua";
+            this.lblGiaMua.Size = new System.Drawing.Size(12, 17);
+            this.lblGiaMua.TabIndex = 80;
+            this.lblGiaMua.Text = " ";
             // 
             // panel3
             // 
@@ -291,7 +348,7 @@ namespace DoAn_DotNet.GUI
             this.txtMaDDM.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtMaDDM.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtMaDDM.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtMaDDM.Location = new System.Drawing.Point(131, 41);
+            this.txtMaDDM.Location = new System.Drawing.Point(131, 42);
             this.txtMaDDM.Name = "txtMaDDM";
             this.txtMaDDM.PasswordChar = '\0';
             this.txtMaDDM.PlaceholderText = "";
@@ -312,7 +369,7 @@ namespace DoAn_DotNet.GUI
             this.txtMaGiong.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtMaGiong.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtMaGiong.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtMaGiong.Location = new System.Drawing.Point(131, 134);
+            this.txtMaGiong.Location = new System.Drawing.Point(131, 135);
             this.txtMaGiong.Name = "txtMaGiong";
             this.txtMaGiong.PasswordChar = '\0';
             this.txtMaGiong.PlaceholderText = "";
@@ -422,6 +479,7 @@ namespace DoAn_DotNet.GUI
             this.cboMaDDM.Name = "cboMaDDM";
             this.cboMaDDM.Size = new System.Drawing.Size(411, 26);
             this.cboMaDDM.TabIndex = 74;
+            this.cboMaDDM.DropDownClosed += new System.EventHandler(this.cboMaDDM_DropDownClosed);
             // 
             // txtTenTC
             // 
@@ -502,6 +560,7 @@ namespace DoAn_DotNet.GUI
             this.cboMaGiong.Name = "cboMaGiong";
             this.cboMaGiong.Size = new System.Drawing.Size(411, 26);
             this.cboMaGiong.TabIndex = 54;
+            this.cboMaGiong.DropDownClosed += new System.EventHandler(this.cboMaGiong_DropDownClosed);
             // 
             // txtNgayNhap
             // 
@@ -701,70 +760,6 @@ namespace DoAn_DotNet.GUI
             this.dGVPhieuNhap.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.dGVPhieuNhap.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGVPhieuNhap_CellDoubleClick);
             // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "MaPN";
-            this.Column2.HeaderText = "Mã Phiếu Nhập";
-            this.Column2.MinimumWidth = 6;
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "MaDDM";
-            this.Column1.HeaderText = "Mã Đơn Đặt Mua";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column11
-            // 
-            this.Column11.DataPropertyName = "MaNV";
-            this.Column11.HeaderText = "Mã NV";
-            this.Column11.MinimumWidth = 6;
-            this.Column11.Name = "Column11";
-            this.Column11.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "NgayNhap";
-            this.Column3.HeaderText = "Ngày Nhập";
-            this.Column3.MinimumWidth = 6;
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // Column9
-            // 
-            this.Column9.DataPropertyName = "NgayCapNhat";
-            this.Column9.HeaderText = "Ngày Cập Nhật";
-            this.Column9.MinimumWidth = 6;
-            this.Column9.Name = "Column9";
-            this.Column9.ReadOnly = true;
-            // 
-            // Column10
-            // 
-            this.Column10.DataPropertyName = "NoiDung";
-            this.Column10.HeaderText = "Nội Dung";
-            this.Column10.MinimumWidth = 6;
-            this.Column10.Name = "Column10";
-            this.Column10.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "TongSLNhap";
-            this.Column4.HeaderText = "Tổng Số Lượng Nhập";
-            this.Column4.MinimumWidth = 6;
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            // 
-            // Column5
-            // 
-            this.Column5.DataPropertyName = "TongTienNhap";
-            this.Column5.HeaderText = "Tổng Tiền Nhập";
-            this.Column5.MinimumWidth = 6;
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            // 
             // guna2ShadowPanel1
             // 
             this.guna2ShadowPanel1.BackColor = System.Drawing.Color.Transparent;
@@ -849,6 +844,76 @@ namespace DoAn_DotNet.GUI
             this.btnThem.TabIndex = 6;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Column2.DataPropertyName = "MaPN";
+            this.Column2.HeaderText = "Mã Phiếu Nhập";
+            this.Column2.MinimumWidth = 6;
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Width = 50;
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Column1.DataPropertyName = "MaDDM";
+            this.Column1.HeaderText = "Mã Đơn Đặt Mua";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 55;
+            // 
+            // Column11
+            // 
+            this.Column11.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Column11.DataPropertyName = "MaNV";
+            this.Column11.HeaderText = "Mã NV";
+            this.Column11.MinimumWidth = 6;
+            this.Column11.Name = "Column11";
+            this.Column11.ReadOnly = true;
+            this.Column11.Width = 54;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "NgayNhap";
+            this.Column3.HeaderText = "Ngày Nhập";
+            this.Column3.MinimumWidth = 6;
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column9
+            // 
+            this.Column9.DataPropertyName = "NgayCapNhat";
+            this.Column9.HeaderText = "Ngày Cập Nhật";
+            this.Column9.MinimumWidth = 6;
+            this.Column9.Name = "Column9";
+            this.Column9.ReadOnly = true;
+            // 
+            // Column10
+            // 
+            this.Column10.DataPropertyName = "NoiDung";
+            this.Column10.HeaderText = "Nội Dung";
+            this.Column10.MinimumWidth = 6;
+            this.Column10.Name = "Column10";
+            this.Column10.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "TongSLNhap";
+            this.Column4.HeaderText = "Tổng Số Lượng Nhập";
+            this.Column4.MinimumWidth = 6;
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "TongTienNhap";
+            this.Column5.HeaderText = "Tổng Tiền Nhập";
+            this.Column5.MinimumWidth = 6;
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            // 
             // frmQLNhapHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -863,6 +928,8 @@ namespace DoAn_DotNet.GUI
             this.guna2ShadowPanel2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dGVChiTietPN)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel5.ResumeLayout(false);
@@ -899,7 +966,6 @@ namespace DoAn_DotNet.GUI
         private Guna.UI2.WinForms.Guna2ComboBox cboMaDDM;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
-        private Guna.UI2.WinForms.Guna2DataGridView dGVChiTietPN;
         private System.Windows.Forms.Panel panel5;
         private Guna.UI2.WinForms.Guna2Button btnLuu;
         private Guna.UI2.WinForms.Guna2Button btnSua;
@@ -910,10 +976,19 @@ namespace DoAn_DotNet.GUI
         private Guna.UI2.WinForms.Guna2CircleButton btnThem;
         private Guna.UI2.WinForms.Guna2ImageButton btnDongTab;
         private Guna.UI2.WinForms.Guna2TextBox txtMaDDM;
+        private Guna.UI2.WinForms.Guna2DateTimePicker dtpNgayNhap;
+        private Guna.UI2.WinForms.Guna2Button btnThemChiTiet;
+        private Guna.UI2.WinForms.Guna2TextBox txtMa;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblGiaMua;
+        private System.Windows.Forms.Label lblSL;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private Guna.UI2.WinForms.Guna2DataGridView dGVChiTietPN;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private Guna.UI2.WinForms.Guna2DateTimePicker dtpNgayNhap;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
@@ -922,8 +997,5 @@ namespace DoAn_DotNet.GUI
         private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private Guna.UI2.WinForms.Guna2Button btnThemChiTiet;
-        private Guna.UI2.WinForms.Guna2TextBox txtMa;
-        private System.Windows.Forms.Label label4;
     }
 }

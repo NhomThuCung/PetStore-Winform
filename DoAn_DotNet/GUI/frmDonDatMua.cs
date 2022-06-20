@@ -99,10 +99,10 @@ namespace DoAn_DotNet.GUI
                 btnSua.Enabled = true;
                 dGVChiTietDDM.DataSource = bllCTDDM.ChiTietDDM(Convert.ToInt32(dGVDonDatMua.Rows[e.RowIndex].Cells[0].Value.ToString()));
 
-                if (isThem)
-                {
-                    dGVChiTietDDM.Columns["GiaMua"].DefaultCellStyle.Format = "c0";
-                }
+                //if (isThem)
+                //{
+                //    dGVChiTietDDM.Columns["GiaMua"].DefaultCellStyle.Format = "c0";
+                //}
 
                 //Hien thi thong tin 
                 txtMaNCC.Text = dGVDonDatMua.Rows[e.RowIndex].Cells[1].Value.ToString();
@@ -206,7 +206,7 @@ namespace DoAn_DotNet.GUI
                         dt.Rows.Add(cboMaGiong.SelectedValue, Convert.ToDecimal(txtGiaMua.Text), numSoLuong.Value);
                         this.Alert("Thêm giống vào đơn đặt mua thành công", frmCustomTB.enmType.Success);
                         dGVChiTietDDM.DataSource = dt;
-                        dGVChiTietDDM.Columns["GiaMua"].DefaultCellStyle.Format = "c0";
+                        //dGVChiTietDDM.Columns["GiaMua"].DefaultCellStyle.Format = "c0";
                     }
                 }
             }

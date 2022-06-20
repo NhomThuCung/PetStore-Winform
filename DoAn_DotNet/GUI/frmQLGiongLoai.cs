@@ -140,8 +140,6 @@ namespace DoAn_DotNet.GUI
                 this.Alert("Tên giống không được bỏ trống", frmCustomTB.enmType.Error);
             else if (txtMoTa.Text.Trim() == "")
                 this.Alert("Mô tả thú cưng không được bỏ trống", frmCustomTB.enmType.Error);
-            else if (numSoLuongTon.Value == 0)
-                this.Alert("Số lượng thú cưng phải lớn hơn 0", frmCustomTB.enmType.Error);
             else
             {
                 GiongDTO info = new GiongDTO();

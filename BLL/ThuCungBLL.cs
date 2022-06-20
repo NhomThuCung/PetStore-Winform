@@ -120,6 +120,11 @@ namespace BLL
             return data.DanhSach();
         }
 
+        public DataTable DanhSachTrangThai()
+        {
+            return data.DanhSachTrangThai();
+        }
+
 
         public DataTable DanhSachTCTheoMa()
         {
@@ -129,6 +134,17 @@ namespace BLL
         public string LayTenTC(int maTC)
         {
             return data.LayTenTC(maTC);
+        }
+
+        public bool CapNhatGiongSoLuongTon(int maGiong)
+        {
+            var doi = data.CapNhatGiongSoLuongTon(maGiong);
+            if (doi.Rows.Count > 0)
+            {
+                return false;
+            }
+            else
+                return true;
         }
 
         public DataTable LayMaTCTheoNgay(DateTime createDate, int maGiong)
@@ -199,6 +215,16 @@ namespace BLL
         public bool UpdateLinqChiTiet(int maTC, string tenTC, decimal giaBan, DateTime ngayCapNhat, int maGiong, int maLoai)
         {
             if (data.UpdateLinqChiTiet(maTC, tenTC, giaBan, ngayCapNhat, maGiong, maLoai) == true)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        //Update Linq
+        public bool UpdateNgayBan(int maTC, DateTime ngayBan)
+        {
+            if (data.UpdateNgayBan(maTC, ngayBan) == true)
             {
                 return true;
             }

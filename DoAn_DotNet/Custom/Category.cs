@@ -23,7 +23,7 @@ namespace DoAn_DotNet.Custom
         private int maTC;
         private string tenTC;
         private decimal giaBan;
-        private int trangThai;
+        private Image trangThai;
         private Image anh;
         private string moTa;
         ThuCungBLL bllThuCung = new ThuCungBLL();
@@ -38,7 +38,7 @@ namespace DoAn_DotNet.Custom
         public decimal GiaBan { get => giaBan; set { giaBan = value; lblGiaBan.Text = value.ToString("c0"); } }
 
         [Category("Custom Props")]
-        public int TrangThai { get => trangThai; set { trangThai = value; lblTrangThai.Text = value.ToString(); } }
+        public Image TrangThai { get => trangThai; set { trangThai = value; picTrangThai.Image = value; } }
 
         [Category("Custom Props")]
         public Image Anh { get => anh; set { anh = value; pic_TC.Image = value; } }

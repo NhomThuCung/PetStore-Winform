@@ -47,6 +47,12 @@ namespace DAL
             return db.ChiTietDonHangs.Where(t => t.MaTC == maTC).ToList();
         }
 
+        public DataTable KiemTraMaTCCoDK(int maTC)
+        {
+            string sql = "SELECT MaTC FROM ChiTietDonHang CTDH, ThuCung TC where CTDH.MaTC = TC.MaTC AND MaTC = " + maTC + " AND TrangThai = 1";
+            return data.QuerySQL(sql);
+        }
+
         public DataTable DanhSach_KetHop()
         {
             string sql = "SELECT CT.*, TC.TenTC, TC.GiaBan FROM ChiTietDonHang CT, ThuCung TC where CT.MaTC = TC.MaTC";
