@@ -10,16 +10,23 @@ Hệ thống quản lý cửa hàng mua bán thú cưng là một phương thứ
 # Chức năng và nghiệp vụ của PetStore
 Phần mền quản lý cửa hàng thú cưng - Pet Store Management Software
 
-[x] Chức năng danh mục
+- [x] Chức năng danh mục
   - Quản lý quyền đăng nhập hệ thống
     - Nội dụng: Chức năng cho phép tài khoản của nhân viên đăng nhập với loại quyền của mình được set trong hệ thống.
-    
   - Quản lý thông tin nhân viên
+    - Nội dung: Chức năng cho phép quản lý có thể thêm xoá sửa các nhân viên có trong hệ thống.
   - Quản lý giống, loài thú cưng
+    - Nội dung: Chức năng cho phép quản lý có thể thêm xoá sửa các giống và loài của thú cưng được bán trong cửa hàng.
   - Quản lý thông tin khách hàng
+    - Nội dung: Chức năng cho phép quản lý hay nhân viên có thể thêm xoá sửa khách hàng khi đến với hệ thống cửa hàng.
   - Quản lý nhà cung cấp thú cưng
+    - Nội dung: Chức năng cho phép quản lý có thể thêm xoá sửa các nhà cung cấp thú cưng cho cửa hàng.
   - Quản lý đơn hàng
-  - Quản lý đổi trả
+    - Nội dung: Chức năng cho phép quản lý có thể xem và sửa nội dung của các đơn hàng đã bán.
+  - Quản lý danh sách đơn đổi trả
+    - Nội dung: Chức năng cho phép quản lý có thể xem và sửa nội dung của các đơn đã được đổi trả.
+- [x] Chức năng nghiệp vụ:
+- [ ] dsadas
 
 
 # Thành Viên
